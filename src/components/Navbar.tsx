@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Container,
-  Nav,
-  Navbar as BootstrapNavbar,
-  NavDropdown,
-} from 'react-bootstrap';
+import { Container, Nav, Navbar as BootstrapNavbar, NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { fetchPackages } from '../api/packageService'; // Ensure this imports the API service
+import { Package, PackageResponse } from '../types/packageTypes'; // Import defined types
 import '../styles/Navbar.css';
 
 const Navbar: React.FC = () => {
-  const [packages, setPackages] = useState<any[]>([]);
-  const [summerPackages, setSummerPackages] = useState<any[]>([]);
-  const [winterPackages, setWinterPackages] = useState<any[]>([]);
+  const [packages, setPackages] = useState<Package[]>([]);
+  const [summerPackages, setSummerPackages] = useState<Package[]>([]);
+  const [winterPackages, setWinterPackages] = useState<Package[]>([]);
 
   useEffect(() => {
     const getPackages = async () => {
       try {
-        const data = await fetchPackages();
+        const data: PackageResponse = await fetchPackages();
         setPackages(data.all_packages);
         setSummerPackages(data.summer_packages);
         setWinterPackages(data.winter_packages);
@@ -43,46 +39,26 @@ const Navbar: React.FC = () => {
         <BootstrapNavbar.Toggle aria-controls="navbar-nav" />
         <BootstrapNavbar.Collapse id="navbar-nav">
           <Nav className="ms-auto">
-            {' '}
-            {/* Aligns the nav items to the right */}
-            <Nav.Link as={Link} to="/">
-              Home
-            </Nav.Link>
-            <Nav.Link as={Link} to="/about-us">
-              About Us
-            </Nav.Link>
-            <Nav.Link as={Link} to="/blogs/">
-              Articles
-            </Nav.Link>
+            <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/about-us">About Us</Nav.Link>
+            <Nav.Link as={Link} to="/blogs/">Articles</Nav.Link>
             <NavDropdown title="Packages" id="packagesDropdown">
               {packages.map((pkg) => (
-                <NavDropdown.Item
-                  key={pkg.id}
-                  as={Link}
-                  to={`/packages/${pkg.slug}`}
-                >
+                <NavDropdown.Item key={pkg.id} as={Link} to={`/packages/${pkg.slug}`}>
                   {pkg.name}
                 </NavDropdown.Item>
               ))}
             </NavDropdown>
             <NavDropdown title="Summer Trips" id="summerTripsDropdown">
               {summerPackages.map((pkg) => (
-                <NavDropdown.Item
-                  key={pkg.id}
-                  as={Link}
-                  to={`/packages/${pkg.slug}`}
-                >
+                <NavDropdown.Item key={pkg.id} as={Link} to={`/packages/${pkg.slug}`}>
                   {pkg.name}
                 </NavDropdown.Item>
               ))}
             </NavDropdown>
             <NavDropdown title="Winter Trips" id="winterTripsDropdown">
               {winterPackages.map((pkg) => (
-                <NavDropdown.Item
-                  key={pkg.id}
-                  as={Link}
-                  to={`/packages/${pkg.slug}`}
-                >
+                <NavDropdown.Item key={pkg.id} as={Link} to={`/packages/${pkg.slug}`}>
                   {pkg.name}
                 </NavDropdown.Item>
               ))}
