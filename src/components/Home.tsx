@@ -1,11 +1,23 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import '../styles/Home.css'; 
 
 const Home: React.FC = () => {
+  const location = useLocation();
+
+  // Use useEffect to log the trip_id when the component mounts
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const tripId = queryParams.get('trip_id');
+    
+    if (tripId) {
+      console.log('Trip ID:', tripId); // Log the trip_id to the console
+    }
+  }, [location]);
+
   return (
     <div className="home-container">
-      <div className="content-container"> {/* New container for semi-transparent background */}
+      <div className="content-container">
         <h1 className="title">
           <i className="fas fa-calendar-day"></i> Booking Options
         </h1>
