@@ -27,12 +27,17 @@
     background: rgba(255, 255, 255, 0.9); /* Semi-transparent dropdown background */
   }
   
+  .dropdown-item {
+    color: #000; /* Default color for dropdown items */
+  }
+  
   .dropdown-item:hover {
     background-color: #f0e68c; /* Hover color for dropdown items */
   }
   
-  /* Add padding to the top of the body content to prevent overlap with the fixed navbar */
-  body {
-    padding-top: 53px; /* Adjust based on your navbar height */
+  .fixed-top {
+    z-index: 1030; /* Ensure navbar stays on top of other content */
   }
+  
+  /* Optional: Add any additional custom styles you want for the navbar here */
   
