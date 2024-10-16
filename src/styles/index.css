@@ -1,0 +1,19 @@
+/* index.css */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa; /* Light gray background for the whole app */
+}
+
+h1, h2, h3 {
+  margin: 0;
+}
+
+button {
+  cursor: pointer; /* Ensure all buttons have a pointer cursor */
+}
+
+a {
+  text-decoration: none; /* Remove underline from links */
+}
