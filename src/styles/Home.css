@@ -14,6 +14,20 @@
   position: relative; /* For layering */
 }
 
+.content-container {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for the container */
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px; /* Padding around the content */
+  width: 80%; /* Width of the content container */
+  max-width: 800px; /* Optional: max width to prevent it from becoming too wide */
+  height: 100%; /* Full height to cover the screen */
+  margin: 0 10%; /* Horizontal margins of 10% from both sides */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content */
+  justify-content: center; /* Center content vertically */
+}
+
 .title {
   font-size: 3rem; /* Adjust size as needed */
   margin-bottom: 0.5rem;
@@ -22,14 +36,21 @@
 
 .subtitle {
   font-size: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 10rem;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Shadow for readability */
 }
 
 .button-container {
+  display: flex; /* Use flexbox for row layout */
+  justify-content: center; /* Center items horizontally */
+  gap: 2rem; /* Space between buttons */
+  margin-top: 2rem; /* Space above button container */
+}
+
+.button-wrapper {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem; /* Space between buttons */
+  flex-direction: column; /* Stack button and description */
+  align-items: center; /* Center align items */
 }
 
 .button {
@@ -40,7 +61,7 @@
   border-radius: 8px;
   cursor: pointer;
   text-align: center;
-  width: 250px; /* Fixed width */
+  width: 200px; /* Fixed width */
   transition: background-color 0.3s, transform 0.3s;
 }
 
@@ -52,6 +73,8 @@
 .description {
   font-size: 0.9rem; /* Smaller font for description */
   margin-top: 0.5rem; /* Space above the description */
+  color: white; /* Ensure the text is visible */
+  text-align: center; /* Center align description text */
 }
 
 /* Specific styles for multiple booking button */
