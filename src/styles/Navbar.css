@@ -1,43 +1,51 @@
 /* src/styles/Navbar.css */
 .navbar-custom {
-    background: linear-gradient(to right, #6a5acd, #8a2be2); /* Gradient background */
-  }
-  
-  .navbar {
-    padding: 10px 0; /* Adjust navbar padding as needed */
-  }
-  
-  .navbar-brand {
-    color: white !important; /* Text color for link */
-  }
-  
-  .navbar-brand img {
-    margin-right: 10px; /* Space between logo and text */
-  }
-  
-  .nav-link {
-    color: white !important; /* Text color for links */
-  }
-  
-  .nav-link:hover {
-    color: #f0e68c !important; /* Color on hover */
-  }
-  
-  .dropdown-menu {
-    background: rgba(255, 255, 255, 0.9); /* Semi-transparent dropdown background */
-  }
-  
-  .dropdown-item {
-    color: #000; /* Default color for dropdown items */
-  }
-  
-  .dropdown-item:hover {
-    background-color: #f0e68c; /* Hover color for dropdown items */
-  }
-  
-  .fixed-top {
-    z-index: 1030; /* Ensure navbar stays on top of other content */
-  }
-  
-  /* Optional: Add any additional custom styles you want for the navbar here */
-  
+  background: linear-gradient(
+    to right,
+    #6a5acd,
+    #8a2be2
+  ); /* Gradient background */
+}
+
+.navbar {
+  padding: 10px 0; /* Adjust navbar padding as needed */
+}
+
+.navbar-brand {
+  color: white !important; /* Text color for link */
+}
+
+.navbar-brand img {
+  margin-right: 10px; /* Space between logo and text */
+}
+
+.nav-link {
+  color: white !important; /* Text color for links */
+}
+
+.nav-link:hover {
+  color: #f0e68c !important; /* Color on hover */
+}
+
+.dropdown-menu {
+  background: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Semi-transparent dropdown background */
+}
+
+.dropdown-item {
+  color: #000; /* Default color for dropdown items */
+}
+
+.dropdown-item:hover {
+  background-color: #f0e68c; /* Hover color for dropdown items */
+}
+
+.fixed-top {
+  z-index: 1030; /* Ensure navbar stays on top of other content */
+}
+
+/* Optional: Add any additional custom styles you want for the navbar here */
