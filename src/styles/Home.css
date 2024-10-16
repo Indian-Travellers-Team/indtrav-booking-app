@@ -15,7 +15,12 @@
 }
 
 .content-container {
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for the container */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Semi-transparent background for the container */
   border-radius: 10px; /* Rounded corners */
   padding: 20px; /* Padding around the content */
   width: 80%; /* Width of the content container */
@@ -54,7 +59,12 @@
 }
 
 .button {
-  background-color: rgba(0, 123, 255, 0.8); /* Semi-transparent blue for background */
+  background-color: rgba(
+    0,
+    123,
+    255,
+    0.8
+  ); /* Semi-transparent blue for background */
   color: white;
   padding: 1rem;
   border: none;
@@ -62,7 +72,9 @@
   cursor: pointer;
   text-align: center;
   width: 200px; /* Fixed width */
-  transition: background-color 0.3s, transform 0.3s;
+  transition:
+    background-color 0.3s,
+    transform 0.3s;
 }
 
 .button:hover {

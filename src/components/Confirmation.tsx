@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/Confirmation.css'; 
+import '../styles/Confirmation.css';
 
 const Confirmation: React.FC = () => {
   return (

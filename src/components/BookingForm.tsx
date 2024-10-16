@@ -22,7 +22,9 @@ const BookingForm: React.FC = () => {
     email: '',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -34,19 +36,39 @@ const BookingForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="booking-form"> {/* Add class for styling */}
+    <form onSubmit={handleSubmit} className="booking-form">
+      {' '}
+      {/* Add class for styling */}
       <h2>Book a Trip with Indian Travellers Team</h2>
       <label>
         Mobile:
-        <input type="text" name="mobile" value={formData.mobile} onChange={handleChange} required />
+        <input
+          type="text"
+          name="mobile"
+          value={formData.mobile}
+          onChange={handleChange}
+          required
+        />
       </label>
       <label>
         First Name:
-        <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} required />
+        <input
+          type="text"
+          name="firstName"
+          value={formData.firstName}
+          onChange={handleChange}
+          required
+        />
       </label>
       <label>
         Last Name:
-        <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} required />
+        <input
+          type="text"
+          name="lastName"
+          value={formData.lastName}
+          onChange={handleChange}
+          required
+        />
       </label>
       <label>
         Gender:
@@ -58,11 +80,23 @@ const BookingForm: React.FC = () => {
       </label>
       <label>
         Age:
-        <input type="number" name="age" value={formData.age} onChange={handleChange} required />
+        <input
+          type="number"
+          name="age"
+          value={formData.age}
+          onChange={handleChange}
+          required
+        />
       </label>
       <label>
         Email:
-        <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
       </label>
       <button type="submit">Next</button>
     </form>
