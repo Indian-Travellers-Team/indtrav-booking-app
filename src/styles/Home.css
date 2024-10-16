@@ -1,0 +1,95 @@
+/* src/styles/Home.css */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Full viewport height */
+  background-image: url('https://indiantraveller-cms-staticfiles.s3.amazonaws.com/bookings/img/photo-of-paragliding.4923a86fa113.jpg'); /* Background image */
+  background-size: 150%; /* Zoom in on the image */
+  background-position: center; /* Focus on the center of the image */
+  background-repeat: no-repeat; /* Prevent the background from repeating */
+  color: white; /* Text color */
+  text-align: center;
+  position: relative; /* For layering */
+}
+
+.content-container {
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Semi-transparent background for the container */
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px; /* Padding around the content */
+  width: 90%; /* Width of the content container */
+  max-width: 1000px; /* Optional: max width to prevent it from becoming too wide */
+  height: 100%; /* Full height to cover the screen */
+  margin: 0 10%; /* Horizontal margins of 10% from both sides */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content */
+  justify-content: center; /* Center content vertically */
+}
+
+.title {
+  font-size: 3rem; /* Adjust size as needed */
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Shadow for readability */
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 10rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Shadow for readability */
+}
+
+.button-container {
+  display: flex; /* Use flexbox for row layout */
+  justify-content: center; /* Center items horizontally */
+  gap: 2rem; /* Space between buttons */
+  margin-top: 2rem; /* Space above button container */
+}
+
+.button-wrapper {
+  display: flex;
+  flex-direction: column; /* Stack button and description */
+  align-items: center; /* Center align items */
+}
+
+.button {
+  background-color: rgba(
+    0,
+    123,
+    255,
+    0.8
+  ); /* Semi-transparent blue for background */
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  width: 400px; /* Fixed width */
+  transition:
+    background-color 0.3s,
+    transform 0.3s;
+}
+
+.button:hover {
+  background-color: rgba(0, 105, 217, 1); /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.description {
+  font-size: 1rem; /* Smaller font for description */
+  margin-top: 0.5rem; /* Space above the description */
+  color: white; /* Ensure the text is visible */
+  text-align: center; /* Center align description text */
+}
+
+/* Specific styles for multiple booking button */
+.multiple-booking {
+  background-color: rgba(108, 117, 125, 0.8); /* Gray background */
+}
