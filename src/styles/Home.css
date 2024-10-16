@@ -23,8 +23,8 @@
   ); /* Semi-transparent background for the container */
   border-radius: 10px; /* Rounded corners */
   padding: 20px; /* Padding around the content */
-  width: 80%; /* Width of the content container */
-  max-width: 800px; /* Optional: max width to prevent it from becoming too wide */
+  width: 90%; /* Width of the content container */
+  max-width: 1000px; /* Optional: max width to prevent it from becoming too wide */
   height: 100%; /* Full height to cover the screen */
   margin: 0 10%; /* Horizontal margins of 10% from both sides */
   display: flex;
@@ -71,7 +71,7 @@
   border-radius: 8px;
   cursor: pointer;
   text-align: center;
-  width: 200px; /* Fixed width */
+  width: 400px; /* Fixed width */
   transition:
     background-color 0.3s,
     transform 0.3s;
@@ -83,7 +83,7 @@
 }
 
 .description {
-  font-size: 0.9rem; /* Smaller font for description */
+  font-size: 1rem; /* Smaller font for description */
   margin-top: 0.5rem; /* Space above the description */
   color: white; /* Ensure the text is visible */
   text-align: center; /* Center align description text */
