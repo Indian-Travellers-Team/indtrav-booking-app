@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import '../styles/BookingForm.css';
 
 interface BookingFormData {
   mobile: string;
@@ -33,7 +34,7 @@ const BookingForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="booking-form"> {/* Add class for styling */}
       <h2>Book a Trip with Indian Travellers Team</h2>
       <label>
         Mobile:
