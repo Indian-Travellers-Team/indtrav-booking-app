@@ -25,12 +25,15 @@ const Footer: React.FC = () => {
             <Link to="/about-us">
               <div className="footer-item">About Us</div>
             </Link>
-            <div className="footer-item">Email: booking.indiantravellersteam@gmail.com</div>
+            <div className="footer-item">
+              Email: booking.indiantravellersteam@gmail.com
+            </div>
             <div className="footer-item">Phone: +91 7531887472</div>
           </div>
           <div className="footer-item address">
             <div className="footer-title">Address</div>
-            C-1/7, Rohini Sector-16, Rohini, Delhi - 110085 <br />(Near District Park)
+            C-1/7, Rohini Sector-16, Rohini, Delhi - 110085 <br />
+            (Near District Park)
           </div>
         </div>
         <div className="footer-bottom">
@@ -43,17 +46,25 @@ const Footer: React.FC = () => {
             </Link>
           </div>
           <div className="social-icons">
-            <a href="https://www.instagram.com/indian.travellers.trips/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.instagram.com/indian.travellers.trips/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <i className="fa-brands fa-instagram"></i> Follow Us on Instagram
             </a>
             <div className="made-with-love">
-              Made with <span className="heart">♥</span> by Indian Travellers Team
+              Made with <span className="heart">♥</span> by Indian Travellers
+              Team
             </div>
           </div>
           <div className="footer-caption">
-            <div className="copyright-text">© 2024 Indian Travellers Team All rights reserved.</div>
+            <div className="copyright-text">
+              © 2024 Indian Travellers Team All rights reserved.
+            </div>
             <div className="caption">
-              Content on this site is copyright protected with respective copyrights. Unauthorized use is prohibited.
+              Content on this site is copyright protected with respective
+              copyrights. Unauthorized use is prohibited.
             </div>
           </div>
         </div>

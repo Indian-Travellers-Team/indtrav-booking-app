@@ -2,96 +2,98 @@
 
 /* Footer Styling */
 .footer-bg {
-    background: linear-gradient(to right, #4568dc, #b06ab3);
-    padding: 10px 0;
-    color: #eef0f2;
+  background: linear-gradient(to right, #4568dc, #b06ab3);
+  padding: 10px 0;
+  color: #eef0f2;
 }
 
-.footer-top, .footer-bottom {
-    display: flex;
-    justify-content: space-between; /* Distribute space evenly */
+.footer-top,
+.footer-bottom {
+  display: flex;
+  justify-content: space-between; /* Distribute space evenly */
 }
 
 .footer-column {
-    margin-right: 0%; /* No margin on the right */
+  margin-right: 0%; /* No margin on the right */
 }
 
 .footer-title {
-    font-weight: bold; /* Bold title */
-    margin-bottom: 10px; /* Space below the title */
+  font-weight: bold; /* Bold title */
+  margin-bottom: 10px; /* Space below the title */
 }
 
 .footer-item {
-    margin-bottom: 5px; /* Space below each item */
-    color: #f5f5f6; /* Color for footer items */
-    text-decoration: none; /* Remove underline */
+  margin-bottom: 5px; /* Space below each item */
+  color: #f5f5f6; /* Color for footer items */
+  text-decoration: none; /* Remove underline */
 }
 
 .footer-logo img {
-    width: 100px; /* Fixed width for the logo */
+  width: 100px; /* Fixed width for the logo */
 }
 
 .social-icons {
-    margin-top: 10px; /* Space above social icons */
+  margin-top: 10px; /* Space above social icons */
 }
 
 .social-icons a {
-    margin-right: 10px; /* Space between social links */
-    color: #f7f7f7; /* Color for social links */
+  margin-right: 10px; /* Space between social links */
+  color: #f7f7f7; /* Color for social links */
 }
 
 .social-icons a:hover {
-    color: #007bff; /* Color on hover for social links */
+  color: #007bff; /* Color on hover for social links */
 }
 
 .footer-caption {
-    margin-top: 20px; /* Space above caption */
+  margin-top: 20px; /* Space above caption */
 }
 
 .footer-caption .copyright-text {
-    font-weight: bold; /* Bold copyright text */
+  font-weight: bold; /* Bold copyright text */
 }
 
 .footer-caption .caption {
-    font-size: 0.7em; /* Smaller font size for caption */
-    margin-top: 5px; /* Space above caption */
+  font-size: 0.7em; /* Smaller font size for caption */
+  margin-top: 5px; /* Space above caption */
 }
 
 .made-with-love {
-    text-align: center; /* Center align text */
-    padding: 20px 0; /* Padding above and below */
-    font-size: 0.9em; /* Font size */
-    width: 100%; /* Full width */
-    color: #eef0f2; /* Color */
+  text-align: center; /* Center align text */
+  padding: 20px 0; /* Padding above and below */
+  font-size: 0.9em; /* Font size */
+  width: 100%; /* Full width */
+  color: #eef0f2; /* Color */
 }
 
 .heart {
-    color: #ff616f; /* Heart color */
-    padding: 0 5px; /* Space around heart */
+  color: #ff616f; /* Heart color */
+  padding: 0 5px; /* Space around heart */
 }
 
 .footer-item.address {
-    padding-top: 10px; /* Space above address */
-    font-size: 0.9em; /* Font size for address */
+  padding-top: 10px; /* Space above address */
+  font-size: 0.9em; /* Font size for address */
 }
 
 .footer-item.address .footer-title {
-    color: #eef0f2; /* Color for address title */
-    margin-bottom: 5px; /* Space below address title */
+  color: #eef0f2; /* Color for address title */
+  margin-bottom: 5px; /* Space below address title */
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .footer-top, .footer-bottom {
-        flex-direction: column; /* Stack items vertically on smaller screens */
-        align-items: center; /* Center align items */
-    }
+  .footer-top,
+  .footer-bottom {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    align-items: center; /* Center align items */
+  }
 
-    .footer-column {
-        margin-bottom: 20px; /* Space below columns on small screens */
-    }
+  .footer-column {
+    margin-bottom: 20px; /* Space below columns on small screens */
+  }
 
-    .social-icons a {
-        margin: 0 5px; /* Space between social links */
-    }
+  .social-icons a {
+    margin: 0 5px; /* Space between social links */
+  }
 }

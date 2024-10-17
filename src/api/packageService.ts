@@ -8,7 +8,7 @@ export const fetchPackages = async (): Promise<PackageResponse> => {
     const response = await axios.get<PackageResponse>(API_URL);
     return response.data; // Return the response data directly
   } catch (error) {
-    console.error("Error fetching packages:", error);
+    console.error('Error fetching packages:', error);
     throw error; // Rethrow the error to handle it later in the calling function
   }
 };
