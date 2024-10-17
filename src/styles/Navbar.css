@@ -48,4 +48,14 @@
   z-index: 1030; /* Ensure navbar stays on top of other content */
 }
 
-/* Optional: Add any additional custom styles you want for the navbar here */
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar-nav {
+    flex-direction: column; /* Stack nav items vertically on smaller screens */
+    width: 100%; /* Full width for nav items */
+  }
+
+  .nav-link {
+    padding: 10px; /* Adjust padding for better spacing */
+  }
+}

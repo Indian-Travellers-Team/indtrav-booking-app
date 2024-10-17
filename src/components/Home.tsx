@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Container, Row, Col } from 'react-bootstrap'; // Import Row and Col from react-bootstrap
 import '../styles/Home.css';
 
 const Home: React.FC = () => {
@@ -16,17 +17,21 @@ const Home: React.FC = () => {
 
   return (
     <div className="home-container">
-      <div className="content-container">
-        <h1 className="title">
-          <i className="fas fa-calendar-day"></i> Booking Options
-        </h1>
-        <p className="subtitle">
-          Choose the type of booking that suits your needs.
-        </p>
-        <div className="button-container">
-          <div className="button-wrapper">
+      <Container className="content-container">
+        <Row className="justify-content-center text-center">
+          <Col xs={12}>
+            <h1 className="title">
+              <i className="fas fa-calendar-day"></i> Booking Options
+            </h1>
+            <p className="subtitle">
+              Choose the type of booking that suits your needs.
+            </p>
+          </Col>
+          <Col xs={12} md={6} className="mb-3">
             <Link to="/booking/single">
-              <div className="button single-booking">
+              <div className="button single-booking text-center">
+                {' '}
+                {/* Added text-center */}
                 <span role="img" aria-label="Single Person Booking">
                   👤
                 </span>{' '}
@@ -36,11 +41,12 @@ const Home: React.FC = () => {
             <p className="description">
               Select this option if you're booking for yourself.
             </p>
-          </div>
-
-          <div className="button-wrapper">
+          </Col>
+          <Col xs={12} md={6} className="mb-3">
             <Link to="/booking/multiple">
-              <div className="button multiple-booking">
+              <div className="button multiple-booking text-center">
+                {' '}
+                {/* Added text-center */}
                 <span role="img" aria-label="Multiple Person Booking">
                   👥
                 </span>{' '}
@@ -50,9 +56,9 @@ const Home: React.FC = () => {
             <p className="description">
               Choose this for booking on behalf of a group or multiple people.
             </p>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };
