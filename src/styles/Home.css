@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh; /* Full viewport height */
+  height: 80vh; /* Full viewport height */
   background-image: url('https://indiantraveller-cms-staticfiles.s3.amazonaws.com/bookings/img/photo-of-paragliding.4923a86fa113.jpg'); /* Background image */
   background-size: 150%; /* Zoom in on the image */
   background-position: center; /* Focus on the center of the image */
@@ -23,9 +23,9 @@
   ); /* Semi-transparent background for the container */
   border-radius: 10px; /* Rounded corners */
   padding: 20px; /* Padding around the content */
-  width: 90%; /* Width of the content container */
+  width: 85%; /* Width of the content container */
   max-width: 1000px; /* Optional: max width to prevent it from becoming too wide */
-  height: 100%; /* Full height to cover the screen */
+  height: 100%; /* Adjust height to fit content */
   margin: 0 10%; /* Horizontal margins of 10% from both sides */
   display: flex;
   flex-direction: column;
@@ -70,11 +70,13 @@
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  text-align: center;
-  width: 400px; /* Fixed width */
+  text-align: center; /* Center align text inside button */
+  width: 100%; /* Full width for button */
+  max-width: 400px; /* Optional: maximum width */
   transition:
     background-color 0.3s,
     transform 0.3s;
+  margin: 0 auto; /* Center button horizontally */
 }
 
 .button:hover {
@@ -92,4 +94,19 @@
 /* Specific styles for multiple booking button */
 .multiple-booking {
   background-color: rgba(108, 117, 125, 0.8); /* Gray background */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem; /* Smaller title size on mobile */
+  }
+
+  .subtitle {
+    font-size: 1.2rem; /* Smaller subtitle size on mobile */
+  }
+
+  .button {
+    width: 90%; /* Full width buttons on mobile */
+  }
 }

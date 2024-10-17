@@ -44,6 +44,8 @@ const Navbar: React.FC = () => {
         <BootstrapNavbar.Toggle aria-controls="navbar-nav" />
         <BootstrapNavbar.Collapse id="navbar-nav">
           <Nav className="ms-auto">
+            {' '}
+            {/* Aligns the nav items to the right */}
             <Nav.Link as={Link} to="/">
               Home
             </Nav.Link>
