@@ -9,6 +9,10 @@ body {
   color: white;
 }
 
+.text-center {
+  color: white;
+}
+
 .booking-container {
   display: flex;
   justify-content: center; /* Center horizontally */
