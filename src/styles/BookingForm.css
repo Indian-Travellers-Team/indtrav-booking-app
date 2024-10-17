@@ -1,41 +1,73 @@
-/* BookingForm.css */
-.booking-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem;
-  background-color: #f8f9fa; /* Light background for form */
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+:root {
+  --background-image-url: url('https://indiantraveller-cms-staticfiles.s3.amazonaws.com/bookings/img/scene.495b069aa4a9.jpg');
 }
 
-.booking-form label {
-  margin: 0.5rem 0;
-  font-size: 1rem;
-}
-
-.booking-form input,
-.booking-form select {
-  padding: 0.5rem;
-  font-size: 1rem;
-  width: 100%;
-  max-width: 400px; /* Limit width for inputs */
-  margin-bottom: 1rem;
-  border: 1px solid #ced4da; /* Light border */
-  border-radius: 4px;
-}
-
-.booking-form button {
-  background-color: #28a745; /* Bootstrap success color */
+body {
+  font-family: Arial, sans-serif;
+  background: var(--background-image-url) no-repeat center center fixed;
+  background-size: cover;
   color: white;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-.booking-form button:hover {
-  background-color: #218838; /* Darker shade on hover */
+.text-center {
+  color: white;
+}
+
+.booking-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: flex-start; /* Align to the top */
+  height: 80vh; /* Full viewport height */
+  padding-top: 50px; /* Add padding from the top */
+  width: 60%; /* Default width for larger screens */
+  margin-left: 20%; /* Centering on larger screens */
+  margin-top: 5%; /* Top margin */
+}
+
+.form-container {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  border-radius: 15px; /* Rounded corners */
+  padding: 20px;
+  width: 60%; /* Default width for larger screens */
+  max-width: 500px; /* Set a maximum width for the form */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional shadow for better visibility */
+}
+
+h2 {
+  color: white; /* Header color */
+  text-align: center;
+  margin-bottom: 10px; /* Space between title and subtitle */
+}
+
+.form-label {
+  color: white; /* Label color */
+}
+
+.btn-primary {
+  background-color: rgba(0, 123, 255, 0.8); /* Semi-transparent blue */
+  border: none; /* Remove border */
+  width: 100%;
+}
+
+.btn-primary:hover {
+  background-color: rgba(0, 105, 217, 1); /* Darker blue on hover */
+}
+
+/* Ensure form elements don't exceed width */
+.form-group {
+  width: 100%; /* Full width for form groups */
+}
+
+/* Responsive Styles for Mobile */
+@media (max-width: 768px) {
+  .booking-container {
+    width: 90%; /* Full width for mobile devices */
+    margin-left: 5%; /* Centering on mobile */
+    margin-top: 20px; /* Add margin from the top */
+  }
+
+  .form-container {
+    width: 100%; /* Full width for mobile */
+    padding: 15px; /* Adjust padding for mobile */
+  }
 }
