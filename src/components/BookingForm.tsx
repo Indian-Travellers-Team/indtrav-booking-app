@@ -1,105 +1,65 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React from 'react';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import '../styles/BookingForm.css';
 
-interface BookingFormData {
-  mobile: string;
-  firstName: string;
-  lastName: string;
-  gender: string;
-  age: string;
-  email: string;
-}
-
 const BookingForm: React.FC = () => {
-  const { type } = useParams<{ type: string }>();
-  const [formData, setFormData] = useState<BookingFormData>({
-    mobile: '',
-    firstName: '',
-    lastName: '',
-    gender: 'Male',
-    age: '',
-    email: '',
-  });
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission logic (e.g., send data to an API)
-    console.log(formData);
-  };
-
   return (
-    <form onSubmit={handleSubmit} className="booking-form">
-      {' '}
-      {/* Add class for styling */}
-      <h2>Book a Trip with Indian Travellers Team</h2>
-      <label>
-        Mobile:
-        <input
-          type="text"
-          name="mobile"
-          value={formData.mobile}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <label>
-        First Name:
-        <input
-          type="text"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <label>
-        Last Name:
-        <input
-          type="text"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <label>
-        Gender:
-        <select name="gender" value={formData.gender} onChange={handleChange}>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Other">Other</option>
-        </select>
-      </label>
-      <label>
-        Age:
-        <input
-          type="number"
-          name="age"
-          value={formData.age}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <label>
-        Email:
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <button type="submit">Next</button>
-    </form>
+    <div className="booking-container">
+      <Container className="form-container">
+        <h2 className="text-center mb-2">Book a Trip with</h2>
+        <h2
+          className="text-center mb-4"
+          style={{ color: 'rgb(188, 224, 190)' }}
+        >
+          Indian Travellers Team 🚀
+        </h2>
+        <Form>
+          <Form.Group controlId="formMobile">
+            <Form.Label className="form-label">Mobile</Form.Label>
+            <Form.Control type="text" placeholder="10 digit Mobile Number" />
+          </Form.Group>
+          <Row>
+            <Col md={6}>
+              <Form.Group controlId="formFirstName">
+                <Form.Label className="form-label">First Name</Form.Label>
+                <Form.Control type="text" placeholder="Your First Name" />
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group controlId="formLastName">
+                <Form.Label className="form-label">Last Name</Form.Label>
+                <Form.Control type="text" placeholder="Your Last Name" />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={6}>
+              <Form.Group controlId="formGender">
+                <Form.Label className="form-label">Gender</Form.Label>
+                <Form.Control as="select">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </Form.Control>
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group controlId="formAge">
+                <Form.Label className="form-label">Age</Form.Label>
+                <Form.Control type="number" placeholder="Your Age" min="0" />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Form.Group controlId="formEmail">
+            <Form.Label className="form-label">Email</Form.Label>
+            <Form.Control type="email" placeholder="Your Email" />
+          </Form.Group>
+          <Button variant="primary" type="submit" className="btn-block mt-3">
+            Next
+          </Button>
+        </Form>
+      </Container>
+    </div>
   );
 };
 
