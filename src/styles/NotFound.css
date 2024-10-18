@@ -1,0 +1,27 @@
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 60px); /* Full height minus navbar height */
+  text-align: center;
+  position: relative; /* Set relative positioning */
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+  color: white; /* White text color */
+  padding: 20px;
+  border-radius: 8px; /* Rounded corners for the overlay */
+}
+
+.back-home-link {
+  margin-top: 20px;
+  text-decoration: none;
+  color: #00aaff; /* Change color for visibility */
+  font-weight: bold;
+}
+
+.back-home-link:hover {
+  text-decoration: underline;
+}
