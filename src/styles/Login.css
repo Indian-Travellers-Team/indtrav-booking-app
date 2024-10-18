@@ -1,0 +1,46 @@
+/* src/styles/Login.css */
+.login-container {
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  height: calc(100vh - 60px); /* Full height minus navbar height */
+  background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 20px; /* Add padding */
+}
+
+h2 {
+  margin-bottom: 20px; /* Space below heading */
+}
+
+input {
+  width: 100%; /* Full width for inputs */
+  padding: 15px; /* Increased padding */
+  margin: 10px 0; /* Space between inputs */
+  border: 1px solid #ccc; /* Border style */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 16px; /* Increased font size */
+}
+
+button {
+  width: 100%; /* Full width for buttons */
+  padding: 15px; /* Increased padding */
+  background-color: #6a5acd; /* Match navbar color */
+  color: white; /* Text color */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+  font-size: 16px; /* Increased font size */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+button:hover {
+  background-color: #5a4dcf; /* Darker on hover */
+}
+
+.error {
+  color: red; /* Error message color */
+  margin-top: 10px; /* Space above error message */
+}
