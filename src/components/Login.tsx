@@ -6,8 +6,11 @@ import {
   getAuth,
   User,
   sendEmailVerification,
+  signInWithPopup,
+  GoogleAuthProvider,
 } from 'firebase/auth';
 import '../styles/Login.css'; // Import styles for the Login component
+import googleLogo from '../assets/google-logo.png'; // Add Google logo to your project
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -53,6 +56,20 @@ const Login: React.FC = () => {
     }
   };
 
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      alert('Google login successful!');
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'An error occurred during Google login',
+      );
+    }
+  };
+
   return (
     <div className="login-container">
       <h2>{isSignUp ? 'Sign Up' : 'Login'}</h2>
@@ -91,6 +108,16 @@ const Login: React.FC = () => {
         )}
         <button type="submit">{isSignUp ? 'Sign Up' : 'Login'}</button>
       </form>
+
+      {/* Google Login Button */}
+      <div className="google-login">
+        <button onClick={handleGoogleLogin}>
+          <img src={googleLogo} alt="Google logo" className="google-logo" />{' '}
+          {/* Add your Google logo here */}
+          Sign in with Google
+        </button>
+      </div>
+
       <p>
         {isSignUp ? 'Already have an account?' : "Don't have an account?"}
         <button onClick={() => setIsSignUp(!isSignUp)}>

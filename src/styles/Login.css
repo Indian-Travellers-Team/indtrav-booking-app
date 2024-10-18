@@ -1,18 +1,17 @@
-/* src/styles/Login.css */
 .login-container {
-  display: flex; /* Use flexbox for layout */
-  flex-direction: column; /* Stack children vertically */
-  justify-content: center; /* Center vertically */
-  align-items: center; /* Center horizontally */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: calc(100vh - 60px); /* Full height minus navbar height */
-  background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
   border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  padding: 20px; /* Add padding */
+  padding: 20px; /* Padding around the container */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
 }
 
 h2 {
-  margin-bottom: 20px; /* Space below heading */
+  margin-bottom: 20px; /* Space below the title */
 }
 
 input {
@@ -34,12 +33,43 @@ button {
   cursor: pointer; /* Pointer cursor */
   font-size: 16px; /* Increased font size */
   transition: background-color 0.3s; /* Smooth transition */
+  margin-top: 10px; /* Space above the button */
 }
 
 button:hover {
   background-color: #5a4dcf; /* Darker on hover */
 }
 
+/* Google Sign-In Button */
+.google-login {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px; /* Space above the Google button */
+}
+
+.google-login button {
+  display: flex;
+  align-items: center;
+  background-color: #0b0a0a; /* White background */
+  border: 1px solid #ddd; /* Border color */
+  padding: 10px 20px; /* Padding for the button */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+  transition: background-color 0.3s; /* Smooth transition */
+  width: auto; /* Automatic width */
+}
+
+.google-login button:hover {
+  background-color: #8d7474; /* Change background on hover */
+}
+
+.google-logo {
+  width: 20px; /* Logo size */
+  height: 20px; /* Logo size */
+  margin-right: 10px; /* Space between logo and text */
+}
+
+/* Optional: Adjust the error message style */
 .error {
   color: red; /* Error message color */
   margin-top: 10px; /* Space above error message */
