@@ -4,16 +4,22 @@ import {
   Nav,
   Navbar as BootstrapNavbar,
   NavDropdown,
+  Button,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { fetchPackages } from '../api/packageService'; // Ensure this imports the API service
-import { Package, PackageResponse } from '../types/packageTypes'; // Import defined types
+import { fetchPackages } from '../api/packageService';
+import { Package, PackageResponse } from '../types/packageTypes';
+import { auth } from '../firebaseConfig';
+import { signOut } from 'firebase/auth';
+import { useAuth } from '../AuthContext';
 import '../styles/Navbar.css';
 
 const Navbar: React.FC = () => {
   const [packages, setPackages] = useState<Package[]>([]);
   const [summerPackages, setSummerPackages] = useState<Package[]>([]);
   const [winterPackages, setWinterPackages] = useState<Package[]>([]);
+
+  const { user } = useAuth(); // Get user from Auth context
 
   useEffect(() => {
     const getPackages = async () => {
@@ -30,6 +36,15 @@ const Navbar: React.FC = () => {
     getPackages();
   }, []);
 
+  const handleLogout = async () => {
+    try {
+      await signOut(auth); // Log out the user
+      console.log('User logged out');
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
+
   return (
     <BootstrapNavbar expand="lg" className="navbar-custom fixed-top">
       <Container>
@@ -44,8 +59,6 @@ const Navbar: React.FC = () => {
         <BootstrapNavbar.Toggle aria-controls="navbar-nav" />
         <BootstrapNavbar.Collapse id="navbar-nav">
           <Nav className="ms-auto">
-            {' '}
-            {/* Aligns the nav items to the right */}
             <Nav.Link as={Link} to="/">
               Home
             </Nav.Link>
@@ -88,6 +101,15 @@ const Navbar: React.FC = () => {
                 </NavDropdown.Item>
               ))}
             </NavDropdown>
+            {/* Logout button and user email display */}
+            {user && (
+              <div className="d-flex align-items-center">
+                <span className="me-2 text-white">{user.email}</span>
+                <Button variant="outline-light" onClick={handleLogout}>
+                  Logout
+                </Button>
+              </div>
+            )}
           </Nav>
         </BootstrapNavbar.Collapse>
       </Container>
