@@ -1,15 +1,19 @@
-// src/components/Login.tsx
 import React, { useState } from 'react';
 import { auth } from '../firebaseConfig';
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  getAuth,
+  User,
+  sendEmailVerification,
 } from 'firebase/auth';
-import '../styles/Login.css';
+import '../styles/Login.css'; // Import styles for the Login component
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [reenterPassword, setReenterPassword] = useState(''); // State for re-enter password
+  const [phone, setPhone] = useState(''); // State for phone number
   const [isSignUp, setIsSignUp] = useState(false);
   const [error, setError] = useState('');
 
@@ -19,8 +23,27 @@ const Login: React.FC = () => {
 
     try {
       if (isSignUp) {
-        await createUserWithEmailAndPassword(auth, email, password);
-        alert('Sign-up successful! You can now log in.');
+        // Check if passwords match
+        if (password !== reenterPassword) {
+          setError('Passwords do not match!');
+          return;
+        }
+
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password,
+        );
+        const user = userCredential.user; // Get the User object
+
+        // Ensure the user is defined before calling sendEmailVerification
+        if (user) {
+          await sendEmailVerification(user); // Call sendEmailVerification correctly
+        }
+
+        alert(
+          'Sign-up successful! Please verify your email before logging in.',
+        );
       } else {
         await signInWithEmailAndPassword(auth, email, password);
         alert('Login successful!');
@@ -48,6 +71,24 @@ const Login: React.FC = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        {isSignUp && ( // Show re-enter password field only for sign-up
+          <input
+            type="password"
+            placeholder="Re-enter Password"
+            value={reenterPassword}
+            onChange={(e) => setReenterPassword(e.target.value)}
+            required
+          />
+        )}
+        {isSignUp && ( // Show phone number field only for sign-up
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+          />
+        )}
         <button type="submit">{isSignUp ? 'Sign Up' : 'Login'}</button>
       </form>
       <p>
