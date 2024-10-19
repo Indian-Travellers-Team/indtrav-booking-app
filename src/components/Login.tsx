@@ -22,8 +22,8 @@ const Login: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [error, setError] = useState('');
 
-  const dispatch = useDispatch<AppDispatch>(); // Use the AppDispatch type
-  const tripId = useSelector((state: RootState) => state.trip.tripId); // Get trip_id from Redux store
+  const dispatch = useDispatch<AppDispatch>();
+  const tripId = useSelector((state: RootState) => state.trip.tripId);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const Login: React.FC = () => {
     const params = new URLSearchParams(window.location.search);
     const tripIdFromUrl = params.get('trip_id');
     if (tripIdFromUrl) {
-      dispatch(setTripId(tripIdFromUrl)); // Set trip_id when the component mounts
+      dispatch(setTripId(tripIdFromUrl));
       console.log('Trip ID from URL:', tripIdFromUrl); // Debugging line
     }
   }, [dispatch]);

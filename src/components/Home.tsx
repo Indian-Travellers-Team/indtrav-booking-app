@@ -1,19 +1,21 @@
 import React, { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Container, Row, Col } from 'react-bootstrap'; // Import Row and Col from react-bootstrap
+import { Link } from 'react-router-dom';
+import { Container, Row, Col } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 import '../styles/Home.css';
 
 const Home: React.FC = () => {
-  const location = useLocation();
+  const tripId = useSelector((state: RootState) => state.trip.tripId);
+  console.log('Redux State:', tripId); // Debugging line
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const tripId = queryParams.get('trip_id');
-
     if (tripId) {
-      console.log('Trip ID:', tripId); // Log the trip_id to the console
+      console.log('Trip ID from Redux:', tripId);
+    } else {
+      console.log('No Trip ID found in Redux');
     }
-  }, [location]);
+  }, [tripId]);
 
   return (
     <div className="home-container">
@@ -30,8 +32,6 @@ const Home: React.FC = () => {
           <Col xs={12} md={6} className="mb-3">
             <Link to="/booking/single">
               <div className="button single-booking text-center">
-                {' '}
-                {/* Added text-center */}
                 <span role="img" aria-label="Single Person Booking">
                   👤
                 </span>{' '}
@@ -45,8 +45,6 @@ const Home: React.FC = () => {
           <Col xs={12} md={6} className="mb-3">
             <Link to="/booking/multiple">
               <div className="button multiple-booking text-center">
-                {' '}
-                {/* Added text-center */}
                 <span role="img" aria-label="Multiple Person Booking">
                   👥
                 </span>{' '}
