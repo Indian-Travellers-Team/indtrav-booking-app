@@ -1,7 +1,13 @@
+// src/store/reducers.ts
 import { combineReducers } from 'redux';
 
 // Define action types
 const SET_TRIP_ID = 'SET_TRIP_ID';
+
+// Initial state type
+interface TripState {
+  tripId: string | null;
+}
 
 // Action creator for setting trip_id
 export const setTripId = (tripId: string | null) => ({
@@ -9,26 +15,25 @@ export const setTripId = (tripId: string | null) => ({
   payload: tripId,
 });
 
-// Initial state type
-interface TripState {
-  tripId: string | null;
-}
-
 // Initial state
 const initialState: TripState = {
-  tripId: null,
+  tripId: null, // tripId should start as null
 };
 
 // Reducer
 const tripReducer = (
   state = initialState,
   action: { type: string; payload?: string | null },
-) => {
+): TripState => {
   switch (action.type) {
     case SET_TRIP_ID:
-      return { ...state, tripId: action.payload };
+      // Only update tripId if action.payload is not undefined
+      if (action.payload !== undefined) {
+        return { ...state, tripId: action.payload }; // Update tripId
+      }
+      return state; // Return the current state if payload is undefined
     default:
-      return state;
+      return state; // Always return the current state if no action matches
   }
 };
 

@@ -1,21 +1,32 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { Container, Row, Col } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setTripId } from '../store/reducers';
 import { RootState } from '../store';
 import '../styles/Home.css';
 
 const Home: React.FC = () => {
+  const dispatch = useDispatch();
   const tripId = useSelector((state: RootState) => state.trip.tripId);
-  console.log('Redux State:', tripId); // Debugging line
+  const location = useLocation();
+  const navigate = useNavigate(); // Add useNavigate hook
 
   useEffect(() => {
-    if (tripId) {
-      console.log('Trip ID from Redux:', tripId);
-    } else {
-      console.log('No Trip ID found in Redux');
+    const queryParams = new URLSearchParams(location.search);
+    const tripIdFromUrl = queryParams.get('trip_id');
+    console.log('Trip ID from Redux:', tripId);
+    // If trip_id from URL is different from the one in Redux, update it
+    if (tripIdFromUrl && tripIdFromUrl !== tripId) {
+      dispatch(setTripId(tripIdFromUrl)); // Update trip_id in Redux store
+      console.log('Trip ID updated in Redux:', tripIdFromUrl); // Debugging line
     }
-  }, [tripId]);
+  }, [location, dispatch, tripId]);
+
+  const handleLoginRedirect = () => {
+    // Redirect to login with the current trip_id
+    navigate(`/login?trip_id=${tripId || ''}`);
+  };
 
   return (
     <div className="home-container">
@@ -54,6 +65,10 @@ const Home: React.FC = () => {
             <p className="description">
               Choose this for booking on behalf of a group or multiple people.
             </p>
+          </Col>
+          <Col xs={12}>
+            <button onClick={handleLoginRedirect}>Login to Book</button>{' '}
+            {/* Button to trigger login redirect */}
           </Col>
         </Row>
       </Container>

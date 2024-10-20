@@ -1,3 +1,4 @@
+// Login.tsx
 import React, { useState, useEffect } from 'react';
 import { auth } from '../firebaseConfig';
 import {
@@ -12,7 +13,7 @@ import { setTripId } from '../store/reducers';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 import googleLogo from '../assets/google-logo.png';
-import { RootState, AppDispatch } from '../store'; // Import RootState and AppDispatch
+import { RootState, AppDispatch } from '../store';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -23,19 +24,18 @@ const Login: React.FC = () => {
   const [error, setError] = useState('');
 
   const dispatch = useDispatch<AppDispatch>();
-  const tripId = useSelector((state: RootState) => state.trip.tripId);
-
-  const location = useLocation();
   const navigate = useNavigate();
 
+  const tripIdFromUrl = new URLSearchParams(useLocation().search).get(
+    'trip_id',
+  ); // Get trip_id from URL
+
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const tripIdFromUrl = params.get('trip_id');
     if (tripIdFromUrl) {
-      dispatch(setTripId(tripIdFromUrl));
+      dispatch(setTripId(tripIdFromUrl)); // Set trip_id from URL to Redux
       console.log('Trip ID from URL:', tripIdFromUrl); // Debugging line
     }
-  }, [dispatch]);
+  }, [dispatch, tripIdFromUrl]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,12 +68,9 @@ const Login: React.FC = () => {
         alert('Login successful!');
         console.log('User logged in:', email); // Debugging line
 
-        // Redirect to the original location or default to bookings
-        const redirectPath = location.state?.from?.pathname || '/booking';
-        const redirectUrl = tripId
-          ? `${redirectPath}?trip_id=${tripId}`
-          : redirectPath;
-        navigate(redirectUrl);
+        // Redirect to the booking page with trip_id
+        const redirectPath = `/booking?trip_id=${tripIdFromUrl || ''}`;
+        navigate(redirectPath);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
@@ -88,12 +85,9 @@ const Login: React.FC = () => {
       alert('Google login successful!');
       console.log('Google login successful!'); // Debugging line
 
-      // Redirect to the original location or default to bookings
-      const redirectPath = location.state?.from?.pathname || '/booking';
-      const redirectUrl = tripId
-        ? `${redirectPath}?trip_id=${tripId}`
-        : redirectPath;
-      navigate(redirectUrl);
+      // Redirect to the booking page with trip_id
+      const redirectPath = `/booking?trip_id=${tripIdFromUrl || ''}`;
+      navigate(redirectPath);
     } catch (err) {
       setError(
         err instanceof Error
@@ -103,8 +97,6 @@ const Login: React.FC = () => {
       console.error('Google login error:', err); // Debugging line
     }
   };
-
-  console.log('Login component is rendering'); // Debugging line
 
   return (
     <div className="login-container">
