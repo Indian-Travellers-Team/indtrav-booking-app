@@ -1,24 +1,41 @@
-import React, { useState } from 'react';
+// Login.tsx
+import React, { useState, useEffect } from 'react';
 import { auth } from '../firebaseConfig';
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  getAuth,
-  User,
+  GoogleAuthProvider,
   sendEmailVerification,
   signInWithPopup,
-  GoogleAuthProvider,
 } from 'firebase/auth';
-import '../styles/Login.css'; // Import styles for the Login component
-import googleLogo from '../assets/google-logo.png'; // Add Google logo to your project
+import { useDispatch, useSelector } from 'react-redux';
+import { setTripId } from '../store/reducers';
+import { useLocation, useNavigate } from 'react-router-dom';
+import '../styles/Login.css';
+import googleLogo from '../assets/google-logo.png';
+import { RootState, AppDispatch } from '../store';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [reenterPassword, setReenterPassword] = useState(''); // State for re-enter password
-  const [phone, setPhone] = useState(''); // State for phone number
+  const [reenterPassword, setReenterPassword] = useState('');
+  const [phone, setPhone] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
   const [error, setError] = useState('');
+
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
+  const tripIdFromUrl = new URLSearchParams(useLocation().search).get(
+    'trip_id',
+  ); // Get trip_id from URL
+
+  useEffect(() => {
+    if (tripIdFromUrl) {
+      dispatch(setTripId(tripIdFromUrl)); // Set trip_id from URL to Redux
+      console.log('Trip ID from URL:', tripIdFromUrl); // Debugging line
+    }
+  }, [dispatch, tripIdFromUrl]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +43,6 @@ const Login: React.FC = () => {
 
     try {
       if (isSignUp) {
-        // Check if passwords match
         if (password !== reenterPassword) {
           setError('Passwords do not match!');
           return;
@@ -37,11 +53,11 @@ const Login: React.FC = () => {
           email,
           password,
         );
-        const user = userCredential.user; // Get the User object
+        const user = userCredential.user;
 
-        // Ensure the user is defined before calling sendEmailVerification
         if (user) {
-          await sendEmailVerification(user); // Call sendEmailVerification correctly
+          await sendEmailVerification(user);
+          console.log('User signed up:', user.email); // Debugging line
         }
 
         alert(
@@ -50,9 +66,15 @@ const Login: React.FC = () => {
       } else {
         await signInWithEmailAndPassword(auth, email, password);
         alert('Login successful!');
+        console.log('User logged in:', email); // Debugging line
+
+        // Redirect to the booking page with trip_id
+        const redirectPath = `/booking?trip_id=${tripIdFromUrl || ''}`;
+        navigate(redirectPath);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
+      console.error('Login error:', err); // Debugging line
     }
   };
 
@@ -61,12 +83,18 @@ const Login: React.FC = () => {
     try {
       await signInWithPopup(auth, provider);
       alert('Google login successful!');
+      console.log('Google login successful!'); // Debugging line
+
+      // Redirect to the booking page with trip_id
+      const redirectPath = `/booking?trip_id=${tripIdFromUrl || ''}`;
+      navigate(redirectPath);
     } catch (err) {
       setError(
         err instanceof Error
           ? err.message
           : 'An error occurred during Google login',
       );
+      console.error('Google login error:', err); // Debugging line
     }
   };
 
@@ -88,7 +116,7 @@ const Login: React.FC = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        {isSignUp && ( // Show re-enter password field only for sign-up
+        {isSignUp && (
           <input
             type="password"
             placeholder="Re-enter Password"
@@ -97,7 +125,7 @@ const Login: React.FC = () => {
             required
           />
         )}
-        {isSignUp && ( // Show phone number field only for sign-up
+        {isSignUp && (
           <input
             type="tel"
             placeholder="Phone Number"
@@ -109,14 +137,14 @@ const Login: React.FC = () => {
         <button type="submit">{isSignUp ? 'Sign Up' : 'Login'}</button>
       </form>
 
-      {/* Google Login Button */}
-      <div className="google-login">
-        <button onClick={handleGoogleLogin}>
-          <img src={googleLogo} alt="Google logo" className="google-logo" />{' '}
-          {/* Add your Google logo here */}
-          Sign in with Google
-        </button>
-      </div>
+      {!isSignUp && (
+        <div className="google-login">
+          <button onClick={handleGoogleLogin}>
+            <img src={googleLogo} alt="Google logo" className="google-logo" />
+            Sign in with Google
+          </button>
+        </div>
+      )}
 
       <p>
         {isSignUp ? 'Already have an account?' : "Don't have an account?"}

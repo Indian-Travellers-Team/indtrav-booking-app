@@ -1,19 +1,32 @@
 import React, { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Container, Row, Col } from 'react-bootstrap'; // Import Row and Col from react-bootstrap
+import { Link, useLocation, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Container, Row, Col } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { setTripId } from '../store/reducers';
+import { RootState } from '../store';
 import '../styles/Home.css';
 
 const Home: React.FC = () => {
+  const dispatch = useDispatch();
+  const tripId = useSelector((state: RootState) => state.trip.tripId);
   const location = useLocation();
+  const navigate = useNavigate(); // Add useNavigate hook
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    const tripId = queryParams.get('trip_id');
-
-    if (tripId) {
-      console.log('Trip ID:', tripId); // Log the trip_id to the console
+    const tripIdFromUrl = queryParams.get('trip_id');
+    console.log('Trip ID from Redux:', tripId);
+    // If trip_id from URL is different from the one in Redux, update it
+    if (tripIdFromUrl && tripIdFromUrl !== tripId) {
+      dispatch(setTripId(tripIdFromUrl)); // Update trip_id in Redux store
+      console.log('Trip ID updated in Redux:', tripIdFromUrl); // Debugging line
     }
-  }, [location]);
+  }, [location, dispatch, tripId]);
+
+  const handleLoginRedirect = () => {
+    // Redirect to login with the current trip_id
+    navigate(`/login?trip_id=${tripId || ''}`);
+  };
 
   return (
     <div className="home-container">
@@ -30,8 +43,6 @@ const Home: React.FC = () => {
           <Col xs={12} md={6} className="mb-3">
             <Link to="/booking/single">
               <div className="button single-booking text-center">
-                {' '}
-                {/* Added text-center */}
                 <span role="img" aria-label="Single Person Booking">
                   👤
                 </span>{' '}
@@ -45,8 +56,6 @@ const Home: React.FC = () => {
           <Col xs={12} md={6} className="mb-3">
             <Link to="/booking/multiple">
               <div className="button multiple-booking text-center">
-                {' '}
-                {/* Added text-center */}
                 <span role="img" aria-label="Multiple Person Booking">
                   👥
                 </span>{' '}
@@ -56,6 +65,10 @@ const Home: React.FC = () => {
             <p className="description">
               Choose this for booking on behalf of a group or multiple people.
             </p>
+          </Col>
+          <Col xs={12}>
+            <button onClick={handleLoginRedirect}>Login to Book</button>{' '}
+            {/* Button to trigger login redirect */}
           </Col>
         </Row>
       </Container>
