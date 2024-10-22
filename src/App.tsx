@@ -12,7 +12,7 @@ import store, { persistor } from './store';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './components/Home';
-import BookingForm from './components/BookingForm';
+import BookingForm from './components/Booking/BookingForm';
 import Login from './components/Login';
 import NotFound from './components/NotFound';
 import { AuthProvider, useAuth } from './AuthContext';
