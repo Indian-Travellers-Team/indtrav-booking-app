@@ -1,0 +1,14 @@
+.btn-primary {
+  background-color: rgba(0, 123, 255, 0.8); /* Semi-transparent blue */
+  border: none; /* Remove border */
+  width: 100%;
+}
+
+.btn-primary:hover {
+  background-color: rgba(0, 105, 217, 1); /* Darker blue on hover */
+}
+
+/* Ensure form elements don't exceed width */
+.form-group {
+  width: 100%; /* Full width for form groups */
+}
