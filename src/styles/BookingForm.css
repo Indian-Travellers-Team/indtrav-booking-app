@@ -48,6 +48,8 @@ body {
   border-radius: 10px; /* Rounded corners */
   padding: 10px; /* Padding for the details section */
   margin: 15px 0; /* Space around the details section */
+  color: white;
+  text-align: center;
 }
 
 h2 {
@@ -80,7 +82,8 @@ h2 {
   .booking-container {
     width: 90%; /* Full width for mobile devices */
     margin-left: 5%; /* Centering on mobile */
-    margin-top: 20px; /* Add margin from the top */
+    margin-top: 50px; /* Add margin from the top */
+    height: 90%;
   }
 
   .form-container {

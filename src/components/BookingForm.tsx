@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+// src/components/BookingForm.tsx
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { fetchCustomerData } from '../api/customerService';
 import { useSelector } from 'react-redux';
@@ -6,13 +7,15 @@ import { RootState } from '../store';
 import { fetchTripDetails } from '../api/tripService';
 import '../styles/BookingForm.css';
 
+// Define the state type for form data
 interface BookingFormData {
   mobile: string;
   firstName: string;
   lastName: string;
   gender: string;
-  age: number | '';
+  age: number | ''; // Allow age to be a number or empty string
   email: string;
+  sharingType: string; // Added field for sharing type
 }
 
 const BookingForm: React.FC = () => {
@@ -23,18 +26,19 @@ const BookingForm: React.FC = () => {
     gender: 'male',
     age: '',
     email: '',
+    sharingType: '', // Initialize sharing type
   });
 
-  const [tripDetails, setTripDetails] = useState<any>(null);
-  const tripId = useSelector((state: RootState) => state.trip.tripId);
+  const [tripDetails, setTripDetails] = useState<any>(null); // State to hold trip details
+  const tripId = useSelector((state: RootState) => state.trip.tripId); // Get trip_id from Redux store
   const userEmail = useSelector((state: RootState) => state.user.email); // Get user email from Redux store
 
   useEffect(() => {
     const fetchDetails = async () => {
       if (tripId) {
         try {
-          const response = await fetchTripDetails(tripId);
-          setTripDetails(response);
+          const response = await fetchTripDetails(tripId); // Fetch trip details using trip_id
+          setTripDetails(response); // Store the response in state
         } catch (error) {
           console.error('Failed to fetch trip details:', error);
         }
@@ -45,11 +49,10 @@ const BookingForm: React.FC = () => {
   }, [tripId]);
 
   useEffect(() => {
-    // Prefill email if userEmail is available
     if (userEmail) {
       setFormData((prevData) => ({
         ...prevData,
-        email: userEmail,
+        email: userEmail, // Prefill email if user is logged in
       }));
     }
   }, [userEmail]);
@@ -63,6 +66,7 @@ const BookingForm: React.FC = () => {
     const { value } = e.target;
     setFormData((prevData) => ({ ...prevData, mobile: value }));
 
+    // Fetch customer data when mobile number is entered
     if (value.length === 10) {
       try {
         const customerData = await fetchCustomerData(value);
@@ -71,7 +75,7 @@ const BookingForm: React.FC = () => {
           firstName: customerData.first_name,
           lastName: customerData.last_name,
           email: customerData.email,
-          age: customerData.age,
+          age: customerData.age, // Ensure age is assigned as a number
           gender: customerData.gender,
         }));
       } catch (error) {
@@ -96,27 +100,55 @@ const BookingForm: React.FC = () => {
           Indian Travellers Team 🚀
         </h2>
 
-        {tripDetails && (
+        {tripDetails && ( // Check if tripDetails is available
           <div className="trip-details mb-4">
-            <h3>Trip Details</h3>
-            <p>
-              <strong>Package Name:</strong> {tripDetails.package_name}
-            </p>
-            <p>
-              <strong>Start Date:</strong> {tripDetails.start_date}
-            </p>
-            <p>
-              <strong>End Date:</strong> {tripDetails.end_date}
-            </p>
-            <p>
-              <strong>Total Days:</strong> {tripDetails.total_days}
-            </p>
-            <p>
-              <strong>Advance Payment:</strong> ${tripDetails.advance_payment}
-            </p>
-            <p>
-              <strong>Discount:</strong> ${tripDetails.discount}
-            </p>
+            <h4>Your Trip Details</h4>
+            <Row>
+              <Col xs={6}>
+                <strong>Package Name:</strong>
+              </Col>
+              <Col xs={6}>
+                <span>{tripDetails.package_name}</span>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={6}>
+                <strong>Start Date:</strong>
+              </Col>
+              <Col xs={6}>
+                <span>{tripDetails.start_date}</span>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={6}>
+                <strong>End Date:</strong>
+              </Col>
+              <Col xs={6}>
+                <span>{tripDetails.end_date}</span>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={6}>
+                <strong>Advance Payment:</strong>
+              </Col>
+              <Col xs={6}>
+                <span
+                  style={{
+                    textDecoration: tripDetails.discount
+                      ? 'line-through'
+                      : 'none',
+                  }}
+                >
+                  ₹{tripDetails.advance_payment}
+                </span>
+                {tripDetails.discount > 0 && (
+                  <span>
+                    {' '}
+                    ₹{tripDetails.advance_payment - tripDetails.discount}
+                  </span>
+                )}
+              </Col>
+            </Row>
           </div>
         )}
 
@@ -197,6 +229,29 @@ const BookingForm: React.FC = () => {
               onChange={handleInputChange}
             />
           </Form.Group>
+
+          {/* Dropdown for sharing type */}
+          <Form.Group controlId="formSharingType" className="mt-3">
+            <Form.Label className="form-label">Select Sharing Type</Form.Label>
+            <Form.Control
+              as="select"
+              name="sharingType"
+              value={formData.sharingType}
+              onChange={handleInputChange}
+            >
+              <option value="">Select Sharing Type</option>
+              <option value="double_sharing">
+                Double Sharing - ₹{tripDetails?.double_sharing_price || 0}
+              </option>
+              <option value="triple_sharing">
+                Triple Sharing - ₹{tripDetails?.triple_sharing_price || 0}
+              </option>
+              <option value="quad_sharing">
+                Quad Sharing - ₹{tripDetails?.quad_sharing_price || 0}
+              </option>
+            </Form.Control>
+          </Form.Group>
+
           <Button variant="primary" type="submit" className="btn-block mt-3">
             Continue Payment
           </Button>
