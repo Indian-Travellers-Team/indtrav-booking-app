@@ -3,10 +3,15 @@ import { combineReducers } from 'redux';
 
 // Define action types
 const SET_TRIP_ID = 'SET_TRIP_ID';
+const SET_USER_EMAIL = 'SET_USER_EMAIL';
 
 // Initial state type
 interface TripState {
   tripId: string | null;
+}
+
+interface UserState {
+  email: string | null; // User email state
 }
 
 // Action creator for setting trip_id
@@ -15,23 +20,42 @@ export const setTripId = (tripId: string | null) => ({
   payload: tripId,
 });
 
+// Action creator for setting user email
+export const setUserEmail = (email: string | null) => ({
+  type: SET_USER_EMAIL,
+  payload: email,
+});
+
 // Initial state
-const initialState: TripState = {
+const initialTripState: TripState = {
   tripId: null, // tripId should start as null
 };
 
-// Reducer
+const initialUserState: UserState = {
+  email: null, // User email should start as null
+};
+
+// Trip reducer
 const tripReducer = (
-  state = initialState,
+  state = initialTripState,
   action: { type: string; payload?: string | null },
 ): TripState => {
   switch (action.type) {
     case SET_TRIP_ID:
-      // Only update tripId if action.payload is not undefined
-      if (action.payload !== undefined) {
-        return { ...state, tripId: action.payload }; // Update tripId
-      }
-      return state; // Return the current state if payload is undefined
+      return { ...state, tripId: action.payload ?? null }; // Update tripId
+    default:
+      return state; // Always return the current state if no action matches
+  }
+};
+
+// User reducer
+const userReducer = (
+  state = initialUserState,
+  action: { type: string; payload?: string | null },
+): UserState => {
+  switch (action.type) {
+    case SET_USER_EMAIL:
+      return { ...state, email: action.payload ?? null }; // Update user email
     default:
       return state; // Always return the current state if no action matches
   }
@@ -40,6 +64,7 @@ const tripReducer = (
 // Combine reducers
 const rootReducer = combineReducers({
   trip: tripReducer,
+  user: userReducer,
 });
 
 export default rootReducer;

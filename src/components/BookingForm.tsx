@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { fetchCustomerData } from '../api/customerService';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
+import { fetchTripDetails } from '../api/tripService';
 import '../styles/BookingForm.css';
 
-// Define the state type for form data
 interface BookingFormData {
   mobile: string;
   firstName: string;
   lastName: string;
   gender: string;
-  age: number | ''; // Allow age to be a number or empty string
+  age: number | '';
   email: string;
 }
 
@@ -19,11 +21,39 @@ const BookingForm: React.FC = () => {
     firstName: '',
     lastName: '',
     gender: 'male',
-    age: '', // Start with empty string for age
+    age: '',
     email: '',
   });
 
-  // Update the type for the event parameter
+  const [tripDetails, setTripDetails] = useState<any>(null);
+  const tripId = useSelector((state: RootState) => state.trip.tripId);
+  const userEmail = useSelector((state: RootState) => state.user.email); // Get user email from Redux store
+
+  useEffect(() => {
+    const fetchDetails = async () => {
+      if (tripId) {
+        try {
+          const response = await fetchTripDetails(tripId);
+          setTripDetails(response);
+        } catch (error) {
+          console.error('Failed to fetch trip details:', error);
+        }
+      }
+    };
+
+    fetchDetails();
+  }, [tripId]);
+
+  useEffect(() => {
+    // Prefill email if userEmail is available
+    if (userEmail) {
+      setFormData((prevData) => ({
+        ...prevData,
+        email: userEmail,
+      }));
+    }
+  }, [userEmail]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -33,7 +63,6 @@ const BookingForm: React.FC = () => {
     const { value } = e.target;
     setFormData((prevData) => ({ ...prevData, mobile: value }));
 
-    // Fetch customer data when mobile number is entered
     if (value.length === 10) {
       try {
         const customerData = await fetchCustomerData(value);
@@ -42,7 +71,7 @@ const BookingForm: React.FC = () => {
           firstName: customerData.first_name,
           lastName: customerData.last_name,
           email: customerData.email,
-          age: customerData.age, // Ensure age is assigned as a number
+          age: customerData.age,
           gender: customerData.gender,
         }));
       } catch (error) {
@@ -66,6 +95,31 @@ const BookingForm: React.FC = () => {
         >
           Indian Travellers Team 🚀
         </h2>
+
+        {tripDetails && (
+          <div className="trip-details mb-4">
+            <h3>Trip Details</h3>
+            <p>
+              <strong>Package Name:</strong> {tripDetails.package_name}
+            </p>
+            <p>
+              <strong>Start Date:</strong> {tripDetails.start_date}
+            </p>
+            <p>
+              <strong>End Date:</strong> {tripDetails.end_date}
+            </p>
+            <p>
+              <strong>Total Days:</strong> {tripDetails.total_days}
+            </p>
+            <p>
+              <strong>Advance Payment:</strong> ${tripDetails.advance_payment}
+            </p>
+            <p>
+              <strong>Discount:</strong> ${tripDetails.discount}
+            </p>
+          </div>
+        )}
+
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formMobile">
             <Form.Label className="form-label">Mobile</Form.Label>
@@ -74,7 +128,7 @@ const BookingForm: React.FC = () => {
               placeholder="10 digit Mobile Number"
               name="mobile"
               value={formData.mobile}
-              onChange={handleMobileChange} // Use this for mobile input
+              onChange={handleMobileChange}
             />
           </Form.Group>
           <Row>
@@ -86,7 +140,7 @@ const BookingForm: React.FC = () => {
                   placeholder="Your First Name"
                   name="firstName"
                   value={formData.firstName}
-                  onChange={handleInputChange} // Use the generic handler for other fields
+                  onChange={handleInputChange}
                 />
               </Form.Group>
             </Col>
@@ -111,7 +165,7 @@ const BookingForm: React.FC = () => {
                   as="select"
                   name="gender"
                   value={formData.gender}
-                  onChange={handleInputChange} // Use the generic handler for other fields
+                  onChange={handleInputChange}
                 >
                   <option value="male">Male</option>
                   <option value="female">Female</option>
@@ -128,7 +182,7 @@ const BookingForm: React.FC = () => {
                   name="age"
                   value={formData.age}
                   min="0"
-                  onChange={handleInputChange} // Use the generic handler for other fields
+                  onChange={handleInputChange}
                 />
               </Form.Group>
             </Col>
@@ -140,11 +194,11 @@ const BookingForm: React.FC = () => {
               placeholder="Your Email"
               name="email"
               value={formData.email}
-              onChange={handleInputChange} // Use the generic handler for other fields
+              onChange={handleInputChange}
             />
           </Form.Group>
           <Button variant="primary" type="submit" className="btn-block mt-3">
-            Next
+            Continue Payment
           </Button>
         </Form>
       </Container>

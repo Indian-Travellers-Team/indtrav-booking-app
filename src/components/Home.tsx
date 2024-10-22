@@ -66,10 +66,6 @@ const Home: React.FC = () => {
               Choose this for booking on behalf of a group or multiple people.
             </p>
           </Col>
-          <Col xs={12}>
-            <button onClick={handleLoginRedirect}>Login to Book</button>{' '}
-            {/* Button to trigger login redirect */}
-          </Col>
         </Row>
       </Container>
     </div>

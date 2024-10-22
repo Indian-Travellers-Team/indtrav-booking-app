@@ -17,7 +17,7 @@ body {
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: flex-start; /* Align to the top */
-  height: 80vh; /* Full viewport height */
+  height: 110vh; /* Full viewport height */
   padding-top: 50px; /* Add padding from the top */
   width: 60%; /* Default width for larger screens */
   margin-left: 20%; /* Centering on larger screens */
@@ -25,12 +25,29 @@ body {
 }
 
 .form-container {
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.7
+  ); /* Make it more opaque for better contrast */
   border-radius: 15px; /* Rounded corners */
   padding: 20px;
   width: 60%; /* Default width for larger screens */
   max-width: 500px; /* Set a maximum width for the form */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional shadow for better visibility */
+}
+
+.trip-details {
+  background-color: rgba(
+    0,
+    123,
+    255,
+    0.7
+  ); /* Semi-transparent blue background */
+  border-radius: 10px; /* Rounded corners */
+  padding: 10px; /* Padding for the details section */
+  margin: 15px 0; /* Space around the details section */
 }
 
 h2 {
