@@ -8,12 +8,11 @@ import {
   signInWithPopup,
 } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
-import { setTripId } from '../store/reducers';
+import { setTripId, setUserEmail } from '../store/reducers'; // Import setUserEmail
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 import googleLogo from '../assets/google-logo.png';
 import { RootState, AppDispatch } from '../store';
-import Modal from './Modal'; // Import the Modal component
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -23,21 +22,22 @@ const Login: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false); // State for modal visibility
+  const [modalMessage, setModalMessage] = useState(''); // State for modal message
 
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
-
-  const tripIdFromUrl = new URLSearchParams(useLocation().search).get(
-    'trip_id',
-  );
   const tripId = useSelector((state: RootState) => state.trip.tripId);
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tripIdFromUrl = params.get('trip_id');
     if (tripIdFromUrl) {
       dispatch(setTripId(tripIdFromUrl));
-      console.log('Trip ID from URL:', tripIdFromUrl);
+      console.log('Trip ID from URL:', tripIdFromUrl); // Debugging line
     }
-  }, [dispatch, tripIdFromUrl]);
+  }, [dispatch]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,28 +59,24 @@ const Login: React.FC = () => {
 
         if (user) {
           await sendEmailVerification(user);
-          console.log('User signed up:', user.email);
+          console.log('User signed up:', user.email); // Debugging line
+          setModalMessage(
+            'Yay!! You are successfully signed up! Please verify your email before logging in.',
+          );
+          setShowModal(true); // Show modal on signup success
         }
-
-        alert(
-          'Sign-up successful! Please verify your email before logging in.',
-        );
       } else {
         await signInWithEmailAndPassword(auth, email, password);
-        console.log('User logged in:', email);
+        console.log('User logged in:', email); // Debugging line
+        dispatch(setUserEmail(email)); // Dispatch user email to Redux store
 
-        // Show modal on successful login
-        setShowModal(true);
-
-        // Redirect to the booking page with trip_id after a short delay
-        setTimeout(() => {
-          const redirectPath = `/booking?trip_id=${tripIdFromUrl || ''}`;
-          navigate(redirectPath);
-        }, 1500); // 1.5 seconds delay
+        // Redirect to the booking page with trip_id
+        const redirectPath = `/booking?trip_id=${tripId || ''}`;
+        navigate(redirectPath);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
-      console.error('Login error:', err);
+      console.error('Login error:', err); // Debugging line
     }
   };
 
@@ -88,34 +84,26 @@ const Login: React.FC = () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-      console.log('Google login successful!');
+      console.log('Google login successful!'); // Debugging line
 
-      // Show modal on successful Google login
-      setShowModal(true);
+      // Dispatch user email to Redux store
+      dispatch(setUserEmail(auth.currentUser?.email || null));
 
-      // Redirect to the booking page with trip_id after a short delay
-      setTimeout(() => {
-        const redirectPath = `/booking?trip_id=${tripIdFromUrl || ''}`;
-        navigate(redirectPath);
-      }, 1500); // 1.5 seconds delay
+      // Redirect to the booking page with trip_id
+      const redirectPath = `/booking?trip_id=${tripId || ''}`;
+      navigate(redirectPath);
     } catch (err) {
       setError(
         err instanceof Error
           ? err.message
           : 'An error occurred during Google login',
       );
-      console.error('Google login error:', err);
+      console.error('Google login error:', err); // Debugging line
     }
   };
 
   return (
     <div className="login-container">
-      {showModal && (
-        <Modal
-          message="Yay!! You are successfully logged in! 🔥"
-          onClose={() => setShowModal(false)}
-        />
-      )}
       <h2>{isSignUp ? 'Sign Up' : 'Login'}</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -169,6 +157,17 @@ const Login: React.FC = () => {
         </button>
       </p>
       {error && <p className="error">{error}</p>}
+
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={() => setShowModal(false)}>
+              &times;
+            </span>
+            <p style={{ color: 'green' }}>{modalMessage}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
