@@ -7,6 +7,7 @@ import { fetchTripDetails } from '../../api/tripService';
 import TripDetails from './TripDetails';
 import UserInfoForm from './UserInfoForm';
 import './styles/BookingForm.css';
+import { useLocation } from 'react-router-dom'; // Import useLocation to get the current route
 
 // Define the state type for form data
 interface BookingFormData {
@@ -20,6 +21,9 @@ interface BookingFormData {
 }
 
 const BookingForm: React.FC = () => {
+  const location = useLocation(); // Get the current route
+  const isMultipleBooking = location.pathname === '/booking/multiple'; // Check if the route is for multiple booking
+
   const [formData, setFormData] = useState<BookingFormData>({
     mobile: '',
     firstName: '',
@@ -108,6 +112,7 @@ const BookingForm: React.FC = () => {
           handleMobileChange={handleMobileChange}
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
+          isMultipleBooking={isMultipleBooking} // Pass the isMultipleBooking prop
         />
       </Container>
     </div>

@@ -16,6 +16,7 @@ interface UserInfoFormProps {
   handleMobileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleInputChange: (e: React.ChangeEvent<HTMLElement>) => void; // Change to HTMLElement
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  isMultipleBooking: boolean; // New prop to indicate if it's a multiple booking
 }
 
 const UserInfoForm: React.FC<UserInfoFormProps> = ({
@@ -24,6 +25,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
   handleMobileChange,
   handleInputChange,
   handleSubmit,
+  isMultipleBooking, // Use the new prop
 }) => {
   const [additionalPersons, setAdditionalPersons] = useState<any[]>([{}]); // Start with one additional person
 
@@ -33,7 +35,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
 
   const handlePersonChange = (
     index: number,
-    e: React.ChangeEvent<HTMLElement>, // Change to HTMLElement
+    e: React.ChangeEvent<HTMLElement>,
   ) => {
     const target = e.target as HTMLInputElement | HTMLSelectElement; // Cast target to correct type
     const { name, value } = target;
@@ -153,69 +155,78 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
       </Form.Group>
 
       {/* Additional Persons Section */}
-      <h4 className="mt-4 add-more-persons-title">👥 Add More Persons</h4>
-      {additionalPersons.map((_, index) => (
-        <div key={index} className="additional-person-fields mb-3">
-          <Row>
-            <Col md={4}>
-              <Form.Group controlId={`firstName${index}`}>
-                <Form.Label>First Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="First Name"
-                  name="firstName"
-                  onChange={(e) => handlePersonChange(index, e)} // Pass the event here
-                />
-              </Form.Group>
-            </Col>
-            <Col md={4}>
-              <Form.Group controlId={`lastName${index}`}>
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Last Name"
-                  name="lastName"
-                  onChange={(e) => handlePersonChange(index, e)} // Pass the event here
-                />
-              </Form.Group>
-            </Col>
-            <Col md={4}>
-              <Form.Group controlId={`age${index}`}>
-                <Form.Label>Age</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="Age"
-                  name="age"
-                  min="0"
-                  onChange={(e) => handlePersonChange(index, e)} // Pass the event here
-                />
-              </Form.Group>
-            </Col>
-            <Col md={6}>
-              <Form.Group controlId={`gender${index}`}>
-                <Form.Label>Gender</Form.Label>
-                <Form.Control
-                  as="select"
-                  name="gender"
-                  onChange={(e) => handlePersonChange(index, e)} // Pass the event here
-                >
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
-                </Form.Control>
-              </Form.Group>
-            </Col>
-            <Col md={6} className="d-flex align-items-end">
-              <Button variant="danger" onClick={() => removePerson(index)}>
-                Remove
-              </Button>
-            </Col>
-          </Row>
-        </div>
-      ))}
-      <Button variant="info" onClick={addPersonFields} className="mt-3">
-        ➕ Add Another Person
-      </Button>
+      {isMultipleBooking && ( // Conditionally render this section
+        <>
+          <h4
+            className="mt-4 add-more-persons-title"
+            style={{ color: 'white' }}
+          >
+            👥 Add More Persons
+          </h4>
+          {additionalPersons.map((_, index) => (
+            <div key={index} className="additional-person-fields mb-3">
+              <Row>
+                <Col md={4}>
+                  <Form.Group controlId={`firstName${index}`}>
+                    <Form.Label>First Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="First Name"
+                      name="firstName"
+                      onChange={(e) => handlePersonChange(index, e)} // Pass the event here
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md={4}>
+                  <Form.Group controlId={`lastName${index}`}>
+                    <Form.Label>Last Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Last Name"
+                      name="lastName"
+                      onChange={(e) => handlePersonChange(index, e)} // Pass the event here
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md={4}>
+                  <Form.Group controlId={`age${index}`}>
+                    <Form.Label>Age</Form.Label>
+                    <Form.Control
+                      type="number"
+                      placeholder="Age"
+                      name="age"
+                      min="0"
+                      onChange={(e) => handlePersonChange(index, e)} // Pass the event here
+                    />
+                  </Form.Group>
+                </Col>
+                <Col md={6}>
+                  <Form.Group controlId={`gender${index}`}>
+                    <Form.Label>Gender</Form.Label>
+                    <Form.Control
+                      as="select"
+                      name="gender"
+                      onChange={(e) => handlePersonChange(index, e)} // Pass the event here
+                    >
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Col>
+                <Col md={6} className="d-flex align-items-end">
+                  <Button variant="danger" onClick={() => removePerson(index)}>
+                    Remove
+                  </Button>
+                </Col>
+              </Row>
+            </div>
+          ))}
+          <Button variant="info" onClick={addPersonFields} className="mt-3">
+            ➕ Add Another Person
+          </Button>
+        </>
+      )}
 
       <Button variant="primary" type="submit" className="btn-block mt-3">
         Continue Payment
