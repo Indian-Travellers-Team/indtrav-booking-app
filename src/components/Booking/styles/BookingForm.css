@@ -17,7 +17,7 @@ body {
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: flex-start; /* Align to the top */
-  height: 110vh; /* Full viewport height */
+  height: auto; /* Full viewport height */
   padding-top: 50px; /* Add padding from the top */
   width: 60%; /* Default width for larger screens */
   margin-left: 20%; /* Centering on larger screens */
@@ -25,6 +25,7 @@ body {
 }
 
 .form-container {
+  flex: 1;
   background-color: rgba(
     0,
     0,

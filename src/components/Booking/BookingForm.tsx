@@ -58,10 +58,9 @@ const BookingForm: React.FC = () => {
     }
   }, [userEmail]);
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
-    const { name, value } = e.target;
+  const handleInputChange = (e: React.ChangeEvent<HTMLElement>) => {
+    const target = e.target as HTMLInputElement | HTMLSelectElement;
+    const { name, value } = target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 

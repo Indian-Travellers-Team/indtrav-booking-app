@@ -12,3 +12,7 @@
 .form-group {
   width: 100%; /* Full width for form groups */
 }
+
+.add-more-persons-title {
+  color: white; /* Change the color to white */
+}
