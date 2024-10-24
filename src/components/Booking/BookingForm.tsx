@@ -1,3 +1,4 @@
+// src/components/BookingForm.tsx
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { fetchCustomerData } from '../../api/customerService';
@@ -89,7 +90,7 @@ const BookingForm: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Add your form submission logic here
   };
@@ -111,8 +112,8 @@ const BookingForm: React.FC = () => {
           tripDetails={tripDetails}
           handleMobileChange={handleMobileChange}
           handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}
-          isMultipleBooking={isMultipleBooking} // Pass the isMultipleBooking prop
+          token={''} // Add the Firebase token if needed
+          isMultipleBooking={isMultipleBooking}
         />
       </Container>
     </div>
