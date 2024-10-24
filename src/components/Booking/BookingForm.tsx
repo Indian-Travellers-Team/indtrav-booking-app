@@ -38,6 +38,9 @@ const BookingForm: React.FC = () => {
   const [tripDetails, setTripDetails] = useState<any>(null);
   const tripId = useSelector((state: RootState) => state.trip.tripId);
   const userEmail = useSelector((state: RootState) => state.user.email);
+  const firebaseToken = useSelector(
+    (state: RootState) => state.user.firebaseToken,
+  );
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -112,7 +115,7 @@ const BookingForm: React.FC = () => {
           tripDetails={tripDetails}
           handleMobileChange={handleMobileChange}
           handleInputChange={handleInputChange}
-          token={''} // Add the Firebase token if needed
+          token={firebaseToken} // Add the Firebase token if needed
           isMultipleBooking={isMultipleBooking}
         />
       </Container>
