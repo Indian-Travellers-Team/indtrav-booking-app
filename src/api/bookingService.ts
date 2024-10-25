@@ -30,15 +30,11 @@ export const createBooking = async (
   },
   token: string,
 ) => {
-  const response = await axios.post(
-    `${API_URL}/api/create-booking/`,
-    data,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
+  const response = await axios.post(`${API_URL}/api/create-booking/`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
     },
-  );
+  });
   return response.data; // Return the response data
 };
