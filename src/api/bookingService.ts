@@ -17,3 +17,24 @@ export const initializeBooking = async (data: {
   );
   return response.data; // Return the response data
 };
+
+export const createBooking = async (
+  data: {
+    first_name: string;
+    last_name: string;
+    gender: string | null;
+    age: number | null;
+    sharing_type: string | null;
+    trip_id: number | null;
+    mobile: string;
+  },
+  token: string,
+) => {
+  const response = await axios.post(`${API_URL}/api/create-booking/`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+  return response.data; // Return the response data
+};
