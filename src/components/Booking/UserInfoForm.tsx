@@ -169,13 +169,13 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
           onChange={handleInputChange}
         >
           <option value="">Select Sharing Type</option>
-          <option value="double_sharing">
+          <option value="double">
             Double Sharing - ₹{tripDetails?.double_sharing_price || 0}
           </option>
-          <option value="triple_sharing">
+          <option value="triple">
             Triple Sharing - ₹{tripDetails?.triple_sharing_price || 0}
           </option>
-          <option value="quad_sharing">
+          <option value="quad">
             Quad Sharing - ₹{tripDetails?.quad_sharing_price || 0}
           </option>
         </Form.Control>
@@ -256,7 +256,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
       )}
 
       <Button variant="primary" type="submit" className="btn-block mt-3">
-        Continue Payment
+        Continue With Payment
       </Button>
     </Form>
   );

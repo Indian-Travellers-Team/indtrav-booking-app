@@ -31,11 +31,12 @@ export const createBooking = async (
   token: string,
 ) => {
   const response = await axios.post(
-    `${API_URL}/bookings/api/create-booking/`,
+    `${API_URL}/api/create-booking/`,
     data,
     {
       headers: {
-        Authorization: `Bearer ${token}`, // Use the Firebase token for authentication
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
       },
     },
   );
