@@ -38,3 +38,36 @@ export const createBooking = async (
   });
   return response.data; // Return the response data
 };
+
+export const createMultiBooking = async (
+  data: {
+    trip_id: number | null;
+    sharing_type: string | null;
+    primary_person: {
+      first_name: string;
+      last_name: string;
+      gender: string;
+      age: string | null;
+      mobile: string;
+    };
+    additional_persons: Array<{
+      first_name: string;
+      last_name: string;
+      gender: string;
+      age: string | null;
+    }>;
+  },
+  token: string,
+) => {
+  const response = await axios.post(
+    `${API_URL}/api/create-multi-booking/`,
+    data,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    },
+  );
+  return response.data; // Return the response data
+};

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Row, Col, Form, Button, Modal } from 'react-bootstrap';
 import './styles/UserInfoForm.css'; // Ensure this points to the UserInfoForm.css
 import { createBooking } from '../../api/bookingService'; // Import the new createBooking function
+import { createMultiBooking } from '../../api/bookingService'; // Import the new createMultiBooking function
 
 interface UserInfoFormProps {
   formData: {
@@ -17,7 +18,7 @@ interface UserInfoFormProps {
   handleMobileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleInputChange: (e: React.ChangeEvent<HTMLElement>) => void; // Change to HTMLElement
   token: string; // Prop for the Firebase token
-  isMultipleBooking: boolean;
+  isMultipleBooking: boolean; // Indicates if this is for multiple booking
 }
 
 const UserInfoForm: React.FC<UserInfoFormProps> = ({
@@ -57,23 +58,31 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
 
   const handleBooking = async () => {
     const bookingData = {
-      first_name: formData.firstName,
-      last_name: formData.lastName,
-      gender: formData.gender,
-      age: formData.age ? formData.age : null, // Ensure age is a string
-      sharing_type: formData.sharingType || null,
       trip_id: tripDetails?.id || null, // Assuming tripDetails contains the trip ID
-      mobile: formData.mobile,
+      sharing_type: formData.sharingType || null,
+      primary_person: {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        gender: formData.gender,
+        age: formData.age ? formData.age.toString() : null, // Ensure age is a string
+        mobile: formData.mobile,
+      },
+      additional_persons: additionalPersons.map((person) => ({
+        first_name: person.firstName,
+        last_name: person.lastName,
+        gender: person.gender,
+        age: person.age ? person.age.toString() : null, // Ensure age is a string
+      })),
     };
 
     try {
-      const response = await createBooking(bookingData, token);
+      const response = await createMultiBooking(bookingData, token);
       if (response.status === 'success') {
         // Handle success (e.g., navigate to the next step)
-        console.log('Booking successful:', response.message);
+        console.log('Multi booking successful:', response.message);
       }
     } catch (error) {
-      console.error('Error creating booking:', error);
+      console.error('Error creating multi booking:', error);
       // Handle error appropriately (e.g., show a message)
     }
   };
