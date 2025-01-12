@@ -1,74 +1,58 @@
-import React, { useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom'; // Import useNavigate
-import { Container, Row, Col } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
-import { setTripId } from '../store/reducers';
-import { RootState } from '../store';
-import '../styles/Home.css';
+import React, { useEffect, useState } from 'react';
+import { Card, Button, Container, Row, Col } from 'react-bootstrap';
+import { fetchHomeData } from '../api/homeService';
+import { HomeResponse, Section, Package } from '../types/packageTypes';
 
 const Home: React.FC = () => {
-  const dispatch = useDispatch();
-  const tripId = useSelector((state: RootState) => state.trip.tripId);
-  const location = useLocation();
-  const navigate = useNavigate(); // Add useNavigate hook
+  const [homeData, setHomeData] = useState<HomeResponse | null>(null);
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const tripIdFromUrl = queryParams.get('trip_id');
-    console.log('Trip ID from Redux:', tripId);
-    // If trip_id from URL is different from the one in Redux, update it
-    if (tripIdFromUrl && tripIdFromUrl !== tripId) {
-      dispatch(setTripId(tripIdFromUrl)); // Update trip_id in Redux store
-      console.log('Trip ID updated in Redux:', tripIdFromUrl); // Debugging line
-    }
-  }, [location, dispatch, tripId]);
+    const fetchData = async () => {
+      try {
+        const data = await fetchHomeData();
+        setHomeData(data);
+      } catch (error) {
+        console.error('Error fetching home data:', error);
+      }
+    };
+    fetchData();
+  }, []);
 
-  const handleLoginRedirect = () => {
-    // Redirect to login with the current trip_id
-    navigate(`/login?trip_id=${tripId || ''}`);
-  };
+  if (!homeData) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div className="home-container">
-      <Container className="content-container">
-        <Row className="justify-content-center text-center">
-          <Col xs={12}>
-            <h1 className="title">
-              <i className="fas fa-calendar-day"></i> Booking Options
-            </h1>
-            <p className="subtitle">
-              Choose the type of booking that suits your needs.
-            </p>
-          </Col>
-          <Col xs={12} md={6} className="mb-3">
-            <Link to="/booking/single">
-              <div className="button single-booking text-center">
-                <span role="img" aria-label="Single Person Booking">
-                  👤
-                </span>{' '}
-                Single Person Booking
-              </div>
-            </Link>
-            <p className="description">
-              Select this option if you're booking for yourself.
-            </p>
-          </Col>
-          <Col xs={12} md={6} className="mb-3">
-            <Link to="/booking/multiple">
-              <div className="button multiple-booking text-center">
-                <span role="img" aria-label="Multiple Person Booking">
-                  👥
-                </span>{' '}
-                Multiple Person Booking
-              </div>
-            </Link>
-            <p className="description">
-              Choose this for booking on behalf of a group or multiple people.
-            </p>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+    <Container>
+      {homeData.sections.map((section: Section, index: number) => (
+        <div key={index} className="mb-5">
+          <h2 className="mb-3">{section.title}</h2>
+          <Row>
+            {section.packages.map((pkg: Package) => (
+              <Col key={pkg.id} md={4} className="mb-4">
+                <Card>
+                  <Card.Img variant="top" src={pkg.image} />
+                  <Card.Body>
+                    <Card.Title>{pkg.name}</Card.Title>
+                    <Card.Text>
+                      {pkg.location} - {pkg.days}D/{pkg.nights}N
+                    </Card.Text>
+                    <Card.Text>
+                      <strong>
+                        {pkg.starting_price
+                          ? `₹${pkg.starting_price.toFixed(2)}`
+                          : 'Contact for Pricing'}
+                      </strong>
+                    </Card.Text>
+                    <Button variant="primary">Explore</Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </div>
+      ))}
+    </Container>
   );
 };
 

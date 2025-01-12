@@ -8,16 +8,16 @@ import {
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { fetchPackages } from '../api/packageService';
-import { Package, PackageResponse } from '../types/packageTypes';
+import { PackageMin, PackageResponse } from '../types/packageTypes';
 import { auth } from '../firebaseConfig';
 import { signOut } from 'firebase/auth';
 import { useAuth } from '../AuthContext';
 import '../styles/Navbar.css';
 
 const Navbar: React.FC = () => {
-  const [packages, setPackages] = useState<Package[]>([]);
-  const [summerPackages, setSummerPackages] = useState<Package[]>([]);
-  const [winterPackages, setWinterPackages] = useState<Package[]>([]);
+  const [packages, setPackages] = useState<PackageMin[]>([]);
+  const [summerPackages, setSummerPackages] = useState<PackageMin[]>([]);
+  const [winterPackages, setWinterPackages] = useState<PackageMin[]>([]);
 
   const { user } = useAuth(); // Get user from Auth context
 

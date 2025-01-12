@@ -12,6 +12,7 @@ import store, { persistor } from './store';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './components/Home';
+import BookingHome from './components/BookingHome';
 import BookingForm from './components/Booking/BookingForm';
 import Login from './components/Login';
 import NotFound from './components/NotFound';
@@ -34,10 +35,11 @@ const App: React.FC = () => {
           <Router>
             <Navbar />
             <Routes>
+              <Route path="/" element={<Home />} />
               <Route path="/login" element={<LoginWrapper />} />
               <Route
                 path="/booking"
-                element={<ProtectedRoute element={<Home />} />}
+                element={<ProtectedRoute element={<BookingHome />} />}
               />
               <Route
                 path="/booking/:type"
