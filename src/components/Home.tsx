@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import { fetchHomeData } from '../api/homeService';
 import { HomeResponse, Section, Package } from '../types/packageTypes';
+import '../styles/Home.css';
 
 const Home: React.FC = () => {
   const [homeData, setHomeData] = useState<HomeResponse | null>(null);
@@ -26,7 +27,7 @@ const Home: React.FC = () => {
     <Container>
       {homeData.sections.map((section: Section, index: number) => (
         <div key={index} className="mb-5">
-          <h2 className="mb-3">{section.title}</h2>
+          <h2 className="mb-3 section-title">{section.title}</h2>
           <Row>
             {section.packages.map((pkg: Package) => (
               <Col key={pkg.id} md={4} className="mb-4">
