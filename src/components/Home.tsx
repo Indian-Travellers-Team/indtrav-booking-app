@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Button, Container, Row, Col } from 'react-bootstrap';
+import { Card, Button, Container, Row, Col, Carousel } from 'react-bootstrap';
 import { fetchHomeData } from '../api/homeService';
 import { HomeResponse, Section, Package } from '../types/packageTypes';
 import '../styles/Home.css';
@@ -25,14 +25,49 @@ const Home: React.FC = () => {
 
   return (
     <Container>
+      {/* Banner Carousel */}
+      <section id="bannerIndicators" className="mb-5">
+        <Carousel>
+          {homeData.banner_list.map((banner, index) => (
+            <Carousel.Item key={index}>
+              {banner.direct_to ? (
+                <a
+                  href={banner.direct_to}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    className="d-block w-100"
+                    src={`http://localhost:8000${banner.image_url}`}
+                    alt={`Slide ${index + 1}`}
+                    style={{ borderRadius: '5%' }}
+                  />
+                </a>
+              ) : (
+                <img
+                  className="d-block w-100"
+                  src={`http://localhost:8000${banner.image_url}`}
+                  alt={`Slide ${index + 1}`}
+                  style={{ borderRadius: '5%' }}
+                />
+              )}
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      </section>
+
+      {/* Package Sections */}
       {homeData.sections.map((section: Section, index: number) => (
         <div key={index} className="mb-5">
           <h2 className="mb-3 section-title">{section.title}</h2>
           <Row>
             {section.packages.map((pkg: Package) => (
-              <Col key={pkg.id} md={4} className="mb-4">
+              <Col key={pkg.id} md={3} sm={6} xs={12} className="mb-4">
                 <Card>
-                  <Card.Img variant="top" src={pkg.image} />
+                  <Card.Img
+                    variant="top"
+                    src={`http://localhost:8000${pkg.image}`}
+                  />
                   <Card.Body>
                     <Card.Title>{pkg.name}</Card.Title>
                     <Card.Text>
@@ -53,6 +88,25 @@ const Home: React.FC = () => {
           </Row>
         </div>
       ))}
+
+      {/* Client Testimonials Section */}
+      <section className="client-testimonials mt-4">
+        <h3 className="text-center mb-4 title-with-underline">
+          What Clients Say About Us?
+        </h3>
+        <Carousel>
+          {homeData.testimonials.map((testimonial, index) => (
+            <Carousel.Item key={index}>
+              <div className="review-card text-center">
+                <p
+                  dangerouslySetInnerHTML={{ __html: testimonial.comment }}
+                ></p>
+                <h5>- {testimonial.client_name}</h5>
+              </div>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      </section>
     </Container>
   );
 };

@@ -2,12 +2,12 @@
   --background-image-url: url('https://indiantraveller-cms-staticfiles.s3.amazonaws.com/bookings/img/scene.495b069aa4a9.jpg');
 }
 
-body {
+/* body {
   font-family: Arial, sans-serif;
   background: var(--background-image-url) no-repeat center center fixed;
   background-size: cover;
   color: white;
-}
+} */
 
 .text-center {
   color: white;
@@ -23,6 +23,7 @@ body {
   margin-left: 20%; /* Centering on larger screens */
   margin-top: 5%; /* Top margin */
   margin-bottom: 2%; /* Top margin */
+  background: var(--background-image-url) no-repeat center center fixed;
 }
 
 .form-container {
