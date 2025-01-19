@@ -55,19 +55,21 @@ const PackageDetailPage: React.FC = () => {
         </p>
       </div>
 
-      {/* Content Section */}
-      <div className="package-content">
+      {/* Row for Itinerary and Costing */}
+      <div className="package-detail-row">
         {/* Itinerary Section */}
-        <div className="package-section">
+        <div className="itinerary-section">
           <h3>Itinerary</h3>
           <div
             className="itinerary-content"
-            dangerouslySetInnerHTML={{ __html: packageDetail.itinerary }}
+            dangerouslySetInnerHTML={{
+              __html: packageDetail.itinerary,
+            }}
           />
         </div>
 
         {/* Costing Section */}
-        <div className="package-section">
+        <div className="costing-section">
           <h3>Costing (Per Person)</h3>
           <ul>
             <li>
@@ -84,8 +86,10 @@ const PackageDetailPage: React.FC = () => {
             </li>
           </ul>
         </div>
+      </div>
 
-        {/* Inclusions and Exclusions Section */}
+      {/* Inclusions and Exclusions Section */}
+      <div className="package-content">
         <div className="package-section">
           <h3>Inclusions</h3>
           <div

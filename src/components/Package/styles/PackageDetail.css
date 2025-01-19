@@ -1,4 +1,4 @@
-/* General Styling for Package Detail */
+/* General Styling */
 .package-detail-container {
   margin: 20px;
   padding: 20px;
@@ -6,7 +6,6 @@
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-family: 'Roboto', sans-serif;
-  background: linear-gradient(to right, #fdfbfb, #ebedee);
 }
 
 /* Banner Section */
@@ -39,117 +38,72 @@
   margin-top: 5px;
 }
 
-/* Content Section */
-.package-content {
+/* Row Layout for Itinerary and Costing */
+.package-detail-row {
   display: flex;
-  flex-direction: column;
   gap: 20px;
+  margin-top: 20px;
 }
 
-.package-section {
+.itinerary-section {
+  flex: 2; /* Larger space for itinerary */
   padding: 15px;
   border-radius: 5px;
   background-color: #f8f9fa;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.package-section h3 {
+.costing-section {
+  flex: 1; /* Smaller space for costing */
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.package-detail-row h3 {
   font-size: 22px;
   color: #343a40;
   margin-bottom: 10px;
-  position: relative;
+  border-bottom: 2px solid orange;
   padding-bottom: 5px;
 }
 
-.package-section h3:after {
-  content: '';
-  position: absolute;
-  width: 50%;
-  height: 3px;
-  background-color: orange;
-  bottom: 0;
-  left: 0;
-}
-
-.package-section ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.package-section ul li {
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 5px;
-}
-
-/* Costing Section */
-.package-costing {
-  padding: 15px;
-  background-color: #f0f0f0;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-}
-
-.package-costing ul {
-  list-style-type: none;
+.package-detail-row ul {
+  list-style: none;
   padding: 0;
 }
 
-.package-costing ul li {
+.package-detail-row ul li {
   font-size: 16px;
   color: #555;
-  margin-bottom: 5px;
-}
-
-.package-costing h3 {
-  font-size: 20px;
-  color: #333;
   margin-bottom: 10px;
 }
 
 /* Inclusions and Exclusions */
-.package-inclusion,
-.package-exclusion {
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 5px;
+.package-section h3 {
+  font-size: 22px;
+  color: #343a40;
+  margin-bottom: 10px;
+  border-bottom: 2px solid orange;
+  padding-bottom: 5px;
 }
 
-.package-inclusion {
-  background-color: #e8f5e9;
-  border: 1px solid #c8e6c9;
+.package-section div {
+  color: #555;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-top: 10px;
 }
 
-.package-exclusion {
-  background-color: #ffebee;
-  border: 1px solid #ffcdd2;
-}
-
-/* Responsive Adjustments */
+/* Responsive Design */
 @media (max-width: 768px) {
-  .package-content {
+  .package-detail-row {
     flex-direction: column;
   }
 
-  .package-section {
-    padding: 10px;
-  }
-
-  .package-title h1 {
-    font-size: 24px;
-  }
-
-  .package-title p {
-    font-size: 16px;
-  }
-
-  .package-section h3 {
-    font-size: 20px;
-  }
-
-  .package-section ul li {
-    font-size: 14px;
+  .itinerary-section,
+  .costing-section {
+    width: 100%;
   }
 }
