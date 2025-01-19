@@ -30,7 +30,7 @@ const Home: React.FC = () => {
           <h2 className="mb-3 section-title">{section.title}</h2>
           <Row>
             {section.packages.map((pkg: Package) => (
-              <Col key={pkg.id} md={4} className="mb-4">
+              <Col key={pkg.id} md={3} sm={6} xs={12} className="mb-4">
                 <Card>
                   <Card.Img variant="top" src={pkg.image} />
                   <Card.Body>
