@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Button, Container, Row, Col } from 'react-bootstrap';
+import { Card, Button, Container, Row, Col, Carousel } from 'react-bootstrap';
 import { fetchHomeData } from '../api/homeService';
 import { HomeResponse, Section, Package } from '../types/packageTypes';
 import '../styles/Home.css';
@@ -53,6 +53,25 @@ const Home: React.FC = () => {
           </Row>
         </div>
       ))}
+
+      {/* Client Testimonials Section */}
+      <section className="client-testimonials mt-4">
+        <h3 className="text-center mb-4 title-with-underline">
+          What Clients Say About Us?
+        </h3>
+        <Carousel>
+          {homeData.testimonials.map((testimonial, index) => (
+            <Carousel.Item key={index}>
+              <div className="review-card text-center">
+                <p
+                  dangerouslySetInnerHTML={{ __html: testimonial.comment }}
+                ></p>
+                <h5>- {testimonial.client_name}</h5>
+              </div>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      </section>
     </Container>
   );
 };
