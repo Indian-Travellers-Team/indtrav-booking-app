@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchPackageDetail } from '../../api/packageDetailService';
 import type { PackageDetail } from '../../types/PackageDetailTypes';
-import '../../components/Package/styles/PackageDetail.css';
+import './styles/PackageDetail.css';
 
 const PackageDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -55,11 +55,15 @@ const PackageDetailPage: React.FC = () => {
         </p>
       </div>
 
+      {/* Content Section */}
       <div className="package-content">
         {/* Itinerary Section */}
         <div className="package-section">
           <h3>Itinerary</h3>
-          <div dangerouslySetInnerHTML={{ __html: packageDetail.itinerary }} />
+          <div
+            className="itinerary-content"
+            dangerouslySetInnerHTML={{ __html: packageDetail.itinerary }}
+          />
         </div>
 
         {/* Costing Section */}
@@ -81,12 +85,18 @@ const PackageDetailPage: React.FC = () => {
           </ul>
         </div>
 
-        {/* Inclusions and Exclusions */}
+        {/* Inclusions and Exclusions Section */}
         <div className="package-section">
           <h3>Inclusions</h3>
-          <div dangerouslySetInnerHTML={{ __html: packageDetail.inclusion }} />
+          <div
+            className="inclusion-content"
+            dangerouslySetInnerHTML={{ __html: packageDetail.inclusion }}
+          />
           <h3>Exclusions</h3>
-          <div dangerouslySetInnerHTML={{ __html: packageDetail.exclusion }} />
+          <div
+            className="exclusion-content"
+            dangerouslySetInnerHTML={{ __html: packageDetail.exclusion }}
+          />
         </div>
       </div>
     </div>
