@@ -17,7 +17,7 @@ body {
   padding-bottom: 5px;
   margin-bottom: 20px;
   font-weight: bold;
-  margin-top: 60px;
+  margin-top: 30px;
 }
 
 /* Card Styles */
@@ -99,14 +99,36 @@ body {
   font-weight: bold;
 }
 
+/* Banner Styling */
+#bannerIndicators {
+  position: relative;
+  max-height: auto; /* Adjust height as needed */
+  overflow: hidden;
+  margin-top: 7%;
+}
+
+#bannerIndicators img.banner-image {
+  max-height: 500px; /* Ensure the image fits within the defined height */
+  object-fit: cover; /* Cover ensures the image scales properly without distortion */
+  width: 100%;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .section-title {
     font-size: 20px;
-    margin-top: 120px;
+    margin-top: 20px;
   }
 
   .card img {
     height: 150px;
+  }
+
+  /* Banner Styling */
+  #bannerIndicators {
+    position: relative;
+    max-height: auto; /* Adjust height as needed */
+    overflow: hidden;
+    margin-top: 40%;
   }
 }
