@@ -1,6 +1,6 @@
 /* General Styling */
 .package-detail-container {
-  margin: 20px;
+  margin: 40px;
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
@@ -10,8 +10,11 @@
 
 /* Banner Section */
 .package-banner {
+  margin-left: 25%;
   text-align: center;
   margin-bottom: 20px;
+  height: 600px;
+  width: 50%;
 }
 
 .package-banner-image {
@@ -57,16 +60,33 @@
   flex: 1; /* Smaller space for costing */
   padding: 15px;
   border-radius: 5px;
+  font-size: 24px;
   background-color: #f8f9fa;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .package-detail-row h3 {
-  font-size: 22px;
+  font-size: 25px;
+  font-weight: bold;
   color: #343a40;
   margin-bottom: 10px;
-  border-bottom: 2px solid orange;
   padding-bottom: 5px;
+}
+
+.package-detail-row h3.title-with-underline {
+  position: relative;
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+.package-detail-row h3.title-with-underline:after {
+  content: '';
+  position: absolute;
+  width: 30%; /* Set the underline width */
+  height: 3px;
+  background-color: orange;
+  bottom: 0;
+  left: 0;
 }
 
 .package-detail-row ul {
@@ -80,15 +100,49 @@
   margin-bottom: 10px;
 }
 
-/* Inclusions and Exclusions */
-.package-section h3 {
-  font-size: 22px;
-  color: #343a40;
-  margin-bottom: 10px;
-  border-bottom: 2px solid orange;
-  padding-bottom: 5px;
+/* Inclusions and Exclusions Row Layout */
+.inclusions-exclusions-row {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
 }
 
+/* Inclusions Section */
+.inclusion-section {
+  flex: 1; /* Equal width for both sections */
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #e8f5e9; /* Light green background for inclusions */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Exclusions Section */
+.exclusion-section {
+  flex: 1; /* Equal width for both sections */
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #ffebee; /* Light red background for exclusions */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Title with Underline */
+.title-with-underline {
+  position: relative;
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+.title-with-underline:after {
+  content: '';
+  position: absolute;
+  width: 30%; /* Set the underline width */
+  height: 3px;
+  background-color: orange;
+  bottom: 0;
+  left: 0;
+}
+
+/* Section Content */
 .package-section div {
   color: #555;
   font-size: 16px;
@@ -105,5 +159,9 @@
   .itinerary-section,
   .costing-section {
     width: 100%;
+  }
+
+  .inclusions-exclusions-row {
+    flex-direction: column; /* Stack inclusions and exclusions vertically on smaller screens */
   }
 }

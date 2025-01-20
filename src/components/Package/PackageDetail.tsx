@@ -59,7 +59,7 @@ const PackageDetailPage: React.FC = () => {
       <div className="package-detail-row">
         {/* Itinerary Section */}
         <div className="itinerary-section">
-          <h3>Itinerary</h3>
+          <h3 className="title-with-underline">Itinerary</h3>
           <div
             className="itinerary-content"
             dangerouslySetInnerHTML={{
@@ -70,33 +70,38 @@ const PackageDetailPage: React.FC = () => {
 
         {/* Costing Section */}
         <div className="costing-section">
-          <h3>Costing (Per Person)</h3>
+          <h3 className="title-with-underline">Costing (Per Person)</h3>
           <ul>
             <li>
               Quad Sharing: ₹
-              {packageDetail.costings.quad_sharing_cost.toFixed(2)}
+              <b>{packageDetail.costings.quad_sharing_cost.toFixed(2)}</b>
             </li>
             <li>
               Triple Sharing: ₹
-              {packageDetail.costings.triple_sharing_cost.toFixed(2)}
+              <b>{packageDetail.costings.triple_sharing_cost.toFixed(2)}</b>
             </li>
             <li>
               Double Sharing: ₹
-              {packageDetail.costings.double_sharing_cost.toFixed(2)}
+              <b>{packageDetail.costings.double_sharing_cost.toFixed(2)}</b>
             </li>
           </ul>
         </div>
       </div>
 
       {/* Inclusions and Exclusions Section */}
-      <div className="package-content">
-        <div className="package-section">
-          <h3>Inclusions</h3>
+      <div className="inclusions-exclusions-row">
+        {/* Inclusions */}
+        <div className="package-section inclusion-section">
+          <h3 className="title-with-underline">Inclusions</h3>
           <div
             className="inclusion-content"
             dangerouslySetInnerHTML={{ __html: packageDetail.inclusion }}
           />
-          <h3>Exclusions</h3>
+        </div>
+
+        {/* Exclusions */}
+        <div className="package-section exclusion-section">
+          <h3 className="title-with-underline">Exclusions</h3>
           <div
             className="exclusion-content"
             dangerouslySetInnerHTML={{ __html: packageDetail.exclusion }}
