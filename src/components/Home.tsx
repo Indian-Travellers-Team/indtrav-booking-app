@@ -3,9 +3,11 @@ import { Card, Button, Container, Row, Col, Carousel } from 'react-bootstrap';
 import { fetchHomeData } from '../api/homeService';
 import { HomeResponse, Section, Package } from '../types/packageTypes';
 import '../styles/Home.css';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 
 const Home: React.FC = () => {
   const [homeData, setHomeData] = useState<HomeResponse | null>(null);
+  const navigate = useNavigate(); // Initialize navigate hook
 
   useEffect(() => {
     const fetchData = async () => {
@@ -80,7 +82,12 @@ const Home: React.FC = () => {
                           : 'Contact for Pricing'}
                       </strong>
                     </Card.Text>
-                    <Button variant="primary">Explore</Button>
+                    <Button
+                      variant="primary"
+                      onClick={() => navigate(`/packages/${pkg.slug}/`)} // Navigate to the package detail page
+                    >
+                      Explore
+                    </Button>
                   </Card.Body>
                 </Card>
               </Col>
