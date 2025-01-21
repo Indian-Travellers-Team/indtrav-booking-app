@@ -17,10 +17,7 @@ const UpcomingTripsComponent: React.FC<{ trips: UpcomingTrip[] }> = ({
               {new Date(trip.start_date).toLocaleDateString()} -{' '}
               {new Date(trip.end_date).toLocaleDateString()}
             </span>
-            <a
-              href={`/booking/single?trip_id=${trip.id}`}
-              className="book-now-button"
-            >
+            <a href={`/booking?trip_id=${trip.id}`} className="book-now-button">
               Book Now
             </a>
           </div>
