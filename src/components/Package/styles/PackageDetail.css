@@ -49,7 +49,7 @@
 }
 
 .itinerary-section {
-  flex: 2; /* Larger space for itinerary */
+  flex: 2;
   padding: 15px;
   border-radius: 5px;
   background-color: #f8f9fa;
@@ -58,116 +58,10 @@
 
 /* Costing and Upcoming Trips Column */
 .costing-trips-column {
-  flex: 1; /* Same width as the itinerary section */
-  display: flex;
-  flex-direction: column; /* Stack Costing and Upcoming Trips vertically */
-  gap: 20px;
-}
-
-/* Costing Section */
-.costing-section {
-  padding: 15px;
-  border-radius: 5px;
-  font-size: 24px;
-  background-color: #f8f9fa;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.costing-section h3 {
-  font-size: 25px;
-  font-weight: bold;
-  color: #343a40;
-  margin-bottom: 10px;
-  position: relative;
-  padding-bottom: 10px;
-  display: inline-block;
-}
-
-.costing-section h3:after {
-  content: '';
-  position: absolute;
-  width: 30%;
-  height: 3px;
-  background-color: orange;
-  bottom: 0;
-  left: 0;
-}
-
-.costing-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.costing-section ul li {
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 10px;
-}
-
-/* Upcoming Trips Section */
-.upcoming-trips-section {
-  padding: 15px;
-  background-color: #f8f9fa;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.upcoming-trips-section h3 {
-  font-size: 21.5px;
-  font-weight: bold;
-  color: #343a40;
-  margin-bottom: 15px;
-  position: relative;
-  padding-bottom: 10px;
-  display: inline-block;
-}
-
-.upcoming-trips-section h3:after {
-  content: '';
-  position: absolute;
-  width: 30%;
-  height: 3px;
-  background-color: orange;
-  bottom: 0;
-  left: 0;
-}
-
-.upcoming-trips-list {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-}
-
-.upcoming-trip {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  font-weight: bold;
-  background-color: #ffffff;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.upcoming-trip span {
-  font-size: 16px;
-  color: #555;
-}
-
-.book-now-button {
-  padding: 8px 15px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #ffffff;
-  background: linear-gradient(to right, #4568dc, #b06ab3);
-  border: none;
-  border-radius: 5px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.book-now-button:hover {
-  background: #3b5998;
+  gap: 20px;
 }
 
 /* Inclusions and Exclusions Row Layout */
@@ -177,25 +71,7 @@
   margin-top: 20px;
 }
 
-/* Inclusions Section */
-.inclusion-section {
-  flex: 1; /* Equal width for both sections */
-  padding: 15px;
-  border-radius: 5px;
-  background-color: #e8f5e9; /* Light green background for inclusions */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Exclusions Section */
-.exclusion-section {
-  flex: 1; /* Equal width for both sections */
-  padding: 15px;
-  border-radius: 5px;
-  background-color: #ffebee; /* Light red background for exclusions */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Title with Underline */
+/* Section Title with Underline */
 .title-with-underline {
   position: relative;
   padding-bottom: 10px;
@@ -205,19 +81,11 @@
 .title-with-underline:after {
   content: '';
   position: absolute;
-  width: 30%; /* Set the underline width */
+  width: 30%;
   height: 3px;
   background-color: orange;
   bottom: 0;
   left: 0;
-}
-
-/* Section Content */
-.package-section div {
-  color: #555;
-  font-size: 16px;
-  line-height: 1.6;
-  margin-top: 10px;
 }
 
 /* Responsive Design */
@@ -232,6 +100,6 @@
   }
 
   .inclusions-exclusions-row {
-    flex-direction: column; /* Stack inclusions and exclusions vertically on smaller screens */
+    flex-direction: column;
   }
 }
