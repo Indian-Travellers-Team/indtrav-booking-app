@@ -1,0 +1,65 @@
+/* Upcoming Trips Section */
+.upcoming-trips-section {
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.upcoming-trips-section h3 {
+  font-size: 21.5px;
+  font-weight: bold;
+  color: #343a40;
+  margin-bottom: 15px;
+  position: relative;
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+.upcoming-trips-section h3:after {
+  content: '';
+  position: absolute;
+  width: 30%;
+  height: 3px;
+  background-color: orange;
+  bottom: 0;
+  left: 0;
+}
+
+.upcoming-trips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.upcoming-trip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  font-weight: bold;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.upcoming-trip span {
+  font-size: 16px;
+  color: #555;
+}
+
+.book-now-button {
+  padding: 8px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+  background: linear-gradient(to right, #4568dc, #b06ab3);
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.book-now-button:hover {
+  background: #3b5998;
+}
