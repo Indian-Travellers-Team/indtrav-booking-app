@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Row, Col, Form, Button, Modal } from 'react-bootstrap';
 import './styles/UserInfoForm.css'; // Ensure this points to the UserInfoForm.css
-import { createBooking } from '../../api/bookingService'; // Import the new createBooking function
-import { createMultiBooking } from '../../api/bookingService'; // Import the new createMultiBooking function
+import { createBooking } from '../../api/bookingService'; // Import for single booking
+import { createMultiBooking } from '../../api/bookingService'; // Import for multiple bookings
 
 interface UserInfoFormProps {
   formData: {
@@ -18,7 +18,7 @@ interface UserInfoFormProps {
   handleMobileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleInputChange: (e: React.ChangeEvent<HTMLElement>) => void; // Change to HTMLElement
   token: string; // Prop for the Firebase token
-  isMultipleBooking: boolean; // Indicates if this is for multiple booking
+  isMultipleBooking: boolean; // Indicates if this is for multiple bookings
 }
 
 const UserInfoForm: React.FC<UserInfoFormProps> = ({
@@ -29,18 +29,20 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
   token,
   isMultipleBooking,
 }) => {
-  const [additionalPersons, setAdditionalPersons] = useState<any[]>([{}]); // Start with one additional person
-  const [showModal, setShowModal] = useState(false); // State for the modal
+  const [additionalPersons, setAdditionalPersons] = useState<any[]>([{}]); // State for additional persons
+  const [showModal, setShowModal] = useState(false); // State for the modal visibility
 
+  // Add an additional person field dynamically
   const addPersonFields = () => {
-    setAdditionalPersons((prev) => [...prev, {}]); // Add a new empty person object
+    setAdditionalPersons((prev) => [...prev, {}]);
   };
 
+  // Handle input change for additional persons
   const handlePersonChange = (
     index: number,
     e: React.ChangeEvent<HTMLElement>,
   ) => {
-    const target = e.target as HTMLInputElement | HTMLSelectElement; // Cast target to correct type
+    const target = e.target as HTMLInputElement | HTMLSelectElement;
     const { name, value } = target;
     setAdditionalPersons((prev) => {
       const updatedPersons = [...prev];
@@ -52,49 +54,51 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
     });
   };
 
+  // Remove an additional person field
   const removePerson = (index: number) => {
     setAdditionalPersons((prev) => prev.filter((_, i) => i !== index));
   };
 
+  // Handle booking submission
   const handleBooking = async () => {
     const bookingData = {
-      trip_id: tripDetails?.id || null, // Assuming tripDetails contains the trip ID
+      trip_id: tripDetails?.id || null, // Pass trip ID from trip details
       sharing_type: formData.sharingType || null,
       primary_person: {
         first_name: formData.firstName,
         last_name: formData.lastName,
         gender: formData.gender,
-        age: formData.age ? formData.age.toString() : null, // Ensure age is a string
+        age: formData.age ? formData.age.toString() : null, // Convert age to string
         mobile: formData.mobile,
       },
       additional_persons: additionalPersons.map((person) => ({
         first_name: person.firstName,
         last_name: person.lastName,
         gender: person.gender,
-        age: person.age ? person.age.toString() : null, // Ensure age is a string
+        age: person.age ? person.age.toString() : null, // Convert age to string
       })),
     };
 
     try {
       const response = await createMultiBooking(bookingData, token);
       if (response.status === 'success') {
-        // Handle success (e.g., navigate to the next step)
-        console.log('Multi booking successful:', response.message);
+        console.log('Multi booking successful:', response.message); // Log success
       }
     } catch (error) {
-      console.error('Error creating multi booking:', error);
-      // Handle error appropriately (e.g., show a message)
+      console.error('Error creating multi booking:', error); // Log error
     }
   };
 
+  // Handle form submission
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setShowModal(true); // Show the modal on form submit
+    setShowModal(true); // Show the modal on submit
   };
 
   return (
     <>
       <Form onSubmit={handleSubmit}>
+        {/* Primary User Info Section */}
         <Form.Group controlId="formMobile">
           <Form.Label className="form-label">Mobile</Form.Label>
           <Form.Control
@@ -172,7 +176,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
           />
         </Form.Group>
 
-        {/* Dropdown for sharing type */}
+        {/* Sharing Type Dropdown */}
         <Form.Group controlId="formSharingType" className="mt-3">
           <Form.Label className="form-label">Select Sharing Type</Form.Label>
           <Form.Control
@@ -195,14 +199,9 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
         </Form.Group>
 
         {/* Additional Persons Section */}
-        {isMultipleBooking && ( // Conditionally render this section
+        {isMultipleBooking && (
           <>
-            <h4
-              className="mt-4 add-more-persons-title"
-              style={{ color: 'white' }}
-            >
-              👥 Add More Persons
-            </h4>
+            <h4 className="mt-4 add-more-persons-title">👥 Add More Persons</h4>
             {additionalPersons.map((_, index) => (
               <div key={index} className="additional-person-fields mb-3">
                 <Row>
@@ -213,7 +212,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
                         type="text"
                         placeholder="First Name"
                         name="firstName"
-                        onChange={(e) => handlePersonChange(index, e)} // Pass the event here
+                        onChange={(e) => handlePersonChange(index, e)}
                       />
                     </Form.Group>
                   </Col>
@@ -224,7 +223,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
                         type="text"
                         placeholder="Last Name"
                         name="lastName"
-                        onChange={(e) => handlePersonChange(index, e)} // Pass the event here
+                        onChange={(e) => handlePersonChange(index, e)}
                       />
                     </Form.Group>
                   </Col>
@@ -236,7 +235,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
                         placeholder="Age"
                         name="age"
                         min="0"
-                        onChange={(e) => handlePersonChange(index, e)} // Pass the event here
+                        onChange={(e) => handlePersonChange(index, e)}
                       />
                     </Form.Group>
                   </Col>
@@ -246,7 +245,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
                       <Form.Control
                         as="select"
                         name="gender"
-                        onChange={(e) => handlePersonChange(index, e)} // Pass the event here
+                        onChange={(e) => handlePersonChange(index, e)}
                       >
                         <option value="male">Male</option>
                         <option value="female">Female</option>
@@ -291,8 +290,8 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
           <Button
             variant="primary"
             onClick={() => {
-              handleBooking(); // Call the booking function
-              setShowModal(false); // Close the modal
+              handleBooking();
+              setShowModal(false);
             }}
           >
             Yes
