@@ -41,6 +41,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 15px;
   transition: transform 0.2s;
+  background: #f9f9f9;
 }
 
 .blog-image-wrapper {
@@ -73,6 +74,7 @@
 
 .read-more-button {
   margin-top: 10px;
+  width: 70%;
 }
 
 .featured-packages-section {
@@ -87,4 +89,14 @@
   padding: 15px;
   margin-bottom: 20px;
   border-radius: 5px;
+  text-align: center;
+}
+
+.featured-packages .package-image {
+  height: 120px;
+  width: 200px;
+}
+
+.featured-packages .check-now-button {
+  width: 70%;
 }

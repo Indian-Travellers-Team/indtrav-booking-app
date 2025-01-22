@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { fetchBlogList } from '../../api/blogListService'; // Import the BlogList API service
-import type { Blog } from '../../types/blogTypes'; // Import Blog type
+import { fetchBlogList } from '../../api/blogListService'; // BlogList API service
+import { fetchFeaturedPackages } from '../../api/packageTypeService'; // Featured packages API service
+import type { Blog } from '../../types/blogTypes'; // Blog type
+import type { PackageType } from '../../types/packageTypeTypes'; // Package type
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import './styles/BlogList.css'; // Import styles for the Blog List
+import './styles/BlogList.css'; // BlogList styles
 
 const BlogList: React.FC = () => {
-  const [blogs, setBlogs] = useState<Blog[]>([]); // State to hold the list of blogs
-  const [loading, setLoading] = useState(true); // State to handle loading
+  const [blogs, setBlogs] = useState<Blog[]>([]); // State to hold blogs
+  const [featuredPackages, setFeaturedPackages] = useState<PackageType[]>([]); // State to hold featured packages
+  const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchBlogList(); // Fetch blogs from the API
-        setBlogs(data);
+        // Fetch blogs
+        const blogsData = await fetchBlogList();
+        setBlogs(blogsData);
+
+        // Fetch featured packages
+        const packagesData = await fetchFeaturedPackages();
+        setFeaturedPackages(packagesData);
       } catch (error) {
-        console.error('Error fetching blogs:', error);
+        console.error('Error fetching data:', error);
       } finally {
         setLoading(false);
       }
@@ -24,7 +32,7 @@ const BlogList: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // Display loading message
+    return <div>Loading...</div>; // Display loading state
   }
 
   return (
@@ -65,38 +73,27 @@ const BlogList: React.FC = () => {
         <div className="featured-packages-section">
           <h4 className="title-with-underline">Featured Packages</h4>
           <div className="featured-packages">
-            {/* Hardcoded Featured Packages */}
-            <div className="package">
-              <h5>Kasol Kheerganga 3D/2N</h5>
-              <p>Starting from ₹6499.00</p>
-              <Button href="/packages/kasol-kheerganga-2" variant="primary">
-                Check Now 🚀
-              </Button>
-            </div>
-            <div className="package">
-              <h5>Lahaul - Spiti 7D/6N</h5>
-              <p>Starting from ₹17499.00</p>
-              <Button href="/packages/lahaul-spiti-9" variant="primary">
-                Check Now 🚀
-              </Button>
-            </div>
-            <div className="package">
-              <h5>Tirthan Jibhi Sirasar Lake 3D/2N</h5>
-              <p>Starting from ₹6999.00</p>
-              <Button
-                href="/packages/tirthan-jibhi-sirasar-lake-10"
-                variant="primary"
-              >
-                Check Now 🚀
-              </Button>
-            </div>
-            <div className="package">
-              <h5>Kedarnath 4D/3N</h5>
-              <p>Starting from ₹9499.00</p>
-              <Button href="/packages/kedarnath-11" variant="primary">
-                Check Now 🚀
-              </Button>
-            </div>
+            {featuredPackages.map((pkg) => (
+              <div key={pkg.id} className="package">
+                <img src={pkg.image} alt={pkg.name} className="package-image" />
+                <h5>{pkg.name}</h5>
+                <p>
+                  {pkg.days}D/{pkg.nights}N - {pkg.location}
+                </p>
+                <p>
+                  {pkg.starting_price
+                    ? `Starting from ₹${pkg.starting_price.toFixed(2)}`
+                    : 'Contact for Pricing'}
+                </p>
+                <Button
+                  href={`/packages/${pkg.slug}`}
+                  className="check-now-button"
+                  variant="primary"
+                >
+                  Check Now 🚀
+                </Button>
+              </div>
+            ))}
           </div>
         </div>
       </div>
