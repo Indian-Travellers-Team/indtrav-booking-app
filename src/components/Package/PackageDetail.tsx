@@ -4,8 +4,8 @@ import { fetchPackageDetail } from '../../api/packageDetailService';
 import { fetchUpcomingTrips } from '../../api/upcomingTripsService';
 import CostingComponent from './CostingComponent';
 import UpcomingTripsComponent from './UpcomingTripsComponent';
-import type { PackageDetail } from '../../types/PackageDetailTypes';
-import type { UpcomingTrip } from '../../types/UpcomingTripTypes';
+import type { PackageDetail } from '../../types/packageDetailTypes';
+import type { UpcomingTrip } from '../../types/upcomingTripTypes';
 import './styles/PackageDetail.css';
 
 const PackageDetailPage: React.FC = () => {

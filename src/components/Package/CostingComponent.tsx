@@ -1,5 +1,5 @@
 import React from 'react';
-import type { PackageDetail } from '../../types/PackageDetailTypes';
+import type { PackageDetail } from '../../types/packageDetailTypes';
 import './styles/CostingComponent.css';
 
 const CostingComponent: React.FC<{ costings: PackageDetail['costings'] }> = ({
