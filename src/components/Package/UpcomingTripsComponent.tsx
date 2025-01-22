@@ -1,5 +1,5 @@
 import React from 'react';
-import type { UpcomingTrip } from '../../types/UpcomingTripTypes';
+import type { UpcomingTrip } from '../../types/upcomingTripTypes';
 import './styles/UpcomingTripsComponent.css';
 
 const UpcomingTripsComponent: React.FC<{ trips: UpcomingTrip[] }> = ({

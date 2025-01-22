@@ -1,6 +1,6 @@
 // src/api/packageDetailService.ts
 import axios from 'axios';
-import { PackageDetail } from '../types/PackageDetailTypes';
+import { PackageDetail } from '../types/packageDetailTypes';
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 
