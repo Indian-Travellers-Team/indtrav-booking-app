@@ -13,6 +13,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import PackageDetailPage from './components/Package/PackageDetail';
+import PackageList from './components/Package/PackageList';
 import BlogList from './components/Blog/BlogList';
 import BlogDetailPage from './components/Blog/BlogDetail';
 import BookingHome from './components/BookingHome';
@@ -42,6 +43,10 @@ const App: React.FC = () => {
               <Route path="/blogs" element={<BlogList />} />
               <Route path="/blogs/:slug" element={<BlogDetailPage />} />
               <Route path="/packages/:slug" element={<PackageDetailPage />} />
+              <Route
+                path="/packages/type/:typeSlug"
+                element={<PackageList />}
+              />
               <Route path="/login" element={<LoginWrapper />} />
               <Route
                 path="/booking"
