@@ -1,4 +1,4 @@
-// src/types/PackageDetailTypes.ts
+// src/types/packageDetailTypes.ts
 export interface PackageDetail {
   id: number;
   name: string;
