@@ -67,7 +67,8 @@ const AboutUs: React.FC = () => {
       </p>
       <h3>Contact Us 📞</h3>
       <p>
-        Email: booking.indiantravellersteam@gmail.com | Phone: +91 7531887472
+        <li>✉️ booking.indiantravellersteam@gmail.com</li>
+        <li>☎️ +91 7531887472</li>
       </p>
     </div>
   );
