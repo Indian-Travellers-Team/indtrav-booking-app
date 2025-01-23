@@ -22,34 +22,19 @@ const AboutUs: React.FC = () => {
       </blockquote>
       <h3>Our Journey 🚀</h3>
       <p>
-        Founded in 2018 by Bhartendu Mehta, Indian Travellers Team began as a
-        small startup with a big vision – to make travel accessible, affordable,
-        and absolutely mesmerizing. Today, we are proud to have grown into a
-        trusted travel partner for thousands of travelers across India.
+        Founded in 2018 by <strong> Bhartendu Mehta</strong>, Indian Travellers
+        Team began as a small startup with a big vision – to make travel
+        accessible, affordable, and absolutely mesmerizing. Today, we are proud
+        to have grown into a trusted travel partner for thousands of travelers
+        across India.
       </p>
       <h3>What We Do 🗺️</h3>
       <ul className="service-list">
-        <li>
-          {' '}
-          <span className="tick-list"> ✅ </span> Personalized Tour Packages 🏖️
-        </li>
-        <li>
-          {' '}
-          <span className="tick-list"> ✅ </span> Adventure and Trekking Trips
-          ⛰️
-        </li>
-        <li>
-          {' '}
-          <span className="tick-list"> ✅ </span> Cultural and Heritage Tours 🏰
-        </li>
-        <li>
-          {' '}
-          <span className="tick-list"> ✅ </span> Corporate and Group Travel 🧑‍💼
-        </li>
-        <li>
-          {' '}
-          <span className="tick-list"> ✅ </span> Customized Itineraries ✍️
-        </li>
+        <li>✅ Personalized Tour Packages 🏖️</li>
+        <li>✅ Adventure and Trekking Trips ⛰️</li>
+        <li>✅ Cultural and Heritage Tours 🏰</li>
+        <li>✅ Corporate and Group Travel 🧑‍💼</li>
+        <li>✅ Customized Itineraries ✍️</li>
       </ul>
       <h3>Our Commitment 💖</h3>
       <p>

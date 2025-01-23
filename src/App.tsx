@@ -21,6 +21,7 @@ import BookingForm from './components/Booking/BookingForm';
 import Login from './components/Login';
 import NotFound from './components/NotFound';
 import AboutUs from './components/AboutUs';
+import RefundPolicy from './components/RefundPolicy';
 import { AuthProvider, useAuth } from './AuthContext';
 
 const ProtectedRoute: React.FC<{ element: JSX.Element }> = ({ element }) => {
@@ -42,6 +43,7 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/refund-policy" element={<RefundPolicy />} />
               <Route path="/blogs" element={<BlogList />} />
               <Route path="/blogs/:slug" element={<BlogDetailPage />} />
               <Route path="/packages/:slug" element={<PackageDetailPage />} />
