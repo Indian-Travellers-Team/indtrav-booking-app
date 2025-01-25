@@ -43,7 +43,7 @@ const Home: React.FC = () => {
                 >
                   <img
                     className="d-block w-100"
-                    src={`http://localhost:8000${banner.image_url}`}
+                    src={`${banner.image_url}`}
                     alt={`Slide ${index + 1}`}
                     style={{ borderRadius: '5%' }}
                   />
@@ -51,7 +51,7 @@ const Home: React.FC = () => {
               ) : (
                 <img
                   className="d-block w-100"
-                  src={`http://localhost:8000${banner.image_url}`}
+                  src={`${banner.image_url}`}
                   alt={`Slide ${index + 1}`}
                   style={{ borderRadius: '5%' }}
                 />
@@ -73,7 +73,7 @@ const Home: React.FC = () => {
                 <Card>
                   <Card.Img
                     variant="top"
-                    src={`http://localhost:8000${pkg.image}`} // Package image
+                    src={`${pkg.image}`} // Package image
                   />
                   <Card.Body>
                     <Card.Title>{pkg.name}</Card.Title> {/* Package name */}
