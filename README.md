@@ -44,5 +44,5 @@ This Booking Application allows users to book trips for themselves and others. I
 - **Authentication**: Firebase Authentication
 - **State Management**: Redux
 
-## Demo
+## Demo 
 - https://www.loom.com/share/3ea617ea04714b92a5a76b2c6a6e0394?sid=b73bdadf-23b7-47bd-8dc6-b523535c899b
