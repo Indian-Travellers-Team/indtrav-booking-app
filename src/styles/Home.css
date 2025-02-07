@@ -66,11 +66,11 @@ body {
 .btn-primary:hover {
   background-color: #0056b3;
 }
-
+/* 
+/* Client Testimonials Section */
 .client-testimonials {
-  padding: 20px;
+  padding: 10px;
   background-color: #f8f9fa; /* Light gray background */
-  border-radius: 10px;
 }
 
 .client-testimonials .title-with-underline {
@@ -78,25 +78,6 @@ body {
   border-bottom: 2px solid #007bff; /* Accent underline */
   display: inline-block;
   padding-bottom: 5px;
-}
-
-.review-card {
-  padding: 20px;
-  background-color: #ffffff; /* White background for each card */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  border-radius: 8px;
-  margin: 10px auto;
-}
-
-.review-card p {
-  font-style: italic;
-  color: #555;
-}
-
-.review-card h5 {
-  margin-top: 10px;
-  color: #007bff; /* Accent color for client names */
-  font-weight: bold;
 }
 
 /* Banner Styling */
@@ -111,6 +92,27 @@ body {
   max-height: 500px; /* Ensure the image fits within the defined height */
   object-fit: cover; /* Cover ensures the image scales properly without distortion */
   width: 100%;
+}
+
+/* Inline Video Section */
+.video-section {
+  margin: 20px 0;
+  padding: 10px;
+  background-color: #f8f9fa; /* Light gray background */
+  border-radius: 10px;
+}
+
+.video-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.video-player {
+  width: 100%;
+  border-radius: 8px;
 }
 
 /* Responsive adjustments */
