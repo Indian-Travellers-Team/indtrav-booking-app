@@ -91,6 +91,15 @@ const Home: React.FC = () => {
               </Col>
             ))}
           </Row>
+          {/* View All Button */}
+          <div className="text-center mt-3">
+            <Button
+              variant="secondary"
+              onClick={() => navigate(`/packages/type/${section.forward_to}`)}
+            >
+              View All
+            </Button>
+          </div>
         </div>
       ))}
 
