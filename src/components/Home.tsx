@@ -111,7 +111,7 @@ const Home: React.FC = () => {
                     <Row className="mt-2">
                       <Col xs={5}>
                         <Button
-                          variant="custom"
+                          variant="primary"
                           href={`tel:+917531887472`}
                           className="w-100 call-now-btn"
                         >

@@ -4,6 +4,7 @@ import { fetchFeaturedPackages } from '../../api/packageTypeService';
 import type { Package } from '../../types/packageTypes';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import FeaturedPackages from './FeaturedPackages';
+import CallbackModal from '../CallbackModal'; // Import the CallbackModal component
 import './styles/PackageList.css';
 
 const PackageList: React.FC = () => {
@@ -11,6 +12,11 @@ const PackageList: React.FC = () => {
   const navigate = useNavigate();
   const [packages, setPackages] = useState<Package[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState<{
+    name: string;
+    id: number;
+  } | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +32,11 @@ const PackageList: React.FC = () => {
 
     fetchData();
   }, [typeSlug]);
+
+  const handleOpenModal = (pkg: Package) => {
+    setSelectedPackage({ name: pkg.name, id: pkg.id });
+    setShowModal(true);
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -76,8 +87,7 @@ const PackageList: React.FC = () => {
                       <Button
                         variant="light"
                         className="callback-button"
-                        data-toggle="modal"
-                        data-target="#callbackModal"
+                        onClick={() => handleOpenModal(pkg)} // Open modal with package details
                       >
                         <i className="fa fa-envelope"></i> Request Callback
                       </Button>
@@ -94,6 +104,16 @@ const PackageList: React.FC = () => {
           <FeaturedPackages />
         </Col>
       </Row>
+
+      {/* Callback Modal */}
+      {selectedPackage && (
+        <CallbackModal
+          show={showModal}
+          onHide={() => setShowModal(false)}
+          packageName={selectedPackage.name}
+          packageId={selectedPackage.id}
+        />
+      )}
     </Container>
   );
 };
