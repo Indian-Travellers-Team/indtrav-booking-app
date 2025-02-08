@@ -116,6 +116,10 @@ body {
   background-color: #56a12d;
 }
 
+.client-testimonials h3 {
+  color: #343a40;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .section-title {

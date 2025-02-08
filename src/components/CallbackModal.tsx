@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import { sendCallbackRequest } from '../api/callbackService'; // Import the API service
 
 interface CallbackModalProps {
   show: boolean;
   onHide: () => void;
   packageName: string;
+  packageId: number;
 }
 
 const CallbackModal: React.FC<CallbackModalProps> = ({
   show,
   onHide,
   packageName,
+  packageId,
 }) => {
   const [name, setName] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
@@ -21,9 +24,21 @@ const CallbackModal: React.FC<CallbackModalProps> = ({
     setMessage(`Requesting Callback for ${packageName}`);
   }, [packageName]);
 
-  const handleSendRequest = () => {
-    console.log('Callback Request:', { name, mobileNumber, message });
-    onHide(); // Close the modal after submitting
+  const handleSendRequest = async () => {
+    try {
+      const requestData = {
+        package: packageId,
+        name,
+        mobile: mobileNumber,
+        message,
+      };
+      console.log('Sending Callback Request:', requestData);
+      await sendCallbackRequest(requestData);
+      onHide();
+    } catch (error) {
+      console.error('Error sending callback request:', error);
+      alert('Failed to send the callback request. Please try again.');
+    }
   };
 
   return (
@@ -58,9 +73,6 @@ const CallbackModal: React.FC<CallbackModalProps> = ({
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>
-          Close
-        </Button>
         <Button variant="primary" onClick={handleSendRequest}>
           Send Request
         </Button>

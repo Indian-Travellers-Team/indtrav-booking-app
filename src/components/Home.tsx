@@ -5,11 +5,15 @@ import { HomeResponse, Section, Package } from '../types/packageTypes';
 import CallbackModal from './CallbackModal'; // Import the CallbackModal component
 import '../styles/Home.css';
 import { useNavigate } from 'react-router-dom';
+import internal from 'stream';
 
 const Home: React.FC = () => {
   const [homeData, setHomeData] = useState<HomeResponse | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedPackageName, setSelectedPackageName] = useState<string | null>(
+    null,
+  );
+  const [selectedPackageId, setSelectedPackageId] = useState<number | null>(
     null,
   );
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -27,9 +31,9 @@ const Home: React.FC = () => {
     fetchData();
   }, []);
 
-  const handleOpenModal = (packageName: string) => {
+  const handleOpenModal = (packageName: string, selectedPackageId: number) => {
     setSelectedPackageName(packageName);
-    console.log('Selected Package:', packageName);
+    setSelectedPackageId(selectedPackageId);
     setShowModal(true);
   };
 
@@ -73,7 +77,9 @@ const Home: React.FC = () => {
       {/* Package Sections */}
       {homeData.sections.map((section: Section, index: number) => (
         <div key={index} className="mb-5">
-          <h2 className="mb-3 section-title">{section.title}</h2>
+          <h2 className="mb-3 section-title title-with-underline">
+            {section.title}
+          </h2>
           <Row>
             {section.packages.map((pkg: Package) => (
               <Col key={pkg.id} md={3} sm={6} xs={12} className="mb-4">
@@ -116,7 +122,7 @@ const Home: React.FC = () => {
                         <Button
                           variant="custom"
                           className="w-100 callback-btn"
-                          onClick={() => handleOpenModal(pkg.name)}
+                          onClick={() => handleOpenModal(pkg.name, pkg.id)}
                         >
                           📩 Request Callback
                         </Button>
@@ -141,7 +147,7 @@ const Home: React.FC = () => {
 
       {/* Inline Video Testimonial Section */}
       <section className="client-testimonials mt-4">
-        <h3 className="text-center mb-4 title-with-underline">
+        <h3 className="text-center mb-4 title-with-underline section-title">
           What Clients Say About Us?
         </h3>
         <div className="video-section text-center">
@@ -169,6 +175,7 @@ const Home: React.FC = () => {
         show={showModal}
         onHide={() => setShowModal(false)}
         packageName={selectedPackageName || ''}
+        packageId={selectedPackageId || 0}
       />
     </Container>
   );
