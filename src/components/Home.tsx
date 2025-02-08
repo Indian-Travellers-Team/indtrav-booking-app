@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Home: React.FC = () => {
   const [homeData, setHomeData] = useState<HomeResponse | null>(null);
-  const videoRef = useRef<HTMLVideoElement>(null); // Reference for the video player
+  const videoRef = useRef<HTMLVideoElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -80,12 +80,38 @@ const Home: React.FC = () => {
                           : 'Contact for Pricing'}
                       </strong>
                     </Card.Text>
+
+                    {/* Explore Button - Full Width */}
                     <Button
                       variant="primary"
                       onClick={() => navigate(`/packages/${pkg.slug}/`)}
+                      className="check-this-button"
                     >
                       Explore
                     </Button>
+
+                    {/* Call Now & Request Callback in one row (50% width each) */}
+                    <Row className="mt-2">
+                      <Col xs={5}>
+                        <Button
+                          variant="custom"
+                          href={`tel:+917531887472`}
+                          className="w-100 call-now-btn"
+                        >
+                          📞 Call Now
+                        </Button>
+                      </Col>
+                      <Col xs={7}>
+                        <Button
+                          variant="custom"
+                          className="w-100 callback-btn"
+                          data-toggle="modal"
+                          data-target="#callbackModal"
+                        >
+                          📩 Request Callback
+                        </Button>
+                      </Col>
+                    </Row>
                   </Card.Body>
                 </Card>
               </Col>
