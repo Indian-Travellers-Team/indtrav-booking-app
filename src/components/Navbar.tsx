@@ -18,6 +18,7 @@ const Navbar: React.FC = () => {
   const [packages, setPackages] = useState<PackageMin[]>([]);
   const [summerPackages, setSummerPackages] = useState<PackageMin[]>([]);
   const [winterPackages, setWinterPackages] = useState<PackageMin[]>([]);
+  const [isExpanded, setIsExpanded] = useState(false); // Track navbar expansion
 
   const { user } = useAuth(); // Get user from Auth context
 
@@ -38,17 +39,26 @@ const Navbar: React.FC = () => {
 
   const handleLogout = async () => {
     try {
-      await signOut(auth); // Log out the user
+      await signOut(auth);
       console.log('User logged out');
     } catch (error) {
       console.error('Logout error:', error);
     }
   };
 
+  // Close navbar on link click (for mobile view)
+  const handleNavItemClick = () => {
+    setIsExpanded(false);
+  };
+
   return (
-    <BootstrapNavbar expand="lg" className="navbar-custom fixed-top">
+    <BootstrapNavbar
+      expand="lg"
+      className="navbar-custom fixed-top"
+      expanded={isExpanded}
+    >
       <Container>
-        <BootstrapNavbar.Brand as={Link} to="/">
+        <BootstrapNavbar.Brand as={Link} to="/" onClick={handleNavItemClick}>
           <img
             src="https://indiantraveller-cms-staticfiles.s3.amazonaws.com/tourism/img/logo.9325bd60d9bf.png"
             alt="Logo"
@@ -56,16 +66,19 @@ const Navbar: React.FC = () => {
           />
           Indian Travellers Team
         </BootstrapNavbar.Brand>
-        <BootstrapNavbar.Toggle aria-controls="navbar-nav" />
+        <BootstrapNavbar.Toggle
+          aria-controls="navbar-nav"
+          onClick={() => setIsExpanded(!isExpanded)}
+        />
         <BootstrapNavbar.Collapse id="navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link as={Link} to="/">
+            <Nav.Link as={Link} to="/" onClick={handleNavItemClick}>
               Home
             </Nav.Link>
-            <Nav.Link as={Link} to="/about-us">
+            <Nav.Link as={Link} to="/about-us" onClick={handleNavItemClick}>
               About Us
             </Nav.Link>
-            <Nav.Link as={Link} to="/blogs/">
+            <Nav.Link as={Link} to="/blogs/" onClick={handleNavItemClick}>
               Articles
             </Nav.Link>
             <NavDropdown title="Packages" id="packagesDropdown">
@@ -74,6 +87,7 @@ const Navbar: React.FC = () => {
                   key={pkg.id}
                   as={Link}
                   to={`/packages/${pkg.slug}`}
+                  onClick={handleNavItemClick}
                 >
                   {pkg.name}
                 </NavDropdown.Item>
@@ -85,6 +99,7 @@ const Navbar: React.FC = () => {
                   key={pkg.id}
                   as={Link}
                   to={`/packages/${pkg.slug}`}
+                  onClick={handleNavItemClick}
                 >
                   {pkg.name}
                 </NavDropdown.Item>
@@ -96,6 +111,7 @@ const Navbar: React.FC = () => {
                   key={pkg.id}
                   as={Link}
                   to={`/packages/${pkg.slug}`}
+                  onClick={handleNavItemClick}
                 >
                   {pkg.name}
                 </NavDropdown.Item>
