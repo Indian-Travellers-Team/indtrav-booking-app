@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchBlogList } from '../../api/blogListService';
 import type { Blog } from '../../types/blogTypes';
-import { Container, Row } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import FeaturedPackages from '../Package/FeaturedPackages';
 import './styles/BlogList.css';
 
@@ -62,8 +62,11 @@ const BlogList: React.FC = () => {
             <p>No blogs available at the moment.</p>
           )}
         </div>
+
         {/* Featured Packages Section */}
-        <FeaturedPackages /> {/* Use the new component here */}
+        <div className="featured-packages-section">
+          <FeaturedPackages />
+        </div>
       </div>
     </Container>
   );

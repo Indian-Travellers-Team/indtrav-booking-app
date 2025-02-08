@@ -25,6 +25,7 @@
   padding: 20px;
 }
 
+/* Package Card */
 .package-card {
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -38,6 +39,7 @@
   transform: scale(1.02);
 }
 
+/* Package Image */
 .package-image-wrapper {
   height: 180px;
   overflow: hidden;
@@ -49,6 +51,7 @@
   object-fit: cover;
 }
 
+/* Package Details */
 .package-details {
   padding: 15px;
   text-align: center;
@@ -67,6 +70,7 @@
   margin-bottom: 15px;
 }
 
+/* Call & Callback Buttons */
 .package-actions {
   display: flex;
   justify-content: space-between;
@@ -78,14 +82,43 @@
   color: white;
   font-size: 14px;
   border-radius: 5px;
+  width: 100%;
 }
 
 .callback-button {
   background-color: #f8f9fa;
   font-size: 14px;
   border-radius: 5px;
+  width: 100%;
 }
 
+/* Featured Packages Section */
 .featured-packages-section {
   padding: 20px;
+}
+
+/* 📱 Responsive Mobile Styles */
+@media (max-width: 768px) {
+  .package-list-container {
+    padding: 10px;
+    margin-top: 100px;
+  }
+
+  .package-list-section {
+    padding: 10px;
+  }
+
+  .featured-packages-section {
+    order: 2; /* Moves Featured Packages below */
+    padding: 10px;
+  }
+
+  .package-actions {
+    flex-direction: column; /* Stacks buttons on top of each other */
+  }
+
+  .call-button,
+  .callback-button {
+    width: 100%; /* Make buttons full-width */
+  }
 }
