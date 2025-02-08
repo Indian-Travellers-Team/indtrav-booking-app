@@ -103,8 +103,9 @@
 }
 
 .callback-button {
-  background-color: #f8f9fa;
+  background-color: #4c6809 !important;
   font-size: 14px;
+  color: white !important;
   border-radius: 5px;
   width: 100%;
 }
