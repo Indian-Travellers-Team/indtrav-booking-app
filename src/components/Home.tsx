@@ -2,11 +2,16 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Card, Button, Container, Row, Col, Carousel } from 'react-bootstrap';
 import { fetchHomeData } from '../api/homeService';
 import { HomeResponse, Section, Package } from '../types/packageTypes';
+import CallbackModal from './CallbackModal'; // Import the CallbackModal component
 import '../styles/Home.css';
 import { useNavigate } from 'react-router-dom';
 
 const Home: React.FC = () => {
   const [homeData, setHomeData] = useState<HomeResponse | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedPackageName, setSelectedPackageName] = useState<string | null>(
+    null,
+  );
   const videoRef = useRef<HTMLVideoElement>(null);
   const navigate = useNavigate();
 
@@ -21,6 +26,12 @@ const Home: React.FC = () => {
     };
     fetchData();
   }, []);
+
+  const handleOpenModal = (packageName: string) => {
+    setSelectedPackageName(packageName);
+    console.log('Selected Package:', packageName);
+    setShowModal(true);
+  };
 
   if (!homeData) {
     return <div>Loading...</div>;
@@ -105,8 +116,7 @@ const Home: React.FC = () => {
                         <Button
                           variant="custom"
                           className="w-100 callback-btn"
-                          data-toggle="modal"
-                          data-target="#callbackModal"
+                          onClick={() => handleOpenModal(pkg.name)}
                         >
                           📩 Request Callback
                         </Button>
@@ -153,6 +163,13 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Callback Modal */}
+      <CallbackModal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        packageName={selectedPackageName || ''}
+      />
     </Container>
   );
 };
