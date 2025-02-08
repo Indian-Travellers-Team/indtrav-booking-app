@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { fetchFeaturedPackages } from '../../api/packageTypeService';
 import type { Package } from '../../types/packageTypes';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import FeaturedPackages from './FeaturedPackages';
+import CallbackModal from '../CallbackModal'; // Import the CallbackModal component
 import './styles/PackageList.css';
 
 const PackageList: React.FC = () => {
   const { typeSlug } = useParams<{ typeSlug: string }>();
+  const navigate = useNavigate();
   const [packages, setPackages] = useState<Package[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState<{
+    name: string;
+    id: number;
+  } | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +32,11 @@ const PackageList: React.FC = () => {
 
     fetchData();
   }, [typeSlug]);
+
+  const handleOpenModal = (pkg: Package) => {
+    setSelectedPackage({ name: pkg.name, id: pkg.id });
+    setShowModal(true);
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -43,24 +55,27 @@ const PackageList: React.FC = () => {
             {packages.map((pkg) => (
               <Col md={6} key={pkg.id} className="mb-4">
                 <div className="package-card">
-                  <a href={`/packages/${pkg.slug}`}>
-                    <div className="package-image-wrapper">
-                      <img
-                        src={pkg.image}
-                        alt={pkg.name}
-                        className="package-image"
-                      />
-                    </div>
-                  </a>
+                  <div className="package-image-wrapper">
+                    <img
+                      src={pkg.image}
+                      alt={pkg.name}
+                      className="package-image"
+                    />
+                  </div>
                   <div className="package-details">
-                    <a href={`/packages/${pkg.slug}`}>
-                      <h5 className="package-name">{pkg.name}</h5>
-                      <p className="package-price">
-                        {pkg.starting_price
-                          ? `₹ ${pkg.starting_price.toLocaleString()}`
-                          : 'Contact us for pricing'}
-                      </p>
-                    </a>
+                    <h5 className="package-name">{pkg.name}</h5>
+                    <p className="package-price">
+                      {pkg.starting_price
+                        ? `Starting from ₹ ${pkg.starting_price.toLocaleString()}`
+                        : 'Contact us for pricing'}
+                    </p>
+                    <Button
+                      variant="custom"
+                      onClick={() => navigate(`/packages/${pkg.slug}`)}
+                      className="check-this-button"
+                    >
+                      Check Now 🚀
+                    </Button>
                     <div className="package-actions">
                       <Button
                         variant="primary"
@@ -72,8 +87,7 @@ const PackageList: React.FC = () => {
                       <Button
                         variant="light"
                         className="callback-button"
-                        data-toggle="modal"
-                        data-target="#callbackModal"
+                        onClick={() => handleOpenModal(pkg)} // Open modal with package details
                       >
                         <i className="fa fa-envelope"></i> Request Callback
                       </Button>
@@ -90,6 +104,16 @@ const PackageList: React.FC = () => {
           <FeaturedPackages />
         </Col>
       </Row>
+
+      {/* Callback Modal */}
+      {selectedPackage && (
+        <CallbackModal
+          show={showModal}
+          onHide={() => setShowModal(false)}
+          packageName={selectedPackage.name}
+          packageId={selectedPackage.id}
+        />
+      )}
     </Container>
   );
 };

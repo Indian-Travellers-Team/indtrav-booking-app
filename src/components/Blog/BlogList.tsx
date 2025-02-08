@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchBlogList } from '../../api/blogListService';
 import type { Blog } from '../../types/blogTypes';
-import { Container, Row } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import FeaturedPackages from '../Package/FeaturedPackages';
 import './styles/BlogList.css';
 
@@ -39,7 +39,7 @@ const BlogList: React.FC = () => {
                 <li key={blog.id} className="blog-card">
                   <div className="blog-image-wrapper">
                     <img
-                      src={`http://127.0.0.1:8000${blog.first_image_url}`}
+                      src={`${blog.first_image_url}`}
                       alt={blog.title}
                       className="blog-image"
                     />
@@ -62,8 +62,11 @@ const BlogList: React.FC = () => {
             <p>No blogs available at the moment.</p>
           )}
         </div>
+
         {/* Featured Packages Section */}
-        <FeaturedPackages /> {/* Use the new component here */}
+        <div className="featured-packages-section">
+          <FeaturedPackages />
+        </div>
       </div>
     </Container>
   );

@@ -25,6 +25,7 @@
   left: 0;
 }
 
+/* Blog List Section */
 .blog-list-section {
   flex: 2;
 }
@@ -42,6 +43,10 @@
   padding: 15px;
   transition: transform 0.2s;
   background: #f9f9f9;
+}
+
+.blog-card:hover {
+  transform: translateY(-3px);
 }
 
 .blog-image-wrapper {
@@ -75,4 +80,41 @@
 .read-more-button {
   margin-top: 10px;
   width: 70%;
+}
+
+/* Featured Packages Section */
+.featured-packages-section {
+  flex: 1;
+}
+
+/* Mobile Screen Adjustments */
+@media (max-width: 768px) {
+  .blog-container {
+    flex-direction: column; /* Stack sections vertically on mobile */
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .blog-list-section {
+    width: 100%;
+  }
+
+  .featured-packages-section {
+    order: 2; /* Ensures Featured Packages appear **below** articles */
+    width: 100%;
+  }
+
+  .blog-card {
+    flex-direction: column; /* Stack blog image and details vertically */
+    align-items: center;
+  }
+
+  .blog-image-wrapper {
+    width: 100%;
+    height: auto;
+  }
+
+  .read-more-button {
+    width: 100%; /* Make button full width */
+  }
 }

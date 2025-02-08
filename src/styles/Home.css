@@ -1,6 +1,6 @@
 /* General styles for the Home component */
 body {
-  background-color: #f9f9f9; /* Light background color */
+  background-color: #f9f9f9;
   font-family: 'Arial', sans-serif;
 }
 
@@ -11,8 +11,8 @@ body {
 
 /* Section Title */
 .section-title {
-  color: #343a40; /* Dark gray color */
-  border-bottom: 2px solid #007bff; /* Accent color */
+  color: #343a40;
+  border-bottom: 2px solid #007bff;
   display: inline-block;
   padding-bottom: 5px;
   margin-bottom: 20px;
@@ -44,73 +44,80 @@ body {
 .card-title {
   font-size: 18px;
   font-weight: bold;
-  color: #007bff; /* Accent color */
+  color: #007bff;
 }
 
 .card-text {
-  color: #555; /* Subtle text color */
+  color: #555;
   margin-bottom: 10px;
 }
 
 .card-text strong {
-  color: #dc3545; /* Red for pricing */
+  color: #dc3545;
 }
 
-/* Button Styles */
-.btn-primary {
+/* "Explore" Button */
+.check-this-button {
+  background-color: #6b6f82 !important;
+  color: white !important;
+  width: 100%;
+  font-size: 14px;
+  margin-bottom: 10px;
+  border-radius: 5px !important;
+  transition: background-color 0.3s ease;
+  border: none !important;
+}
+
+.check-this-button:hover {
+  background-color: #122678 !important;
+  color: white !important;
+}
+
+/* Call Now & Request Callback Buttons */
+.call-now-btn,
+.callback-btn {
+  width: 100%; /* Takes full width inside Bootstrap column */
+  font-size: 12.5px !important;
+  border-radius: 5px;
+}
+
+/* Call Now Button */
+.call-now-btn {
   background-color: #007bff;
   border: none;
+  color: white;
+}
+
+.call-now-btn:hover {
+  background-color: #007bff;
+}
+
+/* Request Callback Button */
+.callback-btn {
+  text-align: left !important;
+  background-color: #4c6809 !important;
+  border: 1px solid #ccc;
+  color: white !important;
+}
+
+.callback-btn:hover {
+  background-color: rgb(86, 75, 119) !important;
+}
+
+/* View All Button */
+.btn-secondary {
+  background-color: #56a12d;
+  border: none;
   transition: background-color 0.3s ease;
+  width: 20%;
 }
 
-.btn-primary:hover {
-  background-color: #0056b3;
+.btn-secondary:hover {
+  background-color: #56a12d;
 }
 
-.client-testimonials {
-  padding: 20px;
-  background-color: #f8f9fa; /* Light gray background */
-  border-radius: 10px;
-}
-
-.client-testimonials .title-with-underline {
-  color: #343a40; /* Dark color for the title */
-  border-bottom: 2px solid #007bff; /* Accent underline */
-  display: inline-block;
-  padding-bottom: 5px;
-}
-
-.review-card {
-  padding: 20px;
-  background-color: #ffffff; /* White background for each card */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  border-radius: 8px;
-  margin: 10px auto;
-}
-
-.review-card p {
-  font-style: italic;
-  color: #555;
-}
-
-.review-card h5 {
-  margin-top: 10px;
-  color: #007bff; /* Accent color for client names */
-  font-weight: bold;
-}
-
-/* Banner Styling */
-#bannerIndicators {
-  position: relative;
-  max-height: auto; /* Adjust height as needed */
-  overflow: hidden;
-  margin-top: 7%;
-}
-
-#bannerIndicators img.banner-image {
-  max-height: 500px; /* Ensure the image fits within the defined height */
-  object-fit: cover; /* Cover ensures the image scales properly without distortion */
-  width: 100%;
+.client-testimonials h3 {
+  color: #343a40;
 }
 
 /* Responsive adjustments */
@@ -120,15 +127,7 @@ body {
     margin-top: 20px;
   }
 
-  .card img {
-    height: 150px;
-  }
-
-  /* Banner Styling */
-  #bannerIndicators {
-    position: relative;
-    max-height: auto; /* Adjust height as needed */
-    overflow: hidden;
-    margin-top: 40%;
+  .btn-secondary {
+    width: 50%;
   }
 }

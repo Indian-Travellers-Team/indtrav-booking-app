@@ -64,7 +64,7 @@ const PackageDetailPage: React.FC = () => {
       <div className="package-title">
         <h1>{packageDetail.name}</h1>
         <p>
-          {packageDetail.days}D/{packageDetail.nights}N -{' '}
+          🚌 {packageDetail.days}D/{packageDetail.nights}N - 📍
           {packageDetail.location}
         </p>
       </div>

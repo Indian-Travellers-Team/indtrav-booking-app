@@ -40,7 +40,7 @@ const FeaturedPackages: React.FC = () => {
             <img src={pkg.image} alt={pkg.name} className="package-image" />
             <h5>{pkg.name}</h5>
             <p>
-              {pkg.days}D/{pkg.nights}N - {pkg.location}
+              🚌 {pkg.days}D/{pkg.nights}N - 📍 {pkg.location}
             </p>
             <p>
               {pkg.starting_price
