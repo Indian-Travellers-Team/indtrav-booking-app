@@ -39,7 +39,7 @@ const BlogList: React.FC = () => {
                 <li key={blog.id} className="blog-card">
                   <div className="blog-image-wrapper">
                     <img
-                      src={`http://127.0.0.1:8000${blog.first_image_url}`}
+                      src={`${blog.first_image_url}`}
                       alt={blog.title}
                       className="blog-image"
                     />
