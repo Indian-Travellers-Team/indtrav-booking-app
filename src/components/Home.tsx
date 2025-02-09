@@ -56,7 +56,7 @@ const Home: React.FC = () => {
                 >
                   <img
                     className="d-block w-100"
-                    src={`${banner.image_url}`}
+                    src={`http://localhost:8000/${banner.image_url}`}
                     alt={`Slide ${index + 1}`}
                     style={{ borderRadius: '5%' }}
                   />
