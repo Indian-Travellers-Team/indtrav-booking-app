@@ -1,102 +1,88 @@
+/* Auth Container */
+.auth-container {
+  max-width: 400px;
+  margin: 5vh auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
 .login-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 60px); /* Full height minus navbar height */
-  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
-  border-radius: 8px; /* Rounded corners */
-  padding: 20px; /* Padding around the container */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-  margin: 10px; /* Margin for smaller screens */
+  max-width: 400px;
+  margin: 5vh auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-  margin-bottom: 20px; /* Space below the title */
-  font-size: 1.8rem; /* Adjust title size for smaller screens */
+/* Title Styling */
+.auth-title {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
-input {
-  width: 100%; /* Full width for inputs */
-  padding: 15px; /* Increased padding */
-  margin: 10px 0; /* Space between inputs */
-  border: 1px solid #ccc; /* Border style */
-  border-radius: 4px; /* Rounded corners */
-  font-size: 16px; /* Increased font size */
+/* Input Fields */
+.form-control {
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 16px;
 }
 
-button {
-  width: 100%; /* Full width for buttons */
-  padding: 15px; /* Increased padding */
-  background-color: #6a5acd; /* Match navbar color */
-  color: white; /* Text color */
-  border: none; /* No border */
-  border-radius: 4px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor */
-  font-size: 16px; /* Increased font size */
-  transition: background-color 0.3s; /* Smooth transition */
-  margin-top: 10px; /* Space above the button */
+/* Submit & Google Buttons */
+.btn-primary,
+.btn-google {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 16px;
 }
 
-button:hover {
-  background-color: #5a4dcf; /* Darker on hover */
-}
-
-/* Google Sign-In Button */
-.google-login {
-  display: flex;
-  justify-content: center;
-  margin-top: 15px; /* Space above the Google button */
-}
-
-.google-login button {
+.btn-google {
+  background-color: white;
+  border: 1px solid #ddd;
+  color: black;
   display: flex;
   align-items: center;
-  background-color: #ffffff; /* White background */
-  border: 1px solid #ddd; /* Border color */
-  padding: 10px 20px; /* Padding for the button */
-  border-radius: 4px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor */
-  transition: background-color 0.3s; /* Smooth transition */
-  width: auto; /* Automatic width */
+  justify-content: center;
 }
 
-.google-login button:hover {
-  background-color: #f5f5f5; /* Slightly darker background on hover */
+.btn-google:hover {
+  background-color: #f5f5f5;
 }
 
+/* Google Logo */
 .google-logo {
-  width: 20px; /* Logo size */
-  height: 20px; /* Logo size */
-  margin-right: 10px; /* Space between logo and text */
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
 }
 
+/* Error Message */
 .error {
-  color: red; /* Error message color */
-  margin-top: 10px; /* Space above error message */
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
 }
 
-/* Responsive Styles */
+/* Responsive */
 @media (max-width: 768px) {
-  .login-container {
-    padding: 15px; /* Reduced padding for smaller screens */
+  .auth-container {
+    width: 90%;
+    padding: 20px;
   }
 
-  h2 {
-    font-size: 1.5rem; /* Adjust title size for smaller screens */
+  .auth-title {
+    font-size: 1.5rem;
   }
 
-  input {
-    font-size: 14px; /* Reduced font size for inputs */
-    padding: 12px; /* Adjust padding */
-  }
-
-  button {
-    font-size: 14px; /* Reduced font size for buttons */
-    padding: 12px; /* Adjust padding */
-  }
-
-  .google-login button {
-    padding: 8px 16px; /* Reduced padding for smaller screens */
+  .btn-primary,
+  .btn-google {
+    font-size: 14px;
+    padding: 10px;
   }
 }
