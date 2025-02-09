@@ -1,4 +1,3 @@
-// App.tsx
 import React from 'react';
 import {
   BrowserRouter as Router,
@@ -18,7 +17,7 @@ import BlogList from './components/Blog/BlogList';
 import BlogDetailPage from './components/Blog/BlogDetail';
 import BookingHome from './components/BookingHome';
 import BookingForm from './components/Booking/BookingForm';
-import Login from './components/Login';
+import Auth from './components/Auth/Auth'; // Updated import for combined Auth component
 import NotFound from './components/NotFound';
 import AboutUs from './components/AboutUs';
 import RefundPolicy from './components/RefundPolicy';
@@ -53,7 +52,7 @@ const App: React.FC = () => {
                 path="/packages/type/:typeSlug"
                 element={<PackageList />}
               />
-              <Route path="/login" element={<LoginWrapper />} />
+              <Route path="/login" element={<AuthWrapper />} /> {/* Updated */}
               <Route
                 path="/booking"
                 element={<ProtectedRoute element={<BookingHome />} />}
@@ -73,15 +72,16 @@ const App: React.FC = () => {
   );
 };
 
-const LoginWrapper: React.FC = () => {
-  const { user } = useAuth(); // Get user from AuthContext
+// Wrapper to handle redirect logic for authenticated users
+const AuthWrapper: React.FC = () => {
+  const { user } = useAuth();
 
-  // If user is logged in, redirect to /booking
+  // If the user is logged in, redirect to the booking page
   if (user) {
     return <Navigate to="/booking" />;
   }
 
-  return <Login />; // Render the Login component if not logged in
+  return <Auth />; // Render the combined Auth component for login/signup
 };
 
 export default App;

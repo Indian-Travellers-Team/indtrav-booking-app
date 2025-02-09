@@ -4,6 +4,18 @@ body {
   font-family: 'Arial', sans-serif;
 }
 
+#bannerIndicators {
+  position: relative;
+  max-height: auto; /* Adjust height as needed */
+  overflow: hidden;
+  margin-top: 7%;
+}
+
+#bannerIndicators img.banner-image {
+  max-height: 400px; /* Ensure the image fits within the defined height */
+  object-fit: cover; /* Cover ensures the image scales properly without distortion */
+  width: 100%;
+}
 /* Container styling */
 .container {
   margin-top: 10px;
@@ -122,6 +134,18 @@ body {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  #bannerIndicators {
+    position: relative;
+    max-height: auto; /* Adjust height as needed */
+    overflow: hidden;
+    margin-top: 33%;
+  }
+
+  #bannerIndicators img.banner-image {
+    max-height: 500px; /* Ensure the image fits within the defined height */
+    object-fit: cover; /* Cover ensures the image scales properly without distortion */
+    width: 100%;
+  }
   .section-title {
     font-size: 20px;
     margin-top: 20px;

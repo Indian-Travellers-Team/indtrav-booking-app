@@ -5,42 +5,85 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="description" content="Web site created using create-react-app" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-  
     <title>React App</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css"
+    />
+
+    <!-- FontAwesome for WhatsApp Icon -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Chat Plugin CSS -->
+    <link href="https://chat-plugin-itt.s3.ap-south-1.amazonaws.com/chat-plugin.css" rel="stylesheet" />
+
+    <!-- jQuery & Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
   </head>
+
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <!-- Chat Plugin -->
+    <div id="app"></div>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <!-- Chat Plugin Script -->
+    <script async src="https://chat-plugin-itt.s3.ap-south-1.amazonaws.com/chat-plugin.js"></script>
+
+    <!-- WhatsApp Floating Button -->
+    <a
+      href="https://api.whatsapp.com/send?phone=7531887472&text=Hello team, I am contacting you regarding a trip."
+      class="whatsapp-float"
+      target="_blank"
+    >
+      <i class="fa-brands fa-whatsapp whatsapp-icon"></i>
+    </a>
+
+    <!-- WhatsApp Button Styles -->
+    <style>
+      .whatsapp-float {
+        position: fixed;
+        bottom: 50%;
+        right: 20px;
+        z-index: 1000;
+        background-color: #25d366;
+        color: white;
+        font-size: 24px;
+        padding: 12px;
+        border-radius: 50%;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+      }
+
+      .whatsapp-float:hover {
+        transform: scale(1.1);
+        background-color: #1ebe57;
+      }
+
+      .whatsapp-icon {
+        font-size: 32px;
+        color: white;
+      }
+
+      /* Chat Plugin Position */
+      #app {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 999;
+      }
+    </style>
   </body>
 </html>
