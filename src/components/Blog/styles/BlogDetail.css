@@ -1,41 +1,274 @@
-.blog-detail-container {
-  margin-top: 60px;
+/* Mountain Theme Wrapper */
+.mountain-blog-detail-wrapper {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(to bottom, #f9f9f9, #e7f0fd);
+  padding-bottom: 60px;
+  min-height: 100vh;
 }
 
+/* Mountain Header Overlay */
+.mountain-header-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.mountain-svg {
+  height: 60px;
+  width: 100%;
+  fill: rgba(72, 52, 212, 0.1);
+}
+
+/* Mountain Footer Overlay */
+.mountain-footer-overlay {
+  position: relative;
+  height: 60px;
+  overflow: hidden;
+  margin-top: 40px;
+}
+
+.mountain-footer-overlay .mountain-svg {
+  transform: rotate(180deg);
+  fill: rgba(72, 52, 212, 0.1);
+}
+
+/* Enhanced Loading Screen */
+.mountain-loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  margin-top: 100px;
+}
+
+.mountain-shape {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px;
+  position: relative;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.mountain-shape:before,
+.mountain-shape:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  border-style: solid;
+}
+
+.mountain-shape:before {
+  left: 0;
+  border-width: 0 50px 60px 0;
+  border-color: transparent #8a6fdf transparent;
+}
+
+.mountain-shape:after {
+  right: 0;
+  border-width: 0 0 60px 50px;
+  border-color: transparent transparent #5d47c7;
+}
+
+.loading-text {
+  color: #4834d4;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+}
+
+.not-found-message {
+  text-align: center;
+  padding: 50px;
+  margin-top: 100px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #666;
+  font-size: 18px;
+}
+
+/* Blog Detail Container */
+.blog-detail-container {
+  margin-top: 100px;
+}
+
+/* Blog Content Section */
 .blog-content-section {
   padding: 20px;
 }
 
-.blog-title {
+.mountain-blog-content-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+/* Section Title with Mountain Theme */
+.section-header {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.mountain-blog-title {
   font-size: 28px;
-  font-weight: bold;
-  color: #343a40;
+  font-weight: 700;
+  background: linear-gradient(45deg, #4834d4, #7466dd);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   margin-bottom: 10px;
 }
 
+.mountain-divider {
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(to right, #4834d4, #7466dd);
+  margin: 10px 0 20px;
+  position: relative;
+  border-radius: 2px;
+}
+
+.mountain-peak {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  background-color: #4834d4;
+  top: -3px;
+  left: 60px;
+  transform: translateX(-50%);
+  clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+}
+
+/* Blog Author */
 .blog-author {
   font-size: 16px;
-  color: #6c757d;
-  margin-bottom: 20px;
+  color: #666;
+  margin-bottom: 25px;
+  display: inline-block;
+  padding: 5px 15px;
+  border-radius: 20px;
+  background-color: rgba(72, 52, 212, 0.1);
 }
 
 .blog-author span {
   font-weight: bold;
-  color: #007bff;
+  color: #4834d4;
+}
+
+/* Mountain Image Styling (Individual images now) */
+
+.mountain-blog-image-container {
+  position: relative;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .blog-image {
-  max-width: 700px;
-  height: 350px;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+  transition: transform 0.5s ease;
 }
 
+.mountain-blog-image-container:hover .blog-image {
+  transform: scale(1.02);
+}
+
+.mountain-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(72, 52, 212, 0.2) 0%,
+    rgba(0, 0, 0, 0) 60%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Blog Content */
 .blog-content {
   line-height: 1.8;
   color: #333;
+  font-size: 16px;
 }
 
+.blog-content p {
+  margin-bottom: 20px;
+}
+
+.blog-content a {
+  color: #4834d4;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.blog-content a:hover {
+  color: #3a2baa;
+  text-decoration: underline;
+}
+
+/* Featured Packages Section */
 .featured-packages-section {
   padding: 20px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .blog-detail-container {
+    margin-top: 80px;
+  }
+
+  .mountain-blog-content-card {
+    padding: 20px;
+  }
+
+  .mountain-blog-title {
+    font-size: 22px;
+  }
+
+  .blog-image {
+    max-height: 300px;
+  }
+
+  .mountain-divider {
+    width: 80px;
+  }
+
+  .mountain-peak {
+    left: 40px;
+  }
 }
