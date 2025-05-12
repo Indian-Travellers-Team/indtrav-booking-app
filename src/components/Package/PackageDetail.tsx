@@ -9,6 +9,57 @@ import type { UpcomingTrip } from '../../types/upcomingTripTypes';
 import { Container } from 'react-bootstrap';
 import './styles/PackageDetail.css';
 
+// New UpcomingTripsWithPagination component
+const UpcomingTripsWithPagination: React.FC<{ trips: UpcomingTrip[] }> = ({
+  trips,
+}) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const tripsPerPage = 5;
+
+  // Calculate pagination values
+  const indexOfLastTrip = currentPage * tripsPerPage;
+  const indexOfFirstTrip = indexOfLastTrip - tripsPerPage;
+  const currentTrips = trips.slice(indexOfFirstTrip, indexOfLastTrip);
+  const totalPages = Math.ceil(trips.length / tripsPerPage);
+
+  // Handle page changes
+  const handlePreviousPage = () => {
+    setCurrentPage((prev) => Math.max(prev - 1, 1));
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  };
+
+  return (
+    <div className="package-side-card">
+      <UpcomingTripsComponent trips={currentTrips} />
+
+      {trips.length > tripsPerPage && (
+        <div className="trips-pagination">
+          <button
+            className="pagination-btn"
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+          >
+            ← Previous
+          </button>
+          <span className="pagination-info">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            className="pagination-btn"
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+          >
+            Next →
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const PackageDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const [packageDetail, setPackageDetail] = useState<PackageDetail | null>(
@@ -136,9 +187,8 @@ const PackageDetailPage: React.FC = () => {
             <div className="package-side-card">
               <CostingComponent costings={packageDetail.costings} />
             </div>
-            <div className="package-side-card">
-              <UpcomingTripsComponent trips={upcomingTrips} />
-            </div>
+            {/* Using the new paginated component */}
+            <UpcomingTripsWithPagination trips={upcomingTrips} />
           </div>
         </div>
 

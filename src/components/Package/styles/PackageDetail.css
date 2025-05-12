@@ -559,3 +559,64 @@
     height: 8px;
   }
 }
+
+/* Pagination styles - add these to your PackageDetail.css */
+.trips-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #e9ecef;
+}
+
+.pagination-btn {
+  background: linear-gradient(to right, #4834d4, #7466dd);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 6px rgba(72, 52, 212, 0.2);
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: linear-gradient(to right, #3a2baa, #5a4dcf);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 8px rgba(72, 52, 212, 0.3);
+}
+
+.pagination-btn:disabled {
+  background: linear-gradient(to right, #a9a4c9, #ccc9e1);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.pagination-info {
+  font-size: 14px;
+  color: #666;
+  font-weight: 600;
+}
+
+/* Media queries for responsive pagination */
+@media (max-width: 576px) {
+  .trips-pagination {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pagination-info {
+    order: -1;
+    margin-bottom: 8px;
+  }
+
+  .pagination-btn {
+    width: 100%;
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
