@@ -1,3 +1,4 @@
+// Login.tsx
 import React, { useState } from 'react';
 import { auth } from '../../firebaseConfig';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
@@ -8,7 +9,12 @@ import { Button, Container } from 'react-bootstrap';
 import googleLogo from '../../assets/google-logo.png';
 import './styles/Login.css';
 
-const Login: React.FC = () => {
+// ✅ Add this prop type
+type LoginProps = {
+  toggleAuthMode: () => void;
+};
+
+const Login: React.FC<LoginProps> = ({ toggleAuthMode }) => {
   const [error, setError] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,7 +28,7 @@ const Login: React.FC = () => {
       dispatch(setUserEmail(user.email || ''));
       dispatch(setFirebaseToken(await user.getIdToken()));
 
-      navigate('/booking'); // Redirect after login
+      navigate('/booking');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Google login failed');
     }
@@ -38,6 +44,12 @@ const Login: React.FC = () => {
             Sign in with Google
           </Button>
         </div>
+        <p>
+          Don’t have an account?{' '}
+          <Button variant="link" onClick={toggleAuthMode}>
+            Sign Up
+          </Button>
+        </p>
         {error && <p className="error">{error}</p>}
       </div>
     </Container>
