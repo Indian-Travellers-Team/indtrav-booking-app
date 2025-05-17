@@ -1,4 +1,3 @@
-// src/components/BookingForm.tsx
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { fetchCustomerData } from '../../api/customerService';
@@ -99,26 +98,53 @@ const BookingForm: React.FC = () => {
   };
 
   return (
-    <div className="booking-container">
-      <Container className="form-container">
-        <h2 className="text-center mb-2">Book a Trip with</h2>
-        <h2
-          className="text-center mb-4"
-          style={{ color: 'rgb(188, 224, 190)' }}
+    <div className="mountain-theme-wrapper">
+      {/* Mountain silhouette header overlay */}
+      <div className="mountain-header-overlay">
+        <svg
+          preserveAspectRatio="none"
+          viewBox="0 0 1200 120"
+          className="mountain-svg"
         >
-          Indian Travellers Team 🚀
-        </h2>
+          <path d="M0,0 L0,120 L1200,120 L1200,0 L1110,60 L1020,0 L930,60 L840,0 L750,60 L660,0 L570,60 L480,0 L390,60 L300,0 L210,60 L120,0 L30,60 L0,0 Z"></path>
+        </svg>
+      </div>
 
-        <TripDetails tripDetails={tripDetails} />
-        <UserInfoForm
-          formData={formData}
-          tripDetails={tripDetails}
-          handleMobileChange={handleMobileChange}
-          handleInputChange={handleInputChange}
-          token={firebaseToken} // Add the Firebase token if needed
-          isMultipleBooking={isMultipleBooking}
-        />
-      </Container>
+      <div className="booking-container">
+        <Container className="mountain-booking-form">
+          <div className="booking-header">
+            <h2 className="booking-title">Book Your Adventure</h2>
+            <div className="mountain-divider">
+              <div className="mountain-peak"></div>
+            </div>
+            <h4 className="booking-subtitle">
+              Indian Travellers Team <span className="adventure-icon">🏔️</span>
+            </h4>
+          </div>
+
+          <TripDetails tripDetails={tripDetails} />
+
+          <UserInfoForm
+            formData={formData}
+            tripDetails={tripDetails}
+            handleMobileChange={handleMobileChange}
+            handleInputChange={handleInputChange}
+            token={firebaseToken} // Add the Firebase token if needed
+            isMultipleBooking={isMultipleBooking}
+          />
+        </Container>
+      </div>
+
+      {/* Mountain-themed footer overlay */}
+      <div className="mountain-footer-overlay">
+        <svg
+          preserveAspectRatio="none"
+          viewBox="0 0 1200 120"
+          className="mountain-svg"
+        >
+          <path d="M0,0 L0,120 L1200,120 L1200,0 L1110,60 L1020,0 L930,60 L840,0 L750,60 L660,0 L570,60 L480,0 L390,60 L300,0 L210,60 L120,0 L30,60 L0,0 Z"></path>
+        </svg>
+      </div>
     </div>
   );
 };

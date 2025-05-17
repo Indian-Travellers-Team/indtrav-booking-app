@@ -97,195 +97,290 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
-        {/* Primary User Info Section */}
-        <Form.Group controlId="formMobile">
-          <Form.Label className="form-label">Mobile</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="10 digit Mobile Number"
-            name="mobile"
-            value={formData.mobile}
-            onChange={handleMobileChange}
-          />
-        </Form.Group>
-        <Row>
-          <Col md={6}>
-            <Form.Group controlId="formFirstName">
-              <Form.Label className="form-label">First Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Your First Name"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group controlId="formLastName">
-              <Form.Label className="form-label">Last Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Your Last Name"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
-        <Row>
-          <Col md={6}>
-            <Form.Group controlId="formGender">
-              <Form.Label className="form-label">Gender</Form.Label>
-              <Form.Control
-                as="select"
-                name="gender"
-                value={formData.gender}
-                onChange={handleInputChange}
+      <div className="mountain-user-info-form">
+        <div className="section-header">
+          <h3 className="mountain-section-title">
+            <span className="mountain-title-inner">Your Information</span>
+          </h3>
+          <div className="mountain-divider small-divider">
+            <div className="mountain-peak"></div>
+          </div>
+        </div>
+
+        <Form onSubmit={handleSubmit} className="booking-form">
+          {/* Primary User Info Section */}
+          <Form.Group controlId="formMobile" className="form-group-mountain">
+            <Form.Label className="form-label-mountain">
+              Mobile Number
+            </Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="10 digit Mobile Number"
+              name="mobile"
+              value={formData.mobile}
+              onChange={handleMobileChange}
+              className="mountain-input"
+            />
+          </Form.Group>
+
+          <Row>
+            <Col md={6}>
+              <Form.Group
+                controlId="formFirstName"
+                className="form-group-mountain"
               >
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-              </Form.Control>
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group controlId="formAge">
-              <Form.Label className="form-label">Age</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Your Age"
-                name="age"
-                value={formData.age}
-                min="0"
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
-        <Form.Group controlId="formEmail">
-          <Form.Label className="form-label">Email</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Your Email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-          />
-        </Form.Group>
+                <Form.Label className="form-label-mountain">
+                  First Name
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Your First Name"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                  className="mountain-input"
+                />
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group
+                controlId="formLastName"
+                className="form-group-mountain"
+              >
+                <Form.Label className="form-label-mountain">
+                  Last Name
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Your Last Name"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  className="mountain-input"
+                />
+              </Form.Group>
+            </Col>
+          </Row>
 
-        {/* Sharing Type Dropdown */}
-        <Form.Group controlId="formSharingType" className="mt-3">
-          <Form.Label className="form-label">Select Sharing Type</Form.Label>
-          <Form.Control
-            as="select"
-            name="sharingType"
-            value={formData.sharingType}
-            onChange={handleInputChange}
+          <Row>
+            <Col md={6}>
+              <Form.Group
+                controlId="formGender"
+                className="form-group-mountain"
+              >
+                <Form.Label className="form-label-mountain">Gender</Form.Label>
+                <Form.Control
+                  as="select"
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleInputChange}
+                  className="mountain-select"
+                >
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </Form.Control>
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group controlId="formAge" className="form-group-mountain">
+                <Form.Label className="form-label-mountain">Age</Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Your Age"
+                  name="age"
+                  value={formData.age}
+                  min="0"
+                  onChange={handleInputChange}
+                  className="mountain-input"
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Form.Group controlId="formEmail" className="form-group-mountain">
+            <Form.Label className="form-label-mountain">
+              Email Address
+            </Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Your Email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              className="mountain-input"
+            />
+          </Form.Group>
+
+          {/* Sharing Type Dropdown */}
+          <Form.Group
+            controlId="formSharingType"
+            className="form-group-mountain mt-3"
           >
-            <option value="">Select Sharing Type</option>
-            <option value="double">
-              Double Sharing - ₹{tripDetails?.double_sharing_price || 0}
-            </option>
-            <option value="triple">
-              Triple Sharing - ₹{tripDetails?.triple_sharing_price || 0}
-            </option>
-            <option value="quad">
-              Quad Sharing - ₹{tripDetails?.quad_sharing_price || 0}
-            </option>
-          </Form.Control>
-        </Form.Group>
+            <Form.Label className="form-label-mountain">
+              Select Sharing Type
+            </Form.Label>
+            <Form.Control
+              as="select"
+              name="sharingType"
+              value={formData.sharingType}
+              onChange={handleInputChange}
+              className="mountain-select"
+            >
+              <option value="">Select Sharing Type</option>
+              <option value="double">
+                Double Sharing - ₹{tripDetails?.double_sharing_price || 0}
+              </option>
+              <option value="triple">
+                Triple Sharing - ₹{tripDetails?.triple_sharing_price || 0}
+              </option>
+              <option value="quad">
+                Quad Sharing - ₹{tripDetails?.quad_sharing_price || 0}
+              </option>
+            </Form.Control>
+          </Form.Group>
 
-        {/* Additional Persons Section */}
-        {isMultipleBooking && (
-          <>
-            <h4 className="mt-4 add-more-persons-title">👥 Add More Persons</h4>
-            {additionalPersons.map((_, index) => (
-              <div key={index} className="additional-person-fields mb-3">
-                <Row>
-                  <Col md={4}>
-                    <Form.Group controlId={`firstName${index}`}>
-                      <Form.Label>First Name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="First Name"
-                        name="firstName"
-                        onChange={(e) => handlePersonChange(index, e)}
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col md={4}>
-                    <Form.Group controlId={`lastName${index}`}>
-                      <Form.Label>Last Name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Last Name"
-                        name="lastName"
-                        onChange={(e) => handlePersonChange(index, e)}
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col md={4}>
-                    <Form.Group controlId={`age${index}`}>
-                      <Form.Label>Age</Form.Label>
-                      <Form.Control
-                        type="number"
-                        placeholder="Age"
-                        name="age"
-                        min="0"
-                        onChange={(e) => handlePersonChange(index, e)}
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col md={6}>
-                    <Form.Group controlId={`gender${index}`}>
-                      <Form.Label>Gender</Form.Label>
-                      <Form.Control
-                        as="select"
-                        name="gender"
-                        onChange={(e) => handlePersonChange(index, e)}
-                      >
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                      </Form.Control>
-                    </Form.Group>
-                  </Col>
-                  <Col md={6} className="d-flex align-items-end">
-                    <Button
-                      variant="danger"
-                      onClick={() => removePerson(index)}
-                    >
-                      Remove
-                    </Button>
-                  </Col>
-                </Row>
+          {/* Additional Persons Section */}
+          {isMultipleBooking && (
+            <div className="additional-persons-section">
+              <div className="section-header mt-4">
+                <h4 className="mountain-section-title">
+                  <span className="mountain-title-inner">
+                    👥 Add More Travelers
+                  </span>
+                </h4>
+                <div className="mountain-divider small-divider">
+                  <div className="mountain-peak"></div>
+                </div>
               </div>
-            ))}
-            <Button variant="info" onClick={addPersonFields} className="mt-3">
-              ➕ Add Another Person
-            </Button>
-          </>
-        )}
 
-        <Button variant="primary" type="submit" className="btn-block mt-3">
-          Continue To Payment
-        </Button>
-      </Form>
+              {additionalPersons.map((_, index) => (
+                <div key={index} className="additional-person-card mb-3">
+                  <Row>
+                    <Col md={4}>
+                      <Form.Group
+                        controlId={`firstName${index}`}
+                        className="form-group-mountain"
+                      >
+                        <Form.Label className="form-label-mountain">
+                          First Name
+                        </Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="First Name"
+                          name="firstName"
+                          onChange={(e) => handlePersonChange(index, e)}
+                          className="mountain-input"
+                        />
+                      </Form.Group>
+                    </Col>
+                    <Col md={4}>
+                      <Form.Group
+                        controlId={`lastName${index}`}
+                        className="form-group-mountain"
+                      >
+                        <Form.Label className="form-label-mountain">
+                          Last Name
+                        </Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Last Name"
+                          name="lastName"
+                          onChange={(e) => handlePersonChange(index, e)}
+                          className="mountain-input"
+                        />
+                      </Form.Group>
+                    </Col>
+                    <Col md={4}>
+                      <Form.Group
+                        controlId={`age${index}`}
+                        className="form-group-mountain"
+                      >
+                        <Form.Label className="form-label-mountain">
+                          Age
+                        </Form.Label>
+                        <Form.Control
+                          type="number"
+                          placeholder="Age"
+                          name="age"
+                          min="0"
+                          onChange={(e) => handlePersonChange(index, e)}
+                          className="mountain-input"
+                        />
+                      </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                      <Form.Group
+                        controlId={`gender${index}`}
+                        className="form-group-mountain"
+                      >
+                        <Form.Label className="form-label-mountain">
+                          Gender
+                        </Form.Label>
+                        <Form.Control
+                          as="select"
+                          name="gender"
+                          onChange={(e) => handlePersonChange(index, e)}
+                          className="mountain-select"
+                        >
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                          <option value="other">Other</option>
+                        </Form.Control>
+                      </Form.Group>
+                    </Col>
+                    <Col md={6} className="d-flex align-items-end">
+                      <Button
+                        variant="danger"
+                        onClick={() => removePerson(index)}
+                        className="mountain-remove-btn"
+                      >
+                        Remove
+                      </Button>
+                    </Col>
+                  </Row>
+                </div>
+              ))}
+
+              <Button
+                variant="info"
+                onClick={addPersonFields}
+                className="mountain-add-btn mt-3"
+              >
+                ➕ Add Another Person
+              </Button>
+            </div>
+          )}
+
+          <Button
+            variant="primary"
+            type="submit"
+            className="mountain-submit-btn mt-4"
+          >
+            Continue To Payment
+          </Button>
+        </Form>
+      </div>
 
       {/* Confirmation Modal */}
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
+      <Modal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        className="mountain-modal"
+      >
         <Modal.Header closeButton>
-          <Modal.Title>Confirm Booking</Modal.Title>
+          <Modal.Title>Confirm Your Booking</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Are you sure you want to proceed with the booking?
+          Are you sure you want to proceed with this booking?
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
-            No
+          <Button
+            variant="secondary"
+            onClick={() => setShowModal(false)}
+            className="mountain-cancel-btn"
+          >
+            No, Cancel
           </Button>
           <Button
             variant="primary"
@@ -293,8 +388,9 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
               handleBooking();
               setShowModal(false);
             }}
+            className="mountain-confirm-btn"
           >
-            Yes
+            Yes, Book Now
           </Button>
         </Modal.Footer>
       </Modal>

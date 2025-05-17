@@ -1,13 +1,100 @@
-.trip-details {
-  background-color: rgba(
-    0,
-    123,
-    255,
-    0.7
-  ); /* Semi-transparent blue background */
-  border-radius: 10px; /* Rounded corners */
-  padding: 10px; /* Padding for the details section */
-  margin: 15px 0; /* Space around the details section */
-  color: white;
-  text-align: center;
+/* Mountain Theme for Trip Details */
+.mountain-trip-details {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border-top: 3px solid #4834d4;
+}
+
+.mountain-trip-details:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Trip Info Rows */
+.trip-info-container {
+  margin-top: 15px;
+}
+
+.trip-info-row {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s ease;
+}
+
+.trip-info-row:last-child {
+  border-bottom: none;
+}
+
+.trip-info-row:hover {
+  background-color: rgba(72, 52, 212, 0.03);
+}
+
+.trip-info-label {
+  font-weight: 600;
+  color: #555;
+  display: flex;
+  align-items: center;
+}
+
+.trip-info-label span::before {
+  content: '▸';
+  margin-right: 8px;
+  color: #4834d4;
+  font-size: 14px;
+}
+
+.trip-info-value {
+  color: #333;
+  font-weight: 500;
+}
+
+/* For trip date rows */
+.trip-info-row:nth-child(2) .trip-info-value,
+.trip-info-row:nth-child(3) .trip-info-value {
+  color: #4834d4;
+  font-weight: 600;
+}
+
+/* For the payment row */
+.trip-info-row:last-child .trip-info-value {
+  font-weight: 700;
+}
+
+/* Discount styling */
+.discounted-price {
+  color: #e74c3c;
+  font-weight: 700;
+  background-color: rgba(231, 76, 60, 0.1);
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 576px) {
+  .mountain-trip-details {
+    padding: 15px;
+  }
+
+  .trip-info-row {
+    padding: 8px 0;
+  }
+
+  .trip-info-label,
+  .trip-info-value {
+    font-size: 14px;
+  }
+
+  .discounted-price {
+    padding: 1px 6px;
+    font-size: 13px;
+  }
 }
