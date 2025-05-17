@@ -17,6 +17,7 @@ import BlogList from './components/Blog/BlogList';
 import BlogDetailPage from './components/Blog/BlogDetail';
 import BookingHome from './components/BookingHome';
 import BookingForm from './components/Booking/BookingForm';
+import BookingSuccess from './components/Booking/BookingSuccess'; // Import the BookingSuccess component
 import Auth from './components/Auth/Auth'; // Updated import for combined Auth component
 import NotFound from './components/NotFound';
 import AboutUs from './components/AboutUs';
@@ -61,6 +62,8 @@ const App: React.FC = () => {
                 path="/booking/:type"
                 element={<ProtectedRoute element={<BookingForm />} />}
               />
+              {/* Add BookingSuccess route */}
+              <Route path="/booking/success" element={<BookingSuccess />} />
               {/* More protected routes */}
               <Route path="*" element={<NotFound />} />
             </Routes>

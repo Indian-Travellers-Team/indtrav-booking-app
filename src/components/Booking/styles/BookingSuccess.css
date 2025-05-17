@@ -1,0 +1,279 @@
+/* Mountain Theme for Booking Success Page */
+.booking-success-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 20px 60px;
+  max-width: 900px;
+}
+
+.booking-success-card {
+  background-color: #27ae60; /* Success green */
+  border-radius: 12px;
+  padding: 40px;
+  width: 100%;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Success sparkle effect */
+.booking-success-card::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.booking-success-card::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Title and Subtitle */
+.success-title {
+  font-size: 36px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.success-subtitle {
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+
+/* Divider */
+.success-divider {
+  border: none;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 25px 0;
+}
+
+/* Booking Details */
+.booking-details {
+  margin-bottom: 30px;
+}
+
+.booking-details p {
+  margin-bottom: 12px;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.detail-value {
+  font-weight: 700;
+}
+
+.highlighted {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 2px 10px;
+  border-radius: 15px;
+  color: white;
+}
+
+/* Persons List */
+.persons-label {
+  margin-bottom: 5px !important;
+}
+
+.persons-list {
+  list-style-type: none;
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.persons-list li {
+  padding: 5px 0;
+  position: relative;
+}
+
+.persons-list li::before {
+  content: '•';
+  position: absolute;
+  left: -15px;
+  color: white;
+}
+
+/* Cost Details */
+.cost-per-person,
+.total-cost,
+.discount,
+.final-cost {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 10px;
+}
+
+.final-cost {
+  font-size: 18px !important;
+}
+
+.original-price {
+  text-decoration: line-through;
+  margin-right: 10px;
+  opacity: 0.7;
+  font-weight: normal;
+}
+
+/* Payment Instructions */
+.payment-instructions {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 30px;
+}
+
+.payment-note {
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.advance-amount,
+.contact-number {
+  font-weight: 700;
+  color: #fff;
+}
+
+.payment-method {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.payment-logo {
+  height: 50px;
+  background-color: white;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.screenshot-instruction,
+.remaining-amount-note {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.remaining-amount-note {
+  margin-top: 15px;
+  font-style: italic;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .booking-success-container {
+    padding: 90px 15px 40px;
+  }
+
+  .booking-success-card {
+    padding: 30px 20px;
+  }
+
+  .success-title {
+    font-size: 28px;
+  }
+
+  .success-subtitle {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .booking-details p {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+
+  .detail-value {
+    margin-top: 5px;
+  }
+}
+
+@media (max-width: 576px) {
+  .booking-success-card {
+    padding: 25px 15px;
+  }
+
+  .success-title {
+    font-size: 24px;
+  }
+
+  .payment-instructions {
+    padding: 15px;
+  }
+
+  .payment-logo {
+    height: 40px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .booking-success-card {
+    background-color: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .mountain-header-overlay,
+  .mountain-footer-overlay {
+    display: none !important;
+  }
+
+  .success-title,
+  .success-subtitle {
+    color: #27ae60 !important;
+  }
+
+  .detail-label {
+    color: #333 !important;
+  }
+
+  .highlighted {
+    background-color: rgba(39, 174, 96, 0.1) !important;
+    color: #27ae60 !important;
+  }
+
+  .payment-instructions {
+    background-color: rgba(39, 174, 96, 0.05) !important;
+    border: 1px solid rgba(39, 174, 96, 0.2) !important;
+  }
+
+  .advance-amount,
+  .contact-number {
+    color: #27ae60 !important;
+  }
+}
