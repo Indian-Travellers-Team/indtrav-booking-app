@@ -4,6 +4,7 @@ import {
   Route,
   Routes,
   Navigate,
+  useLocation,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -78,13 +79,18 @@ const App: React.FC = () => {
 // Wrapper to handle redirect logic for authenticated users
 const AuthWrapper: React.FC = () => {
   const { user } = useAuth();
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+  const tripId = params.get('trip_id');
 
-  // If the user is logged in, redirect to the booking page
+  // If already logged in, send back to booking with trip_id or home
   if (user) {
-    return <Navigate to="/booking" />;
+    const target = tripId ? `/booking?trip_id=${tripId}` : '/';
+    return <Navigate to={target} replace />;
   }
 
-  return <Auth />; // Render the combined Auth component for login/signup
+  // Otherwise show login / signup UI
+  return <Auth />;
 };
 
 export default App;

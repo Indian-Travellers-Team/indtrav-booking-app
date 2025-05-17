@@ -3,6 +3,7 @@ import { Row, Col, Form, Button, Modal, Alert } from 'react-bootstrap';
 import './styles/UserInfoForm.css';
 import { createBooking } from '../../api/bookingService';
 import { createMultiBooking } from '../../api/bookingService';
+import { useNavigate } from 'react-router-dom';
 
 interface UserInfoFormProps {
   formData: {
@@ -40,7 +41,8 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
   const [apiError, setApiError] = useState<string | null>(null);
   const [validationErrors, setValidationErrors] =
     useState<ValidationErrors | null>(null);
-  const [bookingSuccess, setBookingSuccess] = useState(false);
+
+  const navigate = useNavigate();
 
   // Form validation state
   const [errors, setErrors] = useState({
@@ -181,7 +183,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
     setValidationErrors(null);
 
     try {
-      const bookingData = {
+      const bookingData: any = {
         trip_id: tripDetails?.id || null,
         sharing_type: formData.sharingType || null,
         primary_person: {
@@ -192,32 +194,34 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
           mobile: formData.mobile,
           email: formData.email,
         },
-        additional_persons: additionalPersons.map((person) => ({
-          first_name: person.firstName || '',
-          last_name: person.lastName || '',
-          gender: person.gender || 'male',
-          age: person.age ? person.age.toString() : '',
-        })),
+        // only include additional_persons when multi booking
+        ...(isMultipleBooking
+          ? {
+              additional_persons: additionalPersons.map((person) => ({
+                first_name: person.firstName || '',
+                last_name: person.lastName || '',
+                gender: person.gender || 'male',
+                age: person.age ? person.age.toString() : '',
+              })),
+            }
+          : {}),
       };
 
       const response = await createMultiBooking(bookingData, token);
 
-      if (response.status === 'success') {
-        setBookingSuccess(true);
-        // Redirect or show success message
-        console.log('Multi booking successful:', response.message);
+      if (response.status === 'success' && response.booking_id) {
+        // Redirect on success
+        navigate(`/booking/success?booking_id=${response.booking_id}`);
+        return;
       }
     } catch (error: any) {
       console.error('Error creating multi booking:', error);
 
-      // Handle API error response
-      if (error.response && error.response.data) {
+      if (error.response?.data) {
         if (error.response.data.status === 'error') {
-          // Handle validation errors from the API
           if (typeof error.response.data.message === 'object') {
             setValidationErrors(error.response.data.message);
           } else {
-            // General error message
             setApiError(
               error.response.data.message || 'An error occurred during booking',
             );
@@ -306,14 +310,6 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
         {apiError && (
           <Alert variant="danger" className="mountain-alert">
             {apiError}
-          </Alert>
-        )}
-
-        {/* Success Message */}
-        {bookingSuccess && (
-          <Alert variant="success" className="mountain-alert">
-            Your booking has been successfully created! You will receive a
-            confirmation shortly.
           </Alert>
         )}
 
