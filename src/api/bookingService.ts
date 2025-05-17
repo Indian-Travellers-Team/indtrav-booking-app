@@ -74,7 +74,7 @@ export const createMultiBooking = async (
 
 export const fetchBookingDetails = async (bookingId: string) => {
   const response = await axios.get(
-    `${API_URL}/v1/booking/${bookingId}/success/`,
+    `${API_URL}/api/v1/booking/${bookingId}/success/`,
   );
 
   // Transform the API response to match the BookingDetails interface

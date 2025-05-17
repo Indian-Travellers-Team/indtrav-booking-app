@@ -3,6 +3,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { fetchBookingDetails } from '../../api/bookingService';
 import './styles/BookingSuccess.css';
+import paytmIcon from '../../assets/paytm-icon.png';
+import googlePayIcon from '../../assets/google-pay-icon.png';
+import phonepeIcon from '../../assets/phonepe-logo-icon.png';
 
 interface BookingDetails {
   id: number;
@@ -173,7 +176,7 @@ const BookingSuccess: React.FC = () => {
           </div>
 
           <div className="payment-instructions">
-            <p className="payment-note">
+            <span className="payment-note">
               To complete your booking, please pay an advance fee of
               <span className="advance-amount">
                 {' '}
@@ -184,20 +187,27 @@ const BookingSuccess: React.FC = () => {
                 {' '}
                 {booking?.contact_number}
               </span>{' '}
-              using:
-            </p>
+              using any of these payment methods:
+            </span>
 
-            <div className="payment-method">
+            <div className="payment-methods">
               <img
-                src="/assets/paytm-logo.png"
+                src={paytmIcon}
                 alt="Paytm"
                 className="payment-logo"
-                onError={(e) => {
-                  // Fallback if the image doesn't exist
-                  const target = e.target as HTMLImageElement;
-                  target.src =
-                    'https://indiantravellersteam.s3.ap-south-1.amazonaws.com/payment-logos/paytm.png';
-                }}
+                style={{ maxHeight: '100px', margin: '0 10px' }}
+              />
+              <img
+                src={googlePayIcon}
+                alt="Google Pay"
+                className="payment-logo"
+                style={{ maxHeight: '100px', margin: '0 10px' }}
+              />
+              <img
+                src={phonepeIcon}
+                alt="PhonePe"
+                className="payment-logo"
+                style={{ maxHeight: '100px', margin: '0 10px' }}
               />
             </div>
 
