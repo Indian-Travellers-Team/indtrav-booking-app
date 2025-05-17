@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { fetchPackageDetail } from '../../api/packageDetailService';
 import { fetchUpcomingTrips } from '../../api/upcomingTripsService';
 import CostingComponent from './CostingComponent';
+import ItineraryComponent from './ItineraryComponent';
 import UpcomingTripsWithPagination from './UpcomingTripsWithPagination';
-import UpcomingTripsComponent from './UpcomingTripsComponent';
 import type { PackageDetail } from '../../types/packageDetailTypes';
 import type { UpcomingTrip } from '../../types/upcomingTripTypes';
 import { Container } from 'react-bootstrap';
@@ -114,26 +114,19 @@ const PackageDetailPage: React.FC = () => {
 
         {/* Row for Itinerary, Costing, and Upcoming Trips */}
         <div className="package-detail-row">
-          {/* Itinerary Section */}
-          <div className="itinerary-section mountain-card">
-            <div className="section-header">
-              <h3 className="mountain-section-title">
-                <span className="mountain-title-inner">Itinerary</span>
-              </h3>
-              <div className="mountain-divider small-divider">
-                <div className="mountain-peak"></div>
-              </div>
-            </div>
-            <div
-              className="itinerary-content"
-              dangerouslySetInnerHTML={{
-                __html: packageDetail.itinerary,
-              }}
-            />
+          {/* Itinerary Section - Now using the separate component */}
+          <div className="itinerary-section">
+            <ItineraryComponent itinerary={packageDetail.itinerary} />
           </div>
 
           {/* Costing and Upcoming Trips Column */}
           <div className="costing-trips-column">
+            {/* Costing Component */}
+            <div className="package-side-card">
+              <CostingComponent costings={packageDetail.costings} />
+            </div>
+
+            {/* Upcoming Trips Component */}
             <UpcomingTripsWithPagination trips={upcomingTrips} />
           </div>
         </div>

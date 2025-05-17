@@ -1,67 +1,223 @@
-:root {
-  --background-image-url: url('https://indiantraveller-cms-staticfiles.s3.amazonaws.com/bookings/img/scene.495b069aa4a9.jpg');
+/* Mountain Theme for Booking Form */
+
+/* Base Styles */
+.mountain-theme-wrapper {
+  position: relative;
+  overflow-x: hidden;
+  background: linear-gradient(to bottom, #f9f9f9, #e7f0fd);
+  padding-bottom: 60px;
+  min-height: 100vh;
 }
 
-/* body {
-  font-family: Arial, sans-serif;
-  background: var(--background-image-url) no-repeat center center fixed;
-  background-size: cover;
-  color: white;
-} */
-
-.text-center {
-  color: white;
+/* Mountain Header Overlay */
+.mountain-header-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 10;
+  overflow: hidden;
 }
 
+.mountain-svg {
+  height: 60px;
+  width: 100%;
+  fill: rgba(72, 52, 212, 0.1);
+}
+
+/* Mountain Footer Overlay */
+.mountain-footer-overlay {
+  position: relative;
+  height: 60px;
+  overflow: hidden;
+  margin-top: 40px;
+}
+
+.mountain-footer-overlay .mountain-svg {
+  transform: rotate(180deg);
+  fill: rgba(72, 52, 212, 0.1);
+}
+
+/* Booking Container */
 .booking-container {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: flex-start; /* Align to the top */
-  height: auto; /* Full viewport height */
-  padding-top: 50px; /* Add padding from the top */
-  width: 60%; /* Default width for larger screens */
-  margin-left: 20%; /* Centering on larger screens */
-  margin-top: 5%; /* Top margin */
-  margin-bottom: 2%; /* Top margin */
-  background: var(--background-image-url) no-repeat center center fixed;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 100px;
+  padding-bottom: 60px;
+  width: 80%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.form-container {
-  flex: 1;
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-  ); /* Make it more opaque for better contrast */
-  border-radius: 15px; /* Rounded corners */
-  padding: 20px;
-  width: 60%; /* Default width for larger screens */
-  max-width: 500px; /* Set a maximum width for the form */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional shadow for better visibility */
+/* Form Container */
+.mountain-booking-form {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.8)
+  );
+  border-radius: 15px;
+  padding: 30px;
+  width: 100%;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  border-top: 5px solid #4834d4;
+  position: relative;
+  overflow: hidden;
 }
 
-h2 {
-  color: white; /* Header color */
+/* Mountain peak decoration in the background */
+.mountain-booking-form::before {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  right: -50px;
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(
+    135deg,
+    transparent 50%,
+    rgba(72, 52, 212, 0.1) 50%
+  );
+  z-index: 0;
+  opacity: 0.5;
+}
+
+/* Booking Header */
+.booking-header {
   text-align: center;
-  margin-bottom: 10px; /* Space between title and subtitle */
+  margin-bottom: 30px;
+  position: relative;
 }
 
-.form-label {
-  color: white; /* Label color */
+.booking-title {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 5px;
+  background: linear-gradient(45deg, #4834d4, #7466dd);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
 }
 
-/* Responsive Styles for Mobile */
-@media (max-width: 768px) {
+.mountain-divider {
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(to right, #4834d4, #7466dd);
+  margin: 10px auto 15px;
+  position: relative;
+  border-radius: 2px;
+}
+
+.mountain-peak {
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  background-color: #4834d4;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+}
+
+.booking-subtitle {
+  font-size: 18px;
+  color: #555;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.adventure-icon {
+  font-size: 20px;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.small-divider {
+  width: 80px;
+  height: 3px;
+  margin: 10px 0 20px;
+  background: linear-gradient(to right, #333, #666);
+}
+
+.small-divider .mountain-peak {
+  width: 16px;
+  height: 8px;
+  background-color: #555;
+}
+
+/* Section Headers */
+.section-header {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.mountain-section-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.mountain-section-title::before {
+  content: '⛰️';
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+.mountain-section-title .mountain-title-inner {
+  background: linear-gradient(45deg, #333, #555);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
   .booking-container {
-    width: 90%; /* Full width for mobile devices */
-    margin-left: 5%; /* Centering on mobile */
-    margin-top: 50px; /* Add margin from the top */
-    height: 90%;
+    width: 90%;
   }
 
-  .form-container {
-    width: 100%; /* Full width for mobile */
-    padding: 15px; /* Adjust padding for mobile */
+  .booking-title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .booking-container {
+    width: 95%;
+    padding-top: 80px;
+  }
+
+  .mountain-booking-form {
+    padding: 20px;
+  }
+
+  .booking-title {
+    font-size: 24px;
+  }
+
+  .booking-subtitle {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .booking-container {
+    width: 100%;
+    padding: 70px 15px 40px;
+  }
+
+  .mountain-booking-form {
+    padding: 15px;
+  }
+
+  .booking-title {
+    font-size: 22px;
   }
 }

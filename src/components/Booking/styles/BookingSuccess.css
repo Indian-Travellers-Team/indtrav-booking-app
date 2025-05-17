@@ -1,0 +1,128 @@
+/* BookingSuccess.css */
+.booking-success-container {
+  padding: 80px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.booking-success-card {
+  background: #ffffff;
+  border-radius: 8px;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  font-family: sans-serif;
+}
+
+.success-title {
+  text-align: center;
+  color: #27ae60;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.success-subtitle {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.booking-details-table,
+.cost-summary-box {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.row-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.row-item:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-weight: 600;
+  color: #555;
+}
+
+.value {
+  font-weight: 600;
+  color: #000;
+  text-align: right;
+}
+
+.final-row {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+  color: #999;
+  margin-right: 8px;
+}
+
+.persons-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.persons-list li {
+  margin: 4px 0;
+}
+
+.payment-instructions {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.green-box {
+  background-color: #e8f5e9;
+  border-left: 5px solid #27ae60;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.highlight-green {
+  color: #27ae60;
+  font-weight: 700;
+}
+
+.payment-methods {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  gap: 20px;
+}
+
+.payment-logo {
+  height: 50px;
+  background-color: white;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.note-footer {
+  margin-top: 15px;
+  font-style: italic;
+  text-align: center;
+  font-size: 14px;
+  color: #777;
+}
+
+.loading,
+.error {
+  padding: 60px;
+  text-align: center;
+  font-size: 18px;
+}

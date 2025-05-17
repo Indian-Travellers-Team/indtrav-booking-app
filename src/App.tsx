@@ -4,6 +4,7 @@ import {
   Route,
   Routes,
   Navigate,
+  useLocation,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -17,6 +18,7 @@ import BlogList from './components/Blog/BlogList';
 import BlogDetailPage from './components/Blog/BlogDetail';
 import BookingHome from './components/BookingHome';
 import BookingForm from './components/Booking/BookingForm';
+import BookingSuccess from './components/Booking/BookingSuccess'; // Import the BookingSuccess component
 import Auth from './components/Auth/Auth'; // Updated import for combined Auth component
 import NotFound from './components/NotFound';
 import AboutUs from './components/AboutUs';
@@ -61,6 +63,8 @@ const App: React.FC = () => {
                 path="/booking/:type"
                 element={<ProtectedRoute element={<BookingForm />} />}
               />
+              {/* Add BookingSuccess route */}
+              <Route path="/booking/success" element={<BookingSuccess />} />
               {/* More protected routes */}
               <Route path="*" element={<NotFound />} />
             </Routes>
@@ -75,13 +79,18 @@ const App: React.FC = () => {
 // Wrapper to handle redirect logic for authenticated users
 const AuthWrapper: React.FC = () => {
   const { user } = useAuth();
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+  const tripId = params.get('trip_id');
 
-  // If the user is logged in, redirect to the booking page
+  // If already logged in, send back to booking with trip_id or home
   if (user) {
-    return <Navigate to="/booking" />;
+    const target = tripId ? `/booking?trip_id=${tripId}` : '/';
+    return <Navigate to={target} replace />;
   }
 
-  return <Auth />; // Render the combined Auth component for login/signup
+  // Otherwise show login / signup UI
+  return <Auth />;
 };
 
 export default App;

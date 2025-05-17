@@ -1,18 +1,280 @@
-.btn-primary {
-  background-color: rgba(0, 123, 255, 0.8); /* Semi-transparent blue */
-  border: none; /* Remove border */
+/* Alert styling */
+.mountain-alert {
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 15px;
+  border: none;
+  font-weight: 500;
+}
+
+.alert-danger.mountain-alert {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #c82333;
+  border-left: 4px solid #dc3545;
+}
+
+.alert-success.mountain-alert {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+  border-left: 4px solid #28a745;
+}
+
+/* Invalid feedback styling */
+.invalid-feedback {
+  font-size: 13px;
+  color: #dc3545;
+  font-weight: 500;
+  margin-top: 5px;
+  margin-left: 2px;
+}
+
+/* Invalid input styling */
+.mountain-input.is-invalid,
+.mountain-select.is-invalid {
+  border-color: #dc3545;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right calc(0.375em + 0.1875rem) center;
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.mountain-input.is-invalid:focus,
+.mountain-select.is-invalid:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.25);
+}
+.mountain-user-info-form {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  border-top: 3px solid #4834d4;
+  position: relative;
+}
+
+/* Form Group Styling */
+.form-group-mountain {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.form-label-mountain {
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 8px;
+  display: block;
+  font-size: 15px;
+}
+
+/* Input Styling */
+.mountain-input {
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background-color: #f9f9ff;
   width: 100%;
 }
 
-.btn-primary:hover {
-  background-color: rgba(0, 105, 217, 1); /* Darker blue on hover */
+.mountain-input:focus {
+  border-color: #4834d4;
+  box-shadow: 0 0 0 3px rgba(72, 52, 212, 0.1);
+  background-color: white;
 }
 
-/* Ensure form elements don't exceed width */
-.form-group {
-  width: 100%; /* Full width for form groups */
+.mountain-input::placeholder {
+  color: #aaa;
 }
 
-.add-more-persons-title {
-  color: white; /* Change the color to white */
+/* Select Dropdown Styling */
+.mountain-select {
+  border: 1px solid #e1e1e1;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background-color: #f9f9ff;
+  width: 100%;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234834d4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+}
+
+.mountain-select:focus {
+  border-color: #4834d4;
+  box-shadow: 0 0 0 3px rgba(72, 52, 212, 0.1);
+  background-color: white;
+}
+
+/* Additional Persons Section */
+.additional-persons-section {
+  margin-top: 30px;
+}
+
+.additional-person-card {
+  background-color: #f9f9ff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.additional-person-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styling */
+.mountain-add-btn {
+  background: linear-gradient(to right, #2ecc71, #27ae60) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 30px !important;
+  padding: 10px 20px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 10px rgba(46, 204, 113, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+.mountain-add-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 12px rgba(46, 204, 113, 0.3) !important;
+}
+
+.mountain-remove-btn {
+  background: linear-gradient(to right, #e74c3c, #c0392b) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 8px rgba(231, 76, 60, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+.mountain-remove-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 10px rgba(231, 76, 60, 0.3) !important;
+}
+
+.mountain-submit-btn {
+  background: linear-gradient(to right, #4834d4, #7466dd) !important;
+  color: white !important;
+  border: none !important;
+  padding: 12px 30px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  border-radius: 8px !important;
+  width: 100% !important;
+  box-shadow: 0 5px 15px rgba(72, 52, 212, 0.3) !important;
+  transition: all 0.3s ease !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  margin-top: 20px !important;
+}
+
+.mountain-submit-btn:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 20px rgba(72, 52, 212, 0.4) !important;
+}
+
+/* Modal Styling */
+.mountain-modal .modal-content {
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.mountain-modal .modal-header {
+  background: linear-gradient(to right, #4834d4, #7466dd);
+  color: white;
+  border-bottom: none;
+  padding: 15px 20px;
+}
+
+.mountain-modal .modal-title {
+  font-weight: 700;
+}
+
+.mountain-modal .modal-body {
+  padding: 25px 20px;
+  font-size: 16px;
+}
+
+.mountain-modal .modal-footer {
+  border-top: none;
+  padding: 15px 20px 20px;
+}
+
+.mountain-cancel-btn {
+  background-color: #f1f1f1 !important;
+  color: #555 !important;
+  border: none !important;
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+}
+
+.mountain-cancel-btn:hover {
+  background-color: #e1e1e1 !important;
+}
+
+.mountain-confirm-btn {
+  background: linear-gradient(to right, #4834d4, #7466dd) !important;
+  color: white !important;
+  border: none !important;
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 10px rgba(72, 52, 212, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+.mountain-confirm-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 12px rgba(72, 52, 212, 0.3) !important;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .mountain-user-info-form {
+    padding: 20px;
+  }
+
+  .mountain-input,
+  .mountain-select {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .form-label-mountain {
+    font-size: 14px;
+  }
+
+  .additional-person-card {
+    padding: 12px;
+  }
+
+  .mountain-submit-btn {
+    padding: 10px 20px !important;
+    font-size: 15px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .mountain-user-info-form {
+    padding: 15px;
+  }
+
+  .form-group-mountain {
+    margin-bottom: 15px;
+  }
+
+  .additional-person-card {
+    padding: 10px;
+  }
 }
