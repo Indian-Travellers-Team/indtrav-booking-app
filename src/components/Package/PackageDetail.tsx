@@ -4,7 +4,6 @@ import { fetchPackageDetail } from '../../api/packageDetailService';
 import { fetchUpcomingTrips } from '../../api/upcomingTripsService';
 import CostingComponent from './CostingComponent';
 import UpcomingTripsWithPagination from './UpcomingTripsWithPagination';
-import UpcomingTripsComponent from './UpcomingTripsComponent';
 import type { PackageDetail } from '../../types/packageDetailTypes';
 import type { UpcomingTrip } from '../../types/upcomingTripTypes';
 import { Container } from 'react-bootstrap';
@@ -134,6 +133,12 @@ const PackageDetailPage: React.FC = () => {
 
           {/* Costing and Upcoming Trips Column */}
           <div className="costing-trips-column">
+            {/* Costing Component */}
+            <div className="package-side-card">
+              <CostingComponent costings={packageDetail.costings} />
+            </div>
+
+            {/* Upcoming Trips Component */}
             <UpcomingTripsWithPagination trips={upcomingTrips} />
           </div>
         </div>
