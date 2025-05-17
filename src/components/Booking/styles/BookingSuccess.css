@@ -1,175 +1,107 @@
-/* Mountain Theme for Booking Success Page */
+/* BookingSuccess.css */
 .booking-success-container {
+  padding: 80px 20px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 100px 20px 60px;
-  max-width: 900px;
 }
 
 .booking-success-card {
-  background-color: #27ae60; /* Success green */
-  border-radius: 12px;
-  padding: 40px;
+  background: #ffffff;
+  border-radius: 8px;
+  max-width: 700px;
   width: 100%;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-  color: white;
-  position: relative;
-  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  font-family: sans-serif;
 }
 
-/* Success sparkle effect */
-.booking-success-card::before {
-  content: '';
-  position: absolute;
-  top: -50px;
-  right: -50px;
-  width: 100px;
-  height: 100px;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.3) 0%,
-    rgba(255, 255, 255, 0) 70%
-  );
-  border-radius: 50%;
-  z-index: 1;
-}
-
-.booking-success-card::after {
-  content: '';
-  position: absolute;
-  bottom: -30px;
-  left: -30px;
-  width: 80px;
-  height: 80px;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.2) 0%,
-    rgba(255, 255, 255, 0) 70%
-  );
-  border-radius: 50%;
-  z-index: 1;
-}
-
-/* Title and Subtitle */
 .success-title {
-  font-size: 36px;
-  font-weight: 800;
   text-align: center;
-  margin-bottom: 5px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.success-subtitle {
-  font-size: 18px;
-  text-align: center;
-  margin-bottom: 30px;
-  font-weight: 500;
-}
-
-/* Divider */
-.success-divider {
-  border: none;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.3);
-  margin: 25px 0;
-}
-
-/* Booking Details */
-.booking-details {
-  margin-bottom: 30px;
-}
-
-.booking-details p {
-  margin-bottom: 12px;
-  font-size: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.detail-label {
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.detail-value {
+  color: #27ae60;
+  font-size: 28px;
   font-weight: 700;
 }
 
-.highlighted {
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 2px 10px;
-  border-radius: 15px;
-  color: white;
+.success-subtitle {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #555;
 }
 
-/* Persons List */
-.persons-label {
-  margin-bottom: 5px !important;
+.booking-details-table,
+.cost-summary-box {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.row-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.row-item:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-weight: 600;
+  color: #555;
+}
+
+.value {
+  font-weight: 600;
+  color: #000;
+  text-align: right;
+}
+
+.final-row {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+  color: #999;
+  margin-right: 8px;
 }
 
 .persons-list {
   list-style-type: none;
-  padding-left: 20px;
-  margin-bottom: 15px;
+  padding-left: 0;
+  margin: 0;
 }
 
 .persons-list li {
-  padding: 5px 0;
-  position: relative;
+  margin: 4px 0;
 }
 
-.persons-list li::before {
-  content: '•';
-  position: absolute;
-  left: -15px;
-  color: white;
-}
-
-/* Cost Details */
-.cost-per-person,
-.total-cost,
-.discount,
-.final-cost {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 10px;
-}
-
-.final-cost {
-  font-size: 18px !important;
-}
-
-.original-price {
-  text-decoration: line-through;
-  margin-right: 10px;
-  opacity: 0.7;
-  font-weight: normal;
-}
-
-/* Payment Instructions */
 .payment-instructions {
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 30px;
+  margin-top: 20px;
+  text-align: center;
 }
 
-.payment-note {
-  margin-bottom: 15px;
-  line-height: 1.6;
+.green-box {
+  background-color: #e8f5e9;
+  border-left: 5px solid #27ae60;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
 }
 
-.advance-amount,
-.contact-number {
+.highlight-green {
+  color: #27ae60;
   font-weight: 700;
-  color: #fff;
 }
 
-.payment-method {
+.payment-methods {
   display: flex;
   justify-content: center;
-  margin: 20px 0;
+  margin-top: 15px;
+  gap: 20px;
 }
 
 .payment-logo {
@@ -177,103 +109,20 @@
   background-color: white;
   padding: 8px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.screenshot-instruction,
-.remaining-amount-note {
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.remaining-amount-note {
+.note-footer {
   margin-top: 15px;
   font-style: italic;
+  text-align: center;
+  font-size: 14px;
+  color: #777;
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .booking-success-container {
-    padding: 90px 15px 40px;
-  }
-
-  .booking-success-card {
-    padding: 30px 20px;
-  }
-
-  .success-title {
-    font-size: 28px;
-  }
-
-  .success-subtitle {
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
-
-  .booking-details p {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 15px;
-  }
-
-  .detail-value {
-    margin-top: 5px;
-  }
-}
-
-@media (max-width: 576px) {
-  .booking-success-card {
-    padding: 25px 15px;
-  }
-
-  .success-title {
-    font-size: 24px;
-  }
-
-  .payment-instructions {
-    padding: 15px;
-  }
-
-  .payment-logo {
-    height: 40px;
-  }
-}
-
-/* Print Styles */
-@media print {
-  .booking-success-card {
-    background-color: white !important;
-    color: black !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-  }
-
-  .mountain-header-overlay,
-  .mountain-footer-overlay {
-    display: none !important;
-  }
-
-  .success-title,
-  .success-subtitle {
-    color: #27ae60 !important;
-  }
-
-  .detail-label {
-    color: #333 !important;
-  }
-
-  .highlighted {
-    background-color: rgba(39, 174, 96, 0.1) !important;
-    color: #27ae60 !important;
-  }
-
-  .payment-instructions {
-    background-color: rgba(39, 174, 96, 0.05) !important;
-    border: 1px solid rgba(39, 174, 96, 0.2) !important;
-  }
-
-  .advance-amount,
-  .contact-number {
-    color: #27ae60 !important;
-  }
+.loading,
+.error {
+  padding: 60px;
+  text-align: center;
+  font-size: 18px;
 }

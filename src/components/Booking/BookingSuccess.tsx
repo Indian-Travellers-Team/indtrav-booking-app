@@ -1,3 +1,4 @@
+// BookingSuccess.tsx
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
@@ -30,18 +31,15 @@ const BookingSuccess: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Get the Firebase token from Redux store
   const firebaseToken = useSelector(
     (state: RootState) => state.user.firebaseToken,
   );
 
-  // Get booking ID from URL query params or location state
   const queryParams = new URLSearchParams(location.search);
   const bookingId =
     queryParams.get('booking_id') || (location.state as any)?.bookingId || '';
 
   useEffect(() => {
-    // If no booking ID is present, redirect to home
     if (!bookingId) {
       navigate('/');
       return;
@@ -52,20 +50,17 @@ const BookingSuccess: React.FC = () => {
         setLoading(true);
         setError(null);
 
-        // Check if we have a valid firebase token
         if (!firebaseToken) {
           setError('Authentication required. Please log in again.');
           setLoading(false);
           return;
         }
 
-        // Fetch booking details from API with the token
         const details = await fetchBookingDetails(bookingId, firebaseToken);
         setBooking(details);
       } catch (error) {
         console.error('Error fetching booking details:', error);
         setError('Failed to load booking details. Please try again.');
-        // If there's an error, we could either show an error message or redirect
       } finally {
         setLoading(false);
       }
@@ -74,22 +69,19 @@ const BookingSuccess: React.FC = () => {
     getBookingDetails();
   }, [bookingId, navigate, firebaseToken]);
 
-  // For demo purposes, if we don't have a real API yet
   useEffect(() => {
-    // This is a fallback for development/demo when the API is not available
     if (process.env.NODE_ENV === 'development' && !booking && bookingId) {
-      // Mock data based on the API response format
       const mockBooking: BookingDetails = {
         id: parseInt(bookingId) || 57,
         trip_name: 'Kedarnath',
         start_date: 'May 23, 2025',
         end_date: 'May 27, 2025',
-        persons: ['Deepak Mehta', 'Jyoti Mehta'],
-        total_cost_per_person: 6499.0,
-        total_cost: 12998.0,
+        persons: ['Deepak Mehta'],
+        total_cost_per_person: 13998.0,
+        total_cost: 13998.0,
         discount: 0.0,
-        final_cost: 12998.0,
-        advance_fee: 4000.0,
+        final_cost: 13998.0,
+        advance_fee: 2000.0,
         contact_number: '7531887472',
       };
       setBooking(mockBooking);
@@ -98,182 +90,117 @@ const BookingSuccess: React.FC = () => {
   }, [booking, bookingId]);
 
   if (loading) {
-    return (
-      <div className="mountain-theme-wrapper">
-        <div className="mountain-loading">
-          <div className="mountain-shape"></div>
-          <div className="loading-text">Loading your booking details...</div>
-        </div>
-      </div>
-    );
+    return <div className="loading">Loading your booking details...</div>;
   }
 
   if (error) {
-    return (
-      <div className="mountain-theme-wrapper">
-        <Container className="booking-success-container">
-          <div className="booking-error-card">
-            <h1 className="error-title">Oh no!</h1>
-            <p className="error-message">{error}</p>
-            <button
-              className="return-button"
-              onClick={() => navigate('/login')}
-            >
-              Return to Login
-            </button>
-          </div>
-        </Container>
-      </div>
-    );
+    return <div className="error">{error}</div>;
   }
 
   return (
-    <div className="mountain-theme-wrapper">
-      {/* Mountain silhouette header overlay */}
-      <div className="mountain-header-overlay">
-        <svg
-          preserveAspectRatio="none"
-          viewBox="0 0 1200 120"
-          className="mountain-svg"
-        >
-          <path d="M0,0 L0,120 L1200,120 L1200,0 L1110,60 L1020,0 L930,60 L840,0 L750,60 L660,0 L570,60 L480,0 L390,60 L300,0 L210,60 L120,0 L30,60 L0,0 Z"></path>
-        </svg>
-      </div>
+    <Container className="booking-success-container">
+      <div className="booking-success-card">
+        <h1 className="success-title">🎉 Congratulations!</h1>
+        <p className="success-subtitle">
+          Your Booking is Successfully Registered!
+        </p>
 
-      <Container className="booking-success-container">
-        <div className="booking-success-card">
-          <h1 className="success-title">Congratulations!</h1>
-          <p className="success-subtitle">
-            Your Booking is Successfully Registered!
-          </p>
-
-          <hr className="success-divider" />
-
-          <div className="booking-details">
-            <p className="booking-id">
-              <span className="detail-label">Booking ID:</span>
-              <span className="detail-value highlighted">{booking?.id}</span>
-            </p>
-
-            <p className="trip-name">
-              <span className="detail-label">Trip Name:</span>
-              <span className="detail-value">{booking?.trip_name}</span>
-            </p>
-
-            <p className="start-date">
-              <span className="detail-label">Start Date:</span>
-              <span className="detail-value">{booking?.start_date}</span>
-            </p>
-
-            <p className="end-date">
-              <span className="detail-label">End Date:</span>
-              <span className="detail-value">{booking?.end_date}</span>
-            </p>
-
-            <p className="persons-label">
-              <span className="detail-label">Persons in Booking:</span>
-            </p>
-            <ul className="persons-list">
-              {booking?.persons.map((person, index) => (
-                <li key={index}>{person}</li>
-              ))}
-            </ul>
-
-            <p className="cost-per-person">
-              <span className="detail-label">Total Cost per Person:</span>
-              <span className="detail-value">
-                Rs {booking?.total_cost_per_person.toFixed(1)}
-              </span>
-            </p>
-
-            <p className="total-cost">
-              <span className="detail-label">Total Cost:</span>
-              <span className="detail-value">
-                Rs {booking?.total_cost.toFixed(1)}
-              </span>
-            </p>
-
-            <p className="discount">
-              <span className="detail-label">Total Discount:</span>
-              <span className="detail-value">
-                Rs {booking?.discount.toFixed(1)} per person
-              </span>
-            </p>
-
-            <p className="final-cost">
-              <span className="detail-label">Final Cost:</span>
-              <span className="detail-value">
-                <span className="original-price">
-                  Rs {booking?.total_cost.toFixed(1)}
-                </span>{' '}
-                Rs {booking?.final_cost.toFixed(1)} for{' '}
-                {booking?.persons.length} person(s)
-              </span>
-            </p>
+        <div className="booking-details-table">
+          <div className="row-item">
+            <span className="label">Booking ID:</span>
+            <span className="value">{booking?.id}</span>
           </div>
-
-          <div className="payment-instructions">
-            <span className="payment-note">
-              To complete your booking, please pay an advance fee of
-              <span className="advance-amount">
-                {' '}
-                Rs {booking?.advance_fee.toFixed(1)}
-              </span>{' '}
-              on
-              <span className="contact-number">
-                {' '}
-                {booking?.contact_number}
-              </span>{' '}
-              using any of these payment methods:
+          <div className="row-item">
+            <span className="label">Trip Name:</span>
+            <span className="value">{booking?.trip_name}</span>
+          </div>
+          <div className="row-item">
+            <span className="label">Start Date:</span>
+            <span className="value">{booking?.start_date}</span>
+          </div>
+          <div className="row-item">
+            <span className="label">End Date:</span>
+            <span className="value">{booking?.end_date}</span>
+          </div>
+          <div className="row-item">
+            <span className="label">Persons in Booking:</span>
+            <span className="value">
+              <ul className="persons-list">
+                {booking?.persons.map((person, index) => (
+                  <li key={index}>• {person}</li>
+                ))}
+              </ul>
             </span>
-
-            <div className="payment-methods">
-              <img
-                src={paytmIcon}
-                alt="Paytm"
-                className="payment-logo"
-                style={{ maxHeight: '40px', margin: '0 10px' }}
-              />
-              <img
-                src={googlePayIcon}
-                alt="Google Pay"
-                className="payment-logo"
-                style={{ maxHeight: '40px', margin: '0 10px' }}
-              />
-              <img
-                src={phonepeIcon}
-                alt="PhonePe"
-                className="payment-logo"
-                style={{ maxHeight: '40px', margin: '0 10px' }}
-              />
-            </div>
-
-            <p className="screenshot-instruction">
-              Send the screenshot of the payment along with the booking ID (
-              {booking?.id}) on Whatsapp on
-              <span className="contact-number"> {booking?.contact_number}</span>
-              .
-            </p>
-
-            <p className="remaining-amount-note">
-              Remaining amount will be collected just before onboarding for the
-              trip.
-            </p>
           </div>
         </div>
-      </Container>
 
-      {/* Mountain-themed footer overlay */}
-      <div className="mountain-footer-overlay">
-        <svg
-          preserveAspectRatio="none"
-          viewBox="0 0 1200 120"
-          className="mountain-svg"
-        >
-          <path d="M0,0 L0,120 L1200,120 L1200,0 L1110,60 L1020,0 L930,60 L840,0 L750,60 L660,0 L570,60 L480,0 L390,60 L300,0 L210,60 L120,0 L30,60 L0,0 Z"></path>
-        </svg>
+        <div className="cost-summary-box">
+          <div className="row-item">
+            <span className="label">Total Cost per Person:</span>
+            <span className="value">
+              ₹{booking?.total_cost_per_person.toFixed(2)}
+            </span>
+          </div>
+          <div className="row-item">
+            <span className="label">Total Cost:</span>
+            <span className="value">₹{booking?.total_cost.toFixed(2)}</span>
+          </div>
+          <div className="row-item">
+            <span className="label">Total Discount:</span>
+            <span className="value">₹{booking?.discount.toFixed(2)}</span>
+          </div>
+          <div className="row-item final-row">
+            <span className="label">
+              <strong>Final Cost:</strong>
+            </span>
+            <span className="value">
+              <span className="strikethrough">
+                ₹{booking?.total_cost.toFixed(2)}
+              </span>{' '}
+              <strong>₹{booking?.final_cost.toFixed(2)}</strong> for{' '}
+              {booking?.persons.length} person(s)
+            </span>
+          </div>
+        </div>
+
+        <div className="payment-instructions green-box">
+          <p>
+            <strong>To complete your booking</strong>, please pay an advance fee
+            of{' '}
+            <span className="highlight-green">
+              ₹{booking?.advance_fee.toFixed(2)}
+            </span>{' '}
+            on{' '}
+            <span className="highlight-green">{booking?.contact_number}</span>{' '}
+            using any of these payment methods:
+          </p>
+          <div className="payment-methods">
+            <img src={paytmIcon} alt="Paytm" className="payment-logo" />
+            <img
+              src={googlePayIcon}
+              alt="Google Pay"
+              className="payment-logo"
+            />
+            <img src={phonepeIcon} alt="PhonePe" className="payment-logo" />
+          </div>
+        </div>
+
+        <div className="green-box">
+          <p>
+            ✅ Send the screenshot of the payment along with the booking ID (
+            {booking?.id}) on WhatsApp at{' '}
+            <strong>{booking?.contact_number}</strong>.
+          </p>
+        </div>
+
+        <p className="note-footer">
+          <em>
+            Remaining amount will be collected just before onboarding for the
+            trip.
+          </em>
+        </p>
       </div>
-    </div>
+    </Container>
   );
 };
 
