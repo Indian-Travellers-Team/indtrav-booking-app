@@ -69,26 +69,6 @@ const BookingSuccess: React.FC = () => {
     getBookingDetails();
   }, [bookingId, navigate, firebaseToken]);
 
-  useEffect(() => {
-    if (process.env.NODE_ENV === 'development' && !booking && bookingId) {
-      const mockBooking: BookingDetails = {
-        id: parseInt(bookingId) || 57,
-        trip_name: 'Kedarnath',
-        start_date: 'May 23, 2025',
-        end_date: 'May 27, 2025',
-        persons: ['Deepak Mehta'],
-        total_cost_per_person: 13998.0,
-        total_cost: 13998.0,
-        discount: 0.0,
-        final_cost: 13998.0,
-        advance_fee: 2000.0,
-        contact_number: '7531887472',
-      };
-      setBooking(mockBooking);
-      setLoading(false);
-    }
-  }, [booking, bookingId]);
-
   if (loading) {
     return <div className="loading">Loading your booking details...</div>;
   }
