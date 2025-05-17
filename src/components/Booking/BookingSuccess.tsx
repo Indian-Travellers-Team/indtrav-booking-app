@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 import { fetchBookingDetails } from '../../api/bookingService';
 import './styles/BookingSuccess.css';
 import paytmIcon from '../../assets/paytm-icon.png';
@@ -24,8 +26,14 @@ interface BookingDetails {
 const BookingSuccess: React.FC = () => {
   const [booking, setBooking] = useState<BookingDetails | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Get the Firebase token from Redux store
+  const firebaseToken = useSelector(
+    (state: RootState) => state.user.firebaseToken,
+  );
 
   // Get booking ID from URL query params or location state
   const queryParams = new URLSearchParams(location.search);
@@ -42,11 +50,21 @@ const BookingSuccess: React.FC = () => {
     const getBookingDetails = async () => {
       try {
         setLoading(true);
-        // Fetch booking details from API
-        const details = await fetchBookingDetails(bookingId);
+        setError(null);
+
+        // Check if we have a valid firebase token
+        if (!firebaseToken) {
+          setError('Authentication required. Please log in again.');
+          setLoading(false);
+          return;
+        }
+
+        // Fetch booking details from API with the token
+        const details = await fetchBookingDetails(bookingId, firebaseToken);
         setBooking(details);
       } catch (error) {
         console.error('Error fetching booking details:', error);
+        setError('Failed to load booking details. Please try again.');
         // If there's an error, we could either show an error message or redirect
       } finally {
         setLoading(false);
@@ -54,7 +72,7 @@ const BookingSuccess: React.FC = () => {
     };
 
     getBookingDetails();
-  }, [bookingId, navigate]);
+  }, [bookingId, navigate, firebaseToken]);
 
   // For demo purposes, if we don't have a real API yet
   useEffect(() => {
@@ -86,6 +104,25 @@ const BookingSuccess: React.FC = () => {
           <div className="mountain-shape"></div>
           <div className="loading-text">Loading your booking details...</div>
         </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="mountain-theme-wrapper">
+        <Container className="booking-success-container">
+          <div className="booking-error-card">
+            <h1 className="error-title">Oh no!</h1>
+            <p className="error-message">{error}</p>
+            <button
+              className="return-button"
+              onClick={() => navigate('/login')}
+            >
+              Return to Login
+            </button>
+          </div>
+        </Container>
       </div>
     );
   }
@@ -195,19 +232,19 @@ const BookingSuccess: React.FC = () => {
                 src={paytmIcon}
                 alt="Paytm"
                 className="payment-logo"
-                style={{ maxHeight: '100px', margin: '0 10px' }}
+                style={{ maxHeight: '40px', margin: '0 10px' }}
               />
               <img
                 src={googlePayIcon}
                 alt="Google Pay"
                 className="payment-logo"
-                style={{ maxHeight: '100px', margin: '0 10px' }}
+                style={{ maxHeight: '40px', margin: '0 10px' }}
               />
               <img
                 src={phonepeIcon}
                 alt="PhonePe"
                 className="payment-logo"
-                style={{ maxHeight: '100px', margin: '0 10px' }}
+                style={{ maxHeight: '40px', margin: '0 10px' }}
               />
             </div>
 

@@ -72,9 +72,15 @@ export const createMultiBooking = async (
   return response.data; // Return the response data
 };
 
-export const fetchBookingDetails = async (bookingId: string) => {
+export const fetchBookingDetails = async (bookingId: string, token: string) => {
   const response = await axios.get(
     `${API_URL}/api/v1/booking/${bookingId}/success/`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    },
   );
 
   // Transform the API response to match the BookingDetails interface
