@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import type { UpcomingTrip } from '../../types/upcomingTripTypes';
 
-// Enhanced version with filling fast indicators
+// Enhanced version with filling fast indicators and login enforcement
 const UpcomingTripsWithPagination: React.FC<{ trips: UpcomingTrip[] }> = ({
   trips,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const tripsPerPage = 5;
+  const navigate = useNavigate();
 
   // Sort trips by start date (earliest first)
   const sortedTrips = [...trips].sort((a, b) => {
@@ -111,6 +113,25 @@ const UpcomingTripsWithPagination: React.FC<{ trips: UpcomingTrip[] }> = ({
     }
   };
 
+  // Handle booking with login enforcement
+  const handleBookNow = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    tripId: number,
+  ) => {
+    e.preventDefault();
+
+    // Check if user is logged in by looking for auth token
+    const isLoggedIn = !!localStorage.getItem('authToken');
+
+    if (isLoggedIn) {
+      // User is logged in, redirect to booking page
+      window.location.href = `/bookings/?trip=${tripId}`;
+    } else {
+      // User is not logged in, redirect to login page with trip_id parameter
+      navigate(`/login?trip_id=${tripId}`);
+    }
+  };
+
   return (
     <div className="package-side-card">
       <div className="mountain-trips-header">
@@ -149,6 +170,7 @@ const UpcomingTripsWithPagination: React.FC<{ trips: UpcomingTrip[] }> = ({
                   <a
                     href={`/bookings/?trip=${trip.id}`}
                     className="trip-book-button"
+                    onClick={(e) => handleBookNow(e, trip.id)}
                   >
                     Book Now
                   </a>
