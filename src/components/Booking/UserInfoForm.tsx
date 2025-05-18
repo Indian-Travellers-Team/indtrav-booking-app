@@ -317,7 +317,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
           {/* Primary User Info Section */}
           <Form.Group controlId="formMobile" className="form-group-mountain">
             <Form.Label className="form-label-mountain">
-              Mobile Number
+              Mobile Number <span className="text-danger">*</span>
             </Form.Label>
             <Form.Control
               type="text"
@@ -342,7 +342,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
                 className="form-group-mountain"
               >
                 <Form.Label className="form-label-mountain">
-                  First Name
+                  First Name <span className="text-danger">*</span>
                 </Form.Label>
                 <Form.Control
                   type="text"
@@ -366,7 +366,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
                 className="form-group-mountain"
               >
                 <Form.Label className="form-label-mountain">
-                  Last Name
+                  Last Name <span className="text-danger">*</span>
                 </Form.Label>
                 <Form.Control
                   type="text"
@@ -392,7 +392,9 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
                 controlId="formGender"
                 className="form-group-mountain"
               >
-                <Form.Label className="form-label-mountain">Gender</Form.Label>
+                <Form.Label className="form-label-mountain">
+                  Gender <span className="text-danger">*</span>
+                </Form.Label>
                 <Form.Control
                   as="select"
                   name="gender"
@@ -408,7 +410,9 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
             </Col>
             <Col md={6}>
               <Form.Group controlId="formAge" className="form-group-mountain">
-                <Form.Label className="form-label-mountain">Age</Form.Label>
+                <Form.Label className="form-label-mountain">
+                  Age <span className="text-danger">*</span>
+                </Form.Label>
                 <Form.Control
                   type="number"
                   placeholder="Your Age"
@@ -430,7 +434,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
 
           <Form.Group controlId="formEmail" className="form-group-mountain">
             <Form.Label className="form-label-mountain">
-              Email Address
+              Email Address <span className="text-danger">*</span>
             </Form.Label>
             <Form.Control
               type="email"
@@ -438,6 +442,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
               name="email"
               value={formData.email}
               onChange={handleInputChange}
+              disabled
               className={`mountain-input ${errors.email ? 'is-invalid' : ''}`}
               isInvalid={!!errors.email}
             />
@@ -454,7 +459,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
             className="form-group-mountain mt-3"
           >
             <Form.Label className="form-label-mountain">
-              Select Sharing Type
+              Select Sharing Type <span className="text-danger">*</span>
             </Form.Label>
             <Form.Control
               as="select"
@@ -505,7 +510,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
                         className="form-group-mountain"
                       >
                         <Form.Label className="form-label-mountain">
-                          First Name
+                          First Name <span className="text-danger">*</span>
                         </Form.Label>
                         <Form.Control
                           type="text"
@@ -529,7 +534,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
                         className="form-group-mountain"
                       >
                         <Form.Label className="form-label-mountain">
-                          Last Name
+                          Last Name <span className="text-danger">*</span>
                         </Form.Label>
                         <Form.Control
                           type="text"
@@ -553,7 +558,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
                         className="form-group-mountain"
                       >
                         <Form.Label className="form-label-mountain">
-                          Age
+                          Age <span className="text-danger">*</span>
                         </Form.Label>
                         <Form.Control
                           type="number"
@@ -578,7 +583,7 @@ const UserInfoForm: React.FC<UserInfoFormProps> = ({
                         className="form-group-mountain"
                       >
                         <Form.Label className="form-label-mountain">
-                          Gender
+                          Gender <span className="text-danger">*</span>
                         </Form.Label>
                         <Form.Control
                           as="select"
