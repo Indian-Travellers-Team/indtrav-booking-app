@@ -17,6 +17,7 @@ import PackageList from './components/Package/PackageList';
 import BlogList from './components/Blog/BlogList';
 import BlogDetailPage from './components/Blog/BlogDetail';
 import BookingHome from './components/BookingHome';
+import ProfilePage from './components/Account/ProfilePage';
 import BookingForm from './components/Booking/BookingForm';
 import BookingSuccess from './components/Booking/BookingSuccess'; // Import the BookingSuccess component
 import Auth from './components/Auth/Auth'; // Updated import for combined Auth component
@@ -67,6 +68,10 @@ const App: React.FC = () => {
               <Route path="/booking/success" element={<BookingSuccess />} />
               {/* More protected routes */}
               <Route path="*" element={<NotFound />} />
+              <Route
+                path="/profile"
+                element={<ProtectedRoute element={<ProfilePage />} />}
+              />
             </Routes>
             <Footer />
           </Router>
@@ -81,15 +86,19 @@ const AuthWrapper: React.FC = () => {
   const { user } = useAuth();
   const { search } = useLocation();
   const params = new URLSearchParams(search);
-  const tripId = params.get('trip_id');
 
-  // If already logged in, send back to booking with trip_id or home
+  // first priority: explicit route_to redirect
+  const routeTo = params.get('route_to');
+  // fallback: booking with trip_id if present
+  const tripId = params.get('trip_id');
+  const bookingRedirect = tripId ? `/booking?trip_id=${tripId}` : null;
+
   if (user) {
-    const target = tripId ? `/booking?trip_id=${tripId}` : '/';
-    return <Navigate to={target} replace />;
+    // if already logged in, send them back where they came from
+    return <Navigate to={routeTo || bookingRedirect || '/'} replace />;
   }
 
-  // Otherwise show login / signup UI
+  // otherwise show the login/signup UI
   return <Auth />;
 };
 
