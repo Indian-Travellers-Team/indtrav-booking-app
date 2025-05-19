@@ -5,8 +5,9 @@ import {
   Nav,
   Navbar as BootstrapNavbar,
   NavDropdown,
+  Button,
 } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { fetchPackages } from '../api/packageService';
 import { PackageMin, PackageResponse } from '../types/packageTypes';
 import { auth } from '../firebaseConfig';
@@ -34,7 +35,11 @@ const Navbar: React.FC = () => {
 
   const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const menuRef = useRef<HTMLDivElement>(null);
+
+  // Build the route_to param from current location
+  const currentRoute = `${location.pathname}${location.search}`;
 
   useEffect(() => {
     const getPackages = async () => {
@@ -72,6 +77,11 @@ const Navbar: React.FC = () => {
 
   const toggleUserMenu = () => setUserMenuOpen((open) => !open);
   const handleNavItemClick = () => setIsExpanded(false);
+
+  const handleLoginRedirect = () => {
+    navigate(`/login?route_to=${encodeURIComponent(currentRoute)}`);
+    setIsExpanded(false);
+  };
 
   return (
     <BootstrapNavbar
@@ -144,7 +154,8 @@ const Navbar: React.FC = () => {
               ))}
             </NavDropdown>
 
-            {user && (
+            {/* User menu or Login button */}
+            {user ? (
               <div className="relative" ref={menuRef}>
                 <button
                   className="flex items-center space-x-2 px-3 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-md text-white"
@@ -224,6 +235,14 @@ const Navbar: React.FC = () => {
                   </div>
                 )}
               </div>
+            ) : (
+              <Button
+                variant="outline-light"
+                className="ms-2"
+                onClick={handleLoginRedirect}
+              >
+                Login
+              </Button>
             )}
           </Nav>
         </BootstrapNavbar.Collapse>
